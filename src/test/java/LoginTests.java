@@ -17,7 +17,7 @@ public class LoginTests extends BaseTest {
 
         //
 
-        
+
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
