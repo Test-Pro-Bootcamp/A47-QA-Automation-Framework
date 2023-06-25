@@ -21,7 +21,6 @@ public class Homework17 extends BaseTest {
         selectFirstSearchResult();
         clickAddToButton();
         choosePlaylist();
-        verifyPlaylistMessage();
 
 
         //finds View All button
@@ -35,10 +34,6 @@ public class Homework17 extends BaseTest {
         WebElement addTo = driver.findElement(By.xpath("//button[@class='btn-add-to']"));
         addTo.click();
 
-    }
-
-    private void verifyPlaylistMessage() {
-        WebElement addedToPlaylistMessageText = driver.findElement(By.xpath());
     }
 
     private void choosePlaylist() {
