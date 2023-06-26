@@ -17,6 +17,7 @@ public class Homework17 extends BaseTest {
         clickSubmit();
         searchForSong("Dark Days");
         viewAllSongs();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         verifySearchUrl();
         selectFirstSearchResult();
         clickAddToButton();
@@ -24,7 +25,7 @@ public class Homework17 extends BaseTest {
 
 
         //finds View All button
-        WebElement viewAllSongs = driver.findElement(By.xpath("//button[@data-test='view-all-songs-btn']"));
+        WebElement viewAllSongs = driver.findElement(By.cssSelector("data-test='view-all-songs-btn"));
         viewAllSongs.click();
         //finds first result in the View All list
         WebElement firstResult = driver.findElement(By.xpath("//tr[@class='song-item']//td[contains(text(), \"Dark Days\")]"));
@@ -51,13 +52,14 @@ public class Homework17 extends BaseTest {
     }
 
     private void selectFirstSearchResult() {
-        WebElement firstResult = driver.findElement(By.xpath("//*[@id=\"searchExcerptsWrapper\"]/div/div/section[1]/ul/article[1]/span[2]/span[1]"));
+        WebElement firstResult = driver.findElement(By.xpath("(//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]"));
         firstResult.click();
     }
 
     private void viewAllSongs() {
         WebElement viewAllSongs = driver.findElement(By.xpath("//button[@data-test='view-all-songs-btn']"));
         viewAllSongs.click();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
     }
 
     private void verifySearchUrl() {
