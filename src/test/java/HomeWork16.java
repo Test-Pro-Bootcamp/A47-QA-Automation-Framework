@@ -38,5 +38,6 @@ public class HomeWork16 extends BaseTest {
         String checkUrl = "https://qa.koel.app/registration.php";
         Assert.assertEquals(driver.getCurrentUrl(), checkUrl);
 
+        
     }
 }
