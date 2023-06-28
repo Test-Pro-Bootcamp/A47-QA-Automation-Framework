@@ -1,0 +1,21 @@
+        // wait 10 seconds for an element to load before failing a test
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        // open a URL
+        String url = "https://qa.koel.app/";
+        driver.get(url);
+
+        // locate web element for email field by css selector
+        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+
+        // click to element
+        emailField.click();
+
+        // typing demo@class.com in email field
+        emailField.sendKeys("demo@class.com");
+
+        // assert some element is displayed
+        Assert.assertTrue(usersAvatar.isDisplayed());
+
+        // close the browser
+        driver.quit();
