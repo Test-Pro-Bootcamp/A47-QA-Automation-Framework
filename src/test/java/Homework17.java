@@ -38,11 +38,11 @@ public class Homework17 extends BaseTest {
     }
 
     private void choosePlaylist() {
-        WebElement testPlaylist = driver.findElement(By.xpath("//li[contains(text(),'test')]"));
+        WebElement testPlaylist = driver.findElement(By.xpath("//a[contains(text(),'test')]"));
         testPlaylist.click();
 
         //verifies the addition of the song to the playlist
-        WebElement addedToPlaylistMessage = driver.findElement(By.xpath("//div[@class='alertify-logs top right']"));
+        WebElement addedToPlaylistMessage = driver.findElement(By.xpath("//div[@class='success']"));
         Assert.assertTrue(addedToPlaylistMessage.isDisplayed());
     }
 
