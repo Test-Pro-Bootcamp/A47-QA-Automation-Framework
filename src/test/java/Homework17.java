@@ -27,13 +27,14 @@ public class Homework17 extends BaseTest {
     //creates New Playlist
         createNewPlaylist();
         //search for song
-        searchForSong("Dark Days");
-        //click View All Btn
-        clickViewAllBtn();//verify on search results page
+       searchForSong("Dark Days");
+       //click View All Btn
+        clickViewAllBtn();
+        // verify on search results page
         verifySearchUrl();
-        //select the first song returned in the search
+      //select the first song returned in the search
         selectFirstSongResult();
-        //click Add To Btn
+       //click Add To Btn
         clickAddToBtn();
         //choose Playlist to add the song to
         choosePlaylist();
@@ -65,7 +66,7 @@ public class Homework17 extends BaseTest {
     }
 
     public void choosePlaylist() throws InterruptedException{
-        WebElement testPlaylist = driver.findElement(By.xpath("//li[contains(text(),'HW')]"));
+        WebElement testPlaylist = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[15]"));
         testPlaylist.click();
         Thread.sleep(5000);
     }

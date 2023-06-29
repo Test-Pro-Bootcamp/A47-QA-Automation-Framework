@@ -41,25 +41,28 @@ public class BaseTest {
         driver.get(url);
     }
 
-    protected static void enterEmail(String email) {
+    protected static void enterEmail(String email) throws InterruptedException{
         WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
         emailInput.click();
         emailInput.clear();
         //inputs valid email address into email input field
         emailInput.sendKeys(email);
+        Thread.sleep(5000);
     }
 
-    protected static void enterPassword(String password) {
+    protected static void enterPassword(String password) throws InterruptedException{
         WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
         passwordInput.click();
         passwordInput.clear();
         //inputs valid password for login into password field
         passwordInput.sendKeys(password);
+        Thread.sleep(5000);
     }
 
-    public void clickSubmit() {
+    public void clickSubmit() throws InterruptedException{
         WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
         loginButton.click();
+        Thread.sleep(5000);
     }
 
 }
