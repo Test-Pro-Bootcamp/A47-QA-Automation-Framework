@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import java.util.*;
 
 import java.time.Duration;
 
@@ -14,21 +15,24 @@ public class BaseTest {
 
     public static WebDriver driver = null;
     public static String url = "https://qa.koel.app/";
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
-    public void launchBrowser() {
+    public void launchBrowser() throws InterruptedException{
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        Thread.sleep(5000);
 
     }
     @AfterMethod
     public void logout() {
+
         driver.quit();
     }
 
@@ -53,7 +57,7 @@ public class BaseTest {
         passwordInput.sendKeys(password);
     }
 
-    protected static void clickSubmit() {
+    public void clickSubmit() {
         WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
         loginButton.click();
     }
