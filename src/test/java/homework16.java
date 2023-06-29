@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class homework16 {
+public class homework16 extends BaseTest {
     @Test
     public void registrationNavigation() {
 
@@ -27,14 +27,11 @@ public class homework16 {
         registrationLink.click();
 
         //verify redirection to page using Assert method
-        WebElement registrationButton = driver.findElement(By.cssSelector("[value='register']"));
-        Assert.assertTrue(registrationButton.isDisplayed());
+        String registrationURL = "https://qa.koel.app/registration.php";
+        Assert.assertEquals(driver.getCurrentUrl(), registrationURL);
 
         //quit the browser
         driver.quit();
-
-
-
 
 
     }
