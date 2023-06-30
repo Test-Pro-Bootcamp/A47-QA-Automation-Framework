@@ -25,8 +25,8 @@ public class Homework16 extends BaseTest {
         driver.get(url);
         WebElement registrationlink = driver.findElement(By.cssSelector("[id='hel']"));
         registrationlink.click();
-        String registrationUrl = "https://qa.koel.app/registration.php";
-       Threadsleep(2000);
+        String registrationUrl = "https://qa.koel.app/registration.php/";
+       //Threadsleep(2000);
         Assert.assertEquals(driver.getCurrentUrl(),registrationUrl);
         driver.quit();
 
@@ -34,6 +34,6 @@ public class Homework16 extends BaseTest {
 
 
 
-   private void Threadsleep(int i) {
-    }
+  // private void Threadsleep(int i) {
+    //}
 }
