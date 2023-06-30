@@ -1,14 +1,20 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.openqa.selenium.*;
 import java.util.*;
-public class Homework18 extends BaseTest {
+import org.openqa.selenium.*;
 
+
+import java.time.Duration;
+
+public class Homework18 extends BaseTest {
     @Test
-    public void playSong() throws InterruptedException {
-        //open URL
+    public void playSong() throws InterruptedException{
+        //open url
         openLoginUrl();
         //input email
         enterEmail("matt.pierce@testpro.io");
@@ -17,23 +23,33 @@ public class Homework18 extends BaseTest {
         //click submit
         clickSubmit();
 
-        //play Next Song
+        //clicks Play Next BTN
         playNextSong();
-        // verify song is playing
+        //clicks Media Player
+        playButton();
+        //verifies song is playing
         songIsPlaying();
+
+
+
     }
 
-    public void songIsPlaying() {
+    public void playButton() throws InterruptedException {
+        WebElement mediaPlayer = driver.findElement(By.xpath("//span[@class='play']"));
+        mediaPlayer.click();
+    }
+
+    public void songIsPlaying() throws InterruptedException {
         WebElement soundBar = driver.findElement(By.xpath("//div[@class='bars']"));
         Assert.assertTrue(soundBar.isDisplayed());
     }
 
     public void playNextSong() throws InterruptedException{
-        WebElement nextSong = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
-        nextSong.click();
-
-        WebElement mediaPlayer = driver.findElement(By.xpath("//span[@data-testid='play-btn']"));
-        mediaPlayer.click();
+        WebElement playNextBtn = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
+        playNextBtn.click();
         Thread.sleep(5000);
     }
+
+
 }
+
