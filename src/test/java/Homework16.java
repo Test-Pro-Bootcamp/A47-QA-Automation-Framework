@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class Homework16 extends BaseTest {
     @Test
-    public void registrationNavigation() {
+    public void registrationNavigation() throws InterruptedException {
 
 //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
@@ -25,15 +25,15 @@ public class Homework16 extends BaseTest {
         driver.get(url);
         WebElement registrationlink = driver.findElement(By.cssSelector("[id='hel']"));
         registrationlink.click();
-        String registrationUrl = "https://qa.koel.app/registration.php/";
-       //Threadsleep(2000);
-        Assert.assertEquals(driver.getCurrentUrl(),registrationUrl);
+        String registrationUrl = "https://qa.koel.app/registration.php";
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
         driver.quit();
 
     }
 
-
-
-  // private void Threadsleep(int i) {
-    //}
 }
+
+
+
+
