@@ -3,11 +3,13 @@ import org.openqa.selenium.WebElement;
 
 import java.util.*;
 import org.openqa.selenium.*;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest {
 @Test
     public void deletePlaylist() throws InterruptedException {
+    
     //get url
     //login email
     //login password
@@ -17,6 +19,7 @@ public class Homework19 extends BaseTest {
     clickDeleteBtn();
     //verification message for deleted playlist
     getDeletionText();
+    Assert.assertTrue((getNotifyText().contains(deletedSongNotificationText)));
     }
 
     public String getDeletionText() {
