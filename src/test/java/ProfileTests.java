@@ -7,21 +7,12 @@ public class ProfileTests extends BaseTest{
 
     @Test
     public static void changeProfileNameTest () throws InterruptedException {
-
-
-        //Open the URL for the web page on the Chrome browser
-        openLoginUrl();
-
         //Put the email field inside the web page
         enterEmail("supattra.tangsombutpaiboon@testpro.io");
-
         //Put the password field inside the web page
         enterPassword("te$t$tudent1");
-
         //Click on the submit button
         clickSubmit();
-        Thread.sleep(2000);
-
         clickAvatarIcon();
 
         String randomName = generateRandomName();
