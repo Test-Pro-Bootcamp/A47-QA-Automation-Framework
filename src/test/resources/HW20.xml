@@ -10,6 +10,11 @@
                         <include name="deletePlaylist"/>
                     </methods>
             </class>
+            <class name="LoginTests">
+                    <methods>
+                        <include name="LoginEmptyEmailPasswordTest"/>
+                    </methods>
+            </class>
         </classes>
     </test>
 </suite>
