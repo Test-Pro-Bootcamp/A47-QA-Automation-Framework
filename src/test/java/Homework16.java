@@ -27,6 +27,7 @@ public class Homework16 extends BaseTest {
 
         //Click on Registration button
         WebElement registration_button = driver.findElement(By.cssSelector("a[href='/registration.php']"));
+        registration_button.click();
 
         //Verify that you are redirected to Registration page
         String registrationUrl = "https://qa.koel.app/registration.php";
