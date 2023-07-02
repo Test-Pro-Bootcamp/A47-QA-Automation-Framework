@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest {
 @Test
     public void deletePlaylist() throws InterruptedException {
-    String playListName = "choosePlaylist()";
-    String deleteSongNotificationText = ("Deleted Playlist" + playListName);
+    String playListName = "choosePlaylist().name";
+    String deletedSongNotificationText = ("Deleted Playlist" + playListName);
     //get url
     //login email
     //login password
@@ -20,13 +20,13 @@ public class Homework19 extends BaseTest {
     clickDeleteBtn();
     //verification message for deleted playlist
     getDeletionText();
-    Assert.assertTrue((getNotifyText().contains(deletedSongNotificationText)));
+    Assert.assertTrue((getDeletionText().contains(deletedSongNotificationText)));
     }
 
     public String getDeletionText() {
         WebElement notifyElement = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
         return notifyElement.getText();
-        Assert.assertTrue((getNotifyText().contains(deletedSongNotificationText)));
+
     }
 
     public void clickDeleteBtn() {

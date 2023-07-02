@@ -5,10 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.*;
 
@@ -21,15 +18,19 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().setup()
+        ;
     }
     @BeforeMethod
-    public void launchBrowser() throws InterruptedException{
+    @Parameters ({"BaseURL"})
+    public void launchBrowser(String BaseURL) throws InterruptedException{
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        url = BaseURL;
+        driver.get(url);
         Thread.sleep(5000);
 
     }
@@ -38,8 +39,15 @@ public class BaseTest {
 
         driver.quit();
     }
+    @DataProvider (name="CorrectLoginProviders")
+    public static Object[][] getDataFromDataProviders(){
+        return new Object[][] {
+                {"matt.pierce@testpro.io", "te$t$tudent"},
+                {"demo@class.com", "te$t$tudent"}
+        };
+    }
 
-    protected static void openLoginUrl() {
+    public static void openLoginUrl() {
         String url = "https://qa.koel.app/";
         driver.get(url);
     }
@@ -72,7 +80,7 @@ public class BaseTest {
     public void addSongToPlaylist() throws InterruptedException{
         String newSongAddedNotificationText = "Added 1 song into";
         //open url
-        openLoginUrl();
+        //openLoginUrl();
         //input email
         enterEmail("matt.pierce@testpro.io");
         //input password
