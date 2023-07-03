@@ -32,7 +32,7 @@ public class Homework20 extends BaseTest {
     }
 
     private void openPlaylist() throws InterruptedException{
-        WebElement openedPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a")));
+        WebElement openedPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a")));
         openedPlaylist.click();
     }
 
