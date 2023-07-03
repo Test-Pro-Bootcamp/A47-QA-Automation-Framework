@@ -3,6 +3,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,7 +11,7 @@ public class Homework19 extends BaseTest {
 @Test (dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
     public void deletePlaylist(String email, String password) throws InterruptedException {
 
-    String deletedPlaylistMessage = "Deleted Playlist";
+    String deletedPlaylistMessage = "Deleted playlist";
     //get url
     //login email
     enterEmail(email);
@@ -31,23 +32,25 @@ public class Homework19 extends BaseTest {
     }
 
     private void openPlaylist() throws InterruptedException{
-    WebElement openedPlaylist = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+    WebElement openedPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a")));
     openedPlaylist.click();
-    Thread.sleep(5000);
     }
 
 
     public String getDeletionText() throws InterruptedException{
-        WebElement deletePlaylist = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
-        return deletePlaylist.getText();
+        WebElement deletePlaylistConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alertify-logs top right']")));
+        return deletePlaylistConfirm.getText();
 
 
     }
 
     public void clickDeleteBtn() throws InterruptedException{
-    WebElement deletePlaylistBtn = driver.findElement(By.xpath("//button[@class='del btn-delete-playlist']"));
+    WebElement deletePlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
     deletePlaylistBtn.click();
-    Thread.sleep(5000);
+
+
+    WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
+    confirmDeleteBtn.click();
     }
 
 }

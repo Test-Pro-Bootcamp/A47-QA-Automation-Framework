@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -14,6 +16,7 @@ import java.time.Duration;
 public class BaseTest {
 
     public static WebDriver driver = null;
+    public static WebDriverWait wait = null;
     public static String url = "https://qa.koel.app/";
 
     @BeforeSuite
@@ -27,10 +30,9 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         driver.get(url);
-        Thread.sleep(5000);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
     }
     @AfterMethod
@@ -41,8 +43,7 @@ public class BaseTest {
     @DataProvider (name="CorrectLoginProviders")
     public static Object[][] getDataFromDataProviders(){
         return new Object[][] {
-                {"matt.pierce@testpro.io", "te$t$tudent"},
-                {"demo@class.com", "te$t$tudent"}
+                {"matt.pierce@testpro.io", "te$t$tudent"}
         };
     }
 
@@ -61,29 +62,27 @@ public class BaseTest {
     }
 
     protected static void enterPassword(String password) throws InterruptedException{
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
-        passwordInput.click();
+
+        WebElement passwordInput = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']")));
         passwordInput.clear();
         //inputs valid password for login into password field
         passwordInput.sendKeys(password);
-        Thread.sleep(5000);
     }
 
     public void clickSubmit() throws InterruptedException{
-        WebElement loginButton = driver.findElement(By.cssSelector("[type='submit']"));
+        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable((By.cssSelector("[type='submit']"))));
         loginButton.click();
-        Thread.sleep(5000);
     }
 
     @Test
-    public void addSongToPlaylist() throws InterruptedException{
+    public void addSongToPlaylist(String email, String password) throws InterruptedException{
         String newSongAddedNotificationText = "Added 1 song into";
         //open url
         //openLoginUrl();
         //input email
-        enterEmail("matt.pierce@testpro.io");
+        enterEmail(email);
         //input password
-        enterPassword("te$t$tudent");
+        enterPassword(password);
         //click submit
         clickSubmit();
 
@@ -106,45 +105,41 @@ public class BaseTest {
     }
 
     public void choosePlaylist() throws InterruptedException{
-        WebElement testPlaylist = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[15]"));
+        WebElement testPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[15]")));
         testPlaylist.click();
-        Thread.sleep(5000);
     }
 
     public void clickAddToBtn() throws InterruptedException {
-        WebElement addTo = driver.findElement(By.xpath("//button[@class='btn-add-to']"));
+        WebElement addTo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn-add-to']")));
         addTo.click();
-        Thread.sleep(5000);
     }
 
     public void selectFirstSongResult() throws InterruptedException{
-        WebElement firstResult = driver.findElement(By.xpath("(//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]"));
+        WebElement firstResult = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]")));
         firstResult.click();
-        Thread.sleep(5000);
     }
 
     public void clickViewAllBtn() throws InterruptedException{
-        WebElement viewAllBtn = driver.findElement(By.xpath("//button[@data-test='view-all-songs-btn']"));
+        WebElement viewAllBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-test='view-all-songs-btn']")));
         viewAllBtn.click();
-        Thread.sleep(5000);
+
     }
 
     public void verifySearchUrl() throws InterruptedException {
-        WebElement songResultsWrapper = driver.findElement(By.xpath("//section[@id='songResultsWrapper']"));
+        WebElement songResultsWrapper = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']")));
         Assert.assertTrue(songResultsWrapper.isDisplayed());
-        Thread.sleep(5000);
     }
 
     public void searchForSong(String song) throws InterruptedException{
-        WebElement searchField = driver.findElement(By.cssSelector("[type='search']"));
+        WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='search']")));
         searchField.click();
         searchField.clear();
         searchField.sendKeys(song);
-        Thread.sleep(5000);
+
     }
 
     public String getNotificationText () {
-        WebElement notificationElement = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
+        WebElement notificationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.alertify-logs.top.right")));
         return notificationElement.getText();
     }
 }

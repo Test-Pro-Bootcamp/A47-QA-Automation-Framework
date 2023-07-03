@@ -15,12 +15,10 @@ public class LoginTests extends BaseTest {
         options.addArguments("--remote-allow-origins=*");
 
         WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         openLoginUrl();
         enterEmail(email);
         enterPassword(password);
-        Thread.sleep(5000);
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }

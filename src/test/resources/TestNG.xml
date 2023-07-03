@@ -12,7 +12,9 @@
                     <include name = "openPlaylist"/>
                     <include name = "clickDeleteBtn"/>
                     <include name = "getDeletionText"/>
+                    <include name = "addSongToPlaylist"/>
                 </methods>
             </class>
         </classes>
     </test>
+</suite>
