@@ -19,7 +19,6 @@ public class homework16 extends BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         //open URL
-        String url = "https://qa.koel.app/";
         driver.get(url);
 
         //click registration link
