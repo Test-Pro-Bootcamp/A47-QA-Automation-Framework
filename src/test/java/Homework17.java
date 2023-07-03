@@ -3,63 +3,63 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.devtools.Message;
 import org.testng.Assert;
-import org.testng.annotations.*;
-
+import org.testng.annotations.Test;
+import java.time.Duration;
 import java.time.Duration;
 
-public class Homework17 {
-    @Test
 
-    public void addSongToPlaylist() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+public class Homework17  extends BaseTest {
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+   @Test
+  public void addSongToPlaylist() throws InterruptedException {
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
+       String newSongAddedNotificationText = "Added 1 song into";
 
-        WebElement emailInput = driver.findElement(By.cssSelector("input[type='email']"));
-        emailInput.click();
-        emailInput.clear();
-        emailInput.sendKeys("art1234@mail.com");
+       navigateToPage();
+       provideEmail("art1234@mail.com");
+       providePassword("te$t$tudent");
+       clickSubmit();
+       searchSong("Pluto");
+       clickViewAllBtn();
+       selectFirstSongResult();
+       clickAddToBtn();
+       choosePlayList();
+       Assert.assertTrue(getNotificationText().contains(newSongAddedNotificationText));
 
-        WebElement passwordInput = driver.findElement(By.cssSelector("Password"));
-        passwordInput.click();
-        passwordInput.clear();
-        passwordInput.sendKeys("te$t$tudent");
+   }
+   public void searchSong (String songTitleKeyword) throws InterruptedException{
+   WebElement searchFiled = driver.findElement(By.cssSelector("div#serchForm input[type=search]"));
+   searchFiled.sendKeys(songTitleKeyword);
+   Thread.sleep(2000);
+   }
+   public void clickViewAllBtn ()throws InterruptedException {
+       WebElement viewAllSearchResult = driver.findElement(By.cssSelector("div.results section.songs h1 button"));
+       viewAllSearchResult.click();
+       Thread.sleep(2000);
+   }
+   public void selectFirstSongResult()throws InterruptedException{
+       WebElement firstSongResult = driver.findElement(By.cssSelector("section#songResultsWrapper tr.song-item td.title"));
+       firstSongResult.click();
+       Thread.sleep(2000);
+   }
+   public void clickAddToBtn()throws InterruptedException{
+       WebElement addToBtn = driver.findElement(By.cssSelector("button.btn-add-to"));
+       addToBtn.click();
+       Thread.sleep(2000);
+   }
+   public void choosePlayList() {
+       WebElement playlistElement = driver.findElement(By.xpath("//section[@id = 'songResultsWrapper']//li[contains(text(),'Test Pro Playlist')]"));
+       playlistElement.click();
+      // Thread.sleep(2000);
+   }
+   public String getNotificationText(){
+       WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
+       return notificationElement.getText();
+   }
 
-        WebElement submitLogin = driver.findElement(By.cssSelector("submit"));
-        submitLogin.click();
+}
 
 
-
-            WebElement searchFiled = driver.findElement(By.cssSelector("Press F to search"));
-            searchFiled.sendKeys("Dee Yan-Key");
-
-            WebElement viweAll = driver.findElement(By.cssSelector("view-all-songs-btn"));
-            viweAll.click();
-
-            WebElement firstSong = driver.findElement(By.cssSelector("td.track-number text-secondary"));
-            firstSong.click();
-
-            WebElement addSong = driver.findElement(By.cssSelector("Add selected songs to…"));
-            addSong.click();
-
-            WebElement choosePlaylist = driver.findElement(By.cssSelector("section[id='songResultsWrapper'] li[class='favorites']"));
-            choosePlaylist.click();
-
-
-            WebElement messageT = driver.findElement(By.cssSelector("section[id='songResultsWrapper'] li[class='favorites']"));
-            Assert.assertEquals(messageT.getText(), "Added 1 song into {favorites}");
-
-
-            driver.quit();
-
-        }
-    }
 
 
