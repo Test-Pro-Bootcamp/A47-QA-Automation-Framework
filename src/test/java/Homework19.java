@@ -7,29 +7,47 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest {
-@Test
-    public void deletePlaylist() throws InterruptedException {
-    String playListName = "choosePlaylist().name";
-    String deletedSongNotificationText = ("Deleted Playlist" + playListName);
+@Test (dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
+    public void deletePlaylist(String email, String password) throws InterruptedException {
+
+    String deletedPlaylistMessage = "Deleted Playlist";
     //get url
     //login email
+    enterEmail(email);
     //login password
+    enterPassword(password);
     //click submit
+    clickSubmit();
     //choose playlist
+    openPlaylist();
     // click delete that playlist
     clickDeleteBtn();
-    //verification message for deleted playlist
+
+    //gets deletion text
     getDeletionText();
-    Assert.assertTrue((getDeletionText().contains(deletedSongNotificationText)));
+
+    // verifies that the Deletion Message contains the deletion text.
+    Assert.assertTrue((getDeletionText().contains(deletedPlaylistMessage)));
     }
 
-    public String getDeletionText() {
-        WebElement notifyElement = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
-        return notifyElement.getText();
+    private void openPlaylist() throws InterruptedException{
+    WebElement openedPlaylist = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
+    openedPlaylist.click();
+    Thread.sleep(5000);
+    }
+
+
+    public String getDeletionText() throws InterruptedException{
+        WebElement deletePlaylist = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
+        return deletePlaylist.getText();
+
 
     }
 
-    public void clickDeleteBtn() {
+    public void clickDeleteBtn() throws InterruptedException{
+    WebElement deletePlaylistBtn = driver.findElement(By.xpath("//button[@class='del btn-delete-playlist']"));
+    deletePlaylistBtn.click();
+    Thread.sleep(5000);
     }
 
 }
