@@ -48,11 +48,11 @@ public class homework17 extends BaseTest {
         firstSong.click();
 
         //click add to...
-        WebElement addTo = driver.findElement(By.cssSelector("[data-test='add-to-btn']"));
+        WebElement addTo = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/span/button[2]"));
         addTo.click();
 
        // add song to playlist
-        WebElement automatedPlaylist = driver.findElement(By.xpath("//*[@id=\"playlistWrapper\"]/header/div[3]/div/section[1]/ul/li[7]"));
+        WebElement automatedPlaylist = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[7]"));
         automatedPlaylist.click();
 
         //verify notification message appears
@@ -60,7 +60,7 @@ public class homework17 extends BaseTest {
 
 
         //verify notification message contains text "added 1 song into {playlist name}"
-        String bannerMessage = "Added 1 song into Automated Playlist";
+        String bannerMessage = "Added 1 song into Automated Playlisttt";
 
         //quit the browser
         driver.quit();
