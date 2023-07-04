@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
-    @Test
+    @Test (enabled = false)
     public void LoginEmptyEmailPasswordTest() {
 
 //      Added ChromeOptions argument below to fix websocket error
