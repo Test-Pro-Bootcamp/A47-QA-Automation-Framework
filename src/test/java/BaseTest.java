@@ -25,6 +25,7 @@ public class BaseTest {
         // ChromeOptions Argument to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+//        options.addArguments("--headless");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -91,5 +92,9 @@ public class BaseTest {
     public String getNotificationText() {
         WebElement successBanner = driver.findElement(By.cssSelector("[class='success show']"));
         return successBanner.getText();
+    }
+
+    public static void clickPlayNextSong() {
+        
     }
 }

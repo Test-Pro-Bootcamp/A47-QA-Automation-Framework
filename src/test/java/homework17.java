@@ -12,7 +12,7 @@ public class homework17 extends BaseTest {
     @Test
     public void addSongToPlaylist() throws InterruptedException {
 
-        String bannerMessage = "Added 1 song into Automated Playlisttt";
+        String bannerMessage = "Added 1 song into \"Automated Playlisttt.\"";
 
         //open URL
         navigateToPage();
@@ -40,8 +40,13 @@ public class homework17 extends BaseTest {
         //verify notification message appears
         getNotificationText();
 
+        // print notification value in order to debug.  In the future use a logger like SLF4J instead of print statements.
+        System.out.println("bannerMessage = " + bannerMessage);
+        System.out.println("Notification text: " + getNotificationText());
+
         //verify notification message contains text "added 1 song into {playlist name}"
-        Assert.assertTrue(getNotificationText().contains(bannerMessage));
+        Assert.assertEquals(getNotificationText(), bannerMessage, "The expected banner message does not match the Notification Text.");
+
 
         //quit the browser
         driver.quit();

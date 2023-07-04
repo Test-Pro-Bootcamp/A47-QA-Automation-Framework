@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,9 +12,16 @@ public class homework18 extends BaseTest {
     @Test
     public void playSong() {
 
+        //open URL
+        navigateToPage();
+
+        //login
+        provideEmail("alexandra.ward@testpro.io");
+        providePassword("te$t$tudent");
+        clickSubmit();
+
+        clickPlayNextSong();
+
 
     }
-=======
-public class homework18 {
->>>>>>> Stashed changes
 }
