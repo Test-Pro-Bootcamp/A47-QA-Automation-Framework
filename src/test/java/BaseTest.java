@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,9 +29,33 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @AfterMethod
-    public void closeBrowser(){
-        driver.quit();
+//    @AfterMethod
+//    public void closeBrowser(){
+//        driver.quit();
+//    }
+
+
+    public static void openLoginUrl(String url) {
+        driver.get(url);
+    }
+
+    public static void enterPassword(String userPassword) {
+        WebElement password = driver.findElement(By.cssSelector("[type='password']"));
+        password.click();
+        password.clear();
+        password.sendKeys(userPassword);
+    }
+
+    public static void enterEmail(String userEmail) {
+        WebElement email = driver.findElement(By.cssSelector("[type='email']"));
+        email.click();
+        email.clear();
+        email.sendKeys(userEmail);
+    }
+
+    public static void clickSubmitButton() {
+        WebElement submitLogin = driver.findElement(By.cssSelector("button[type='submit']"));
+        submitLogin.click();
     }
 
 
