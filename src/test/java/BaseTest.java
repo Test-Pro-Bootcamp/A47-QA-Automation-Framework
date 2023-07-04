@@ -20,19 +20,22 @@ public class BaseTest {
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
+
     static ChromeDriver driver;
     static WebDriverWait wait;
     static Actions actions;
     static String url;
+
     @DataProvider(name = "validCredentials")
-    static Object [][] getDataFromDataProviders(){
+    static Object[][] getDataFromDataProviders() {
         return new Object[][]{
                 {"angel.ayala@testpro.io", "school!sc0"},
         };
     }
+
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL){
+    public void launchBrowser(String BaseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
@@ -45,33 +48,38 @@ public class BaseTest {
         driver.get(url);
 
     }
+
     void enterEmail(String email) {
-       WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']")));
-       emailField.clear();
-       emailField.sendKeys(email);
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']")));
+        emailField.clear();
+        emailField.sendKeys(email);
     }
-    void enterPassword(String password){
-       WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='password']")));
-       passwordField.clear();
-       passwordField.sendKeys(password);
+
+    void enterPassword(String password) {
+        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='password']")));
+        passwordField.clear();
+        passwordField.sendKeys(password);
     }
-    void clickSubmit(){
+
+    void clickSubmit() {
         WebElement submitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         submitButton.click();
     }
-    void selectPlaylist(){
+
+    void selectPlaylist() {
         WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(3) > a")));
         actions.contextClick(playlist).perform();
     }
-    void selectEdit(){
+
+    void selectEdit() {
         WebElement edit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(3) > nav > ul > li:nth-child(1)")));
         edit.click();
     }
-    void renamePlaylist(String name){
-        WebElement newName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.playlist.playlist.editing")));
-        newName.clear();
+        void renamePlaylist(String name){
+        WebElement newName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        newName.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
         newName.sendKeys(name);
-        actions.sendKeys(Keys.ENTER);
+        newName.sendKeys(Keys.ENTER);
     }
     String validateAction(){
         WebElement validationText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));

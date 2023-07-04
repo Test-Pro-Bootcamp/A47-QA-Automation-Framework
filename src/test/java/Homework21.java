@@ -12,8 +12,6 @@ public class Homework21 extends BaseTest{
         selectPlaylist();
         selectEdit();
         renamePlaylist("something NEW");
-        validateAction();
-
         Assert.assertTrue(validateAction().contains(message));
     }
 }
