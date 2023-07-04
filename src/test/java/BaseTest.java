@@ -1,21 +1,25 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
-<<<<<<< Updated upstream
-=======
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
->>>>>>> Stashed changes
 import org.testng.annotations.BeforeSuite;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.time.Duration;
 
 public class BaseTest {
+
+    public static WebDriver driver = null;
+    public static String url = "https://qa.koel.app/";
 
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-<<<<<<< Updated upstream
-=======
 
     @BeforeMethod
     public void launchBrowser() {
@@ -105,5 +109,4 @@ public class BaseTest {
         WebElement soundBar = driver.findElement(By.xpath("//*[@id=\"mainFooter\"]/div[2]/div[2]/div/button[1]/div/img"));
         return soundBar.isDisplayed();
     }
->>>>>>> Stashed changes
 }
