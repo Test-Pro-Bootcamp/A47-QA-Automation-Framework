@@ -7,9 +7,12 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
+
     @Test
     public void LoginEmptyEmailPasswordTest() {
 
+        provideEmail("art1234@mail.com");
+        providePassword("te$t$tudent");
 //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");

@@ -3,9 +3,10 @@ import org.testng.annotations.Test;
 
 public class Homework20 extends BaseTest{
 
+
         @Test(dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
 
-        public void deletePlaylist(String email, String password) throws InterruptedException {
+        public void deletePlaylist(String email, String password) {
             String deletedPlaylistMsg = "Deleted Playlist";
 
             provideEmail(email);

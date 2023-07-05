@@ -1,5 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;
+import java.util.UUID;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,12 +9,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public class BaseTest{
+
+
+
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
     public static String url = "https://bbb.testpro.io";
@@ -23,6 +25,7 @@ public class BaseTest{
     static void setupClass(){
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeMethod
     @Parameters({"BaseURL"})
    public void launchBrowser(String BaseURL){
@@ -30,32 +33,57 @@ public class BaseTest{
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         url = BaseURL;
         driver.get(url);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
+
     @AfterMethod
     public void closeBrowser(){
         driver.quit();
         driver.get(url);
     }
 
-
+    @DataProvider(name="IncorrectLoginProvider")
+    public static Object[][] getDataFromDataProviders(){
+        return new Object[][] {
+                {"notExsting@email.com","NotExistingPassword"},
+                {"demo@class.com", ""},
+                {"",""}
+        };
+    }
+    @DataProvider(name = "CorrectLoginProviders")
+    public Object[][] getDataFromDataProvider(){
+        return new Object[][]{
+                {"email??@gmail,com", "password"}
+                //Data email, password
+        };
+    }
+    @Test(dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
+    public void deletePlaylist(String email, String password) {
+    }
     public static void navigateToPage(){
         driver.get(url);
     }
-    public static void provideEmail(String email){
-        WebElement emailField= wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
-        emailField.click();
-        emailField.clear();
-        emailField.sendKeys(email);
+    protected static void provideEmail(String email){
+        WebElement emailInput= wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
+       emailInput.click();
+        emailInput.clear();
+        emailInput.sendKeys(email);
     }
-    public static void providePassword(String password){
+    protected static void openLoginUrl(){
+        String url = "https://qa.koel.app/";
+        driver.get(url);
+    }
+    protected static String generateRandomName() {
+        return UUID.randomUUID().toString().replace(" ", "");
+    }
+    protected static void providePassword(String password){
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
-        passwordField.click();
+        //passwordField.click();
         passwordField.clear();
         passwordField.sendKeys(password);
     }
