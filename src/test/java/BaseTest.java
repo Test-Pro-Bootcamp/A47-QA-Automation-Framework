@@ -53,12 +53,11 @@ public class BaseTest {
     }
 
     protected static void enterEmail(String email) throws InterruptedException{
-        WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailInput = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
         emailInput.click();
         emailInput.clear();
         //inputs valid email address into email input field
         emailInput.sendKeys(email);
-        Thread.sleep(5000);
     }
 
     protected static void enterPassword(String password) throws InterruptedException{
