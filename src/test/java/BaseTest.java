@@ -55,4 +55,19 @@ public class BaseTest {
         WebElement submit = driver.findElement(By.cssSelector("button[type = 'submit']"));
         submit.click();
     }
+    public static void playASong() {
+        WebElement playNextSongBtn = driver.findElement(By.className("next"));
+        WebElement playSongBtn = driver.findElement(By.xpath("//span[@data-testid = 'play-btn']"));
+        playNextSongBtn.click();
+        playSongBtn.click();
+    }
+
+    public boolean soundBarIsDisplayed() {
+        WebElement soundBar = driver.findElement(By.className("bars"));
+        return soundBar.isDisplayed();
+    }
+    public boolean pauseBtnIsDisplayed() {
+        WebElement pauseBtn = driver.findElement(By.className("pause"));
+        return pauseBtn.isDisplayed();
+    }
 }
