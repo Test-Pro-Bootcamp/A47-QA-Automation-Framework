@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,6 +18,7 @@ public class BaseTest {
 
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
+    public static Actions action = null;
     public static String url = "https://qa.koel.app/";
 
     @BeforeSuite
@@ -32,7 +34,8 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         url = BaseURL;
         driver.get(url);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        action = new Actions(driver);
 
     }
     @AfterMethod
@@ -140,5 +143,24 @@ public class BaseTest {
     public String getNotificationText () {
         WebElement notificationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.alertify-logs.top.right")));
         return notificationElement.getText();
+    }
+    public void doubleClickChoosePlaylist() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        action.doubleClick(playlistElement).click().perform();
+}
+    public void rightClickPlaylist () {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement songElement= driver.findElement(By.xpath(".playlist:nth-child(3)"));
+        action.contextClick(songElement).click().perform();
+    }
+
+    public void clickDeleteBtn() {
+        WebElement deletePlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
+        deletePlaylistBtn.click();
+
+
+        WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
+        confirmDeleteBtn.click();
     }
 }

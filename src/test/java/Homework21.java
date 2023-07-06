@@ -1,7 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -11,7 +10,7 @@ public class Homework21 extends BaseTest {
     @Test (dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
     public void renamePlaylist (String email, String password) throws InterruptedException {
 
-        String deletedPlaylistMessage = "Deleted playlist";
+        String editedPlaylistNameMessage = "Updated playlist";
         //get url
         //login email
         enterEmail(email);
@@ -20,37 +19,37 @@ public class Homework21 extends BaseTest {
         //click submit
         clickSubmit();
         //choose playlist
-        openPlaylist();
-        // click delete that playlist
-        clickDeleteBtn();
-
-        //gets deletion text
-        getDeletionText();
+        choosePlaylist();
+        // edit the Playlist Name
+        editPlaylistName();
+        getChangesText();
 
         // verifies that the Deletion Message contains the deletion text.
-        Assert.assertTrue((getDeletionText().contains(deletedPlaylistMessage)));
-    }
-
-    private void openPlaylist() {
-        WebElement openedPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a")));
-        openedPlaylist.click();
+        Assert.assertTrue((getChangesText().contains(editedPlaylistNameMessage)));
     }
 
 
-    public String getDeletionText() {
-        WebElement deletePlaylistConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alertify-logs top right']")));
-        return deletePlaylistConfirm.getText();
 
+    public void editPlaylistName() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        WebElement editNameField = driver.findElement(By.cssSelector("[name='name']"));
+        editNameField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+        editNameField.sendKeys("Test Playlist");
+        editNameField.sendKeys(Keys.ENTER);
+    }
+
+    public void choosePlaylist() {
+        WebElement openedPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        action.doubleClick(openedPlaylist).click().perform();
 
     }
 
-    public void clickDeleteBtn() {
-        WebElement deletePlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
-        deletePlaylistBtn.click();
+
+    public String getChangesText() {
+        WebElement renamePlaylistConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alertify-logs top right']")));
+        return renamePlaylistConfirm.getText();
 
 
-        WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
-        confirmDeleteBtn.click();
     }
 
 }
