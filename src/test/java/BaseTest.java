@@ -7,18 +7,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
+import javax.swing.*;
+
 public class BaseTest{
-
-
-
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
+    public static Actions actions = null;
     public static String url = "https://bbb.testpro.io";
-
 
 
     @BeforeSuite
@@ -39,6 +39,9 @@ public class BaseTest{
         url = BaseURL;
         driver.get(url);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        actions = new Actions(driver);
+
     }
 
     @AfterMethod
@@ -63,7 +66,9 @@ public class BaseTest{
         };
     }
     @Test(dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
-    public void deletePlaylist(String email, String password) {
+    public void deletePlaylist(String email, String password) throws InterruptedException {
+    String deletePlaylistMsg = "Delete playlist";
+    //enterEmail
     }
     public static void navigateToPage(){
         driver.get(url);
@@ -83,7 +88,6 @@ public class BaseTest{
     }
     protected static void providePassword(String password){
         WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
-        //passwordField.click();
         passwordField.clear();
         passwordField.sendKeys(password);
     }
@@ -142,11 +146,27 @@ public class BaseTest{
     public void confirmDelete() {
         WebElement confirmBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.ok")));
         confirmBtn.click();
-
     }
     public String getDeletedPlaylistMsg(){
         WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return notificationMsg.getText();
     }
+    public void doubleClickChoosePlaylist(){
+        WebElement playListElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        actions.doubleClick(playListElement).perform();
+    }
+    public void chooseAllSongsList(){
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li a.songs"))).click();
+
+    }
+    public void contextClickFirstSong(){
+        WebElement firstSongElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
+        actions.contextClick(firstSongElement).perform();
+    }
+    public void choosePlaylistOption(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li.playBack"))).click();
+
+    }
+
 
 }

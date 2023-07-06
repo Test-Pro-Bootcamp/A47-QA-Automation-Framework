@@ -25,10 +25,17 @@ import org.testng.annotations.Test;
         confirmDelete();
 
         Assert.assertTrue(getDeletedPlaylistMsg().contains(deletedPlaylistMsg));
-
-
-
     }
 
+     @Test (dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
+     public void playSong(String email, String password){
+         provideEmail(email);
+         providePassword(password);
+         clickSubmit();
+         chooseAllSongsList();
+         contextClickFirstSong();
+         choosePlaylistOption();
 
+         Assert.assertTrue(isSongPlaying());
+     }
  }
