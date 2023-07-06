@@ -39,18 +39,19 @@ public class BaseTest {
         driver.get(url);
     }
 
-    public static void enterPassword(String userPassword) {
-        WebElement password = driver.findElement(By.cssSelector("[type='password']"));
-        password.click();
-        password.clear();
-        password.sendKeys(userPassword);
-    }
 
     public static void enterEmail(String userEmail) {
         WebElement email = driver.findElement(By.cssSelector("[type='email']"));
         email.click();
         email.clear();
         email.sendKeys(userEmail);
+    }
+
+    public static void enterPassword(String userPassword) {
+        WebElement password = driver.findElement(By.cssSelector("[type='password']"));
+        password.click();
+        password.clear();
+        password.sendKeys(userPassword);
     }
 
     public static void clickSubmitButton() {
