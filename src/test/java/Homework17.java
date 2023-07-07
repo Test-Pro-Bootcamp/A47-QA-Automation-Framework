@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.time.Duration;
@@ -28,25 +29,21 @@ public class Homework17  extends BaseTest {
        Assert.assertTrue(getNotificationText().contains(newSongAddedNotificationText));
 
    }
-   public void searchSong (String songTitleKeyword) throws InterruptedException{
-   WebElement searchFiled = driver.findElement(By.cssSelector("div#serchForm input[type=search]"));
+   public void searchSong (String songTitleKeyword) {
+   WebElement searchFiled = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#serchForm input[type=search]")));
    searchFiled.sendKeys(songTitleKeyword);
-   Thread.sleep(2000);
    }
-   public void clickViewAllBtn ()throws InterruptedException {
-       WebElement viewAllSearchResult = driver.findElement(By.cssSelector("div.results section.songs h1 button"));
+   public void clickViewAllBtn () {
+       WebElement viewAllSearchResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.results section.songs h1 button")));
        viewAllSearchResult.click();
-       Thread.sleep(2000);
    }
-   public void selectFirstSongResult()throws InterruptedException{
-       WebElement firstSongResult = driver.findElement(By.cssSelector("section#songResultsWrapper tr.song-item td.title"));
+   public void selectFirstSongResult() {
+       WebElement firstSongResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section#songResultsWrapper tr.song-item td.title")));
        firstSongResult.click();
-       Thread.sleep(2000);
    }
-   public void clickAddToBtn()throws InterruptedException{
-       WebElement addToBtn = driver.findElement(By.cssSelector("button.btn-add-to"));
+   public void clickAddToBtn() {
+       WebElement addToBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn-add-to")));
        addToBtn.click();
-       Thread.sleep(2000);
    }
    public void choosePlayList() {
        WebElement playlistElement = driver.findElement(By.xpath("//section[@id = 'songResultsWrapper']//li[contains(text(),'Test Pro Playlist')]"));
