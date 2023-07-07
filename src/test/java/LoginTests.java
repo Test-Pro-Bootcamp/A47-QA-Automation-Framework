@@ -1,25 +1,23 @@
+import Pages.HomePage;
+import Pages.LoginPage;
+import Pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.openqa.selenium.*;
 
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
-    @Test(dataProvider = "CorrectLoginProviders")
-    public void LoginValidPasswordTest(String email, String password) throws InterruptedException{
+    @Test
+    public void LoginValidCredentialsTest() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        loginPage.login();
 
-        WebDriver driver = new ChromeDriver(options);
-
-        openLoginUrl();
-        enterEmail(email);
-        enterPassword(password);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        Assert.assertTrue(homePage.getAvatarIcon().isDisplayed());
     }
 }
