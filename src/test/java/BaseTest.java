@@ -15,12 +15,12 @@ public class BaseTest {
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-     String url;
-     ChromeDriver driver;
-     WebDriverWait wait;
+     static String url;
+     static ChromeDriver driver;
+     static WebDriverWait wait;
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL){
+     static void launchBrowser(String BaseURL){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--allow-remote-origins=*");
         options.addArguments("--disable-notifications");
@@ -31,7 +31,7 @@ public class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
     @AfterMethod
-    public void closeBrowser(){
+     static void closeBrowser(){
         driver.quit();
     }
 }
