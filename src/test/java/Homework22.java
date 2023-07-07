@@ -10,9 +10,8 @@ public class Homework22 extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
         loginPage.login();
-        homePage.avatar();
         homePage.selectPlaylist();
-        homePage.enterName("anyName1");
+        homePage.enterName("anyName");
 
         Assert.assertTrue(homePage.verificationMessage().contains(message));
     }
