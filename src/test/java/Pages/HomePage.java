@@ -18,6 +18,7 @@ public class HomePage extends BasePage{
         super(givenDriver);
     }
     public HomePage contextClickFirstPlaylist(){
+        findElement(selectPlaylist);
         contextClick(selectPlaylist);
         return this;
     }

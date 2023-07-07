@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,14 +16,14 @@ public class BaseTest {
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-     static String url;
-     static ChromeDriver driver;
-     static WebDriverWait wait;
+     protected static String url;
+     protected static WebDriver driver;
+      protected static WebDriverWait wait;
     @BeforeMethod
     @Parameters({"BaseURL"})
-     static void launchBrowser(String BaseURL){
+    static void launchBrowser(String BaseURL){
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--allow-remote-origins=*");
+        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
 
         driver = new ChromeDriver(options);
