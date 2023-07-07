@@ -4,11 +4,14 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest {
     @Test
     @Parameters({"Playlist"})
-    public void deletePlaylist(String Playlist) {
-        login("teststudent@teststudent.com", "te$t$tudent");
+    public void deletePlaylist( String Playlist) {
+            login("teststudent@teststudent.com", "te$t$tudent");
+//        createPlaylist (Playlist);
+//        newPlaylistNotification();
+//        Assert.assertTrue(newPlaylistIsDisplayed());
         deleteSelectedPlaylist(Playlist);
-        String msgText = "Deleted playlist \"" + Playlist + ".\"";
-        System.out.println("Message should be: " + msgText);
-        Assert.assertTrue(deletedPlaylistNotify().contains(msgText));
+        String notifyText = "Deleted playlist \"" + Playlist + ".\"";
+        System.out.println("Message should be: " + notifyText);
+        Assert.assertTrue(deletedPlaylistNotify().contains(notifyText));
     }
 }
