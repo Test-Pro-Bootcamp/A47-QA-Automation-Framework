@@ -1,9 +1,10 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 public class BaseTest {
 
@@ -13,9 +14,6 @@ public class BaseTest {
     }
     static String url;
     static ChromeDriver driver;
-    static WebDriverWait wait;
-    static Actions actions;
-
 
     @BeforeMethod
     @Parameters({"BaseURL"})

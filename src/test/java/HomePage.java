@@ -1,9 +1,10 @@
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
@@ -18,13 +19,9 @@ public class HomePage extends BasePage{
     }
     void selectPlaylist(){
         contextClick(firstPlaylist);
-
-    }
-    void selectEdit(){
-        findElement(editSelection).click();
-
     }
     void enterName(String name){
+        findElement(editSelection).click();
         findElement(nameField).sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
         findElement(nameField).sendKeys(name);
         findElement(nameField).sendKeys(Keys.ENTER);
