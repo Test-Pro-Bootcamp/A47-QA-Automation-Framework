@@ -5,38 +5,33 @@ import org.testng.annotations.Test;
 
 public class Homework19 extends BaseTest{
 
-    @Test
+ @Test
     public void deletePlaylist() {
 
-
-
-            provideEmail(email);
-            providePassword(password);
+            provideEmail("art1234@mail.com");
+            providePassword("te$t$tudent");
             clickSubmit();
-
             openPlaylist();
             clickDeletePlaylistBtn();
             confirmDelete();
+             navigationToPage();
 
-            Assert.assertTrue(getDeletedPlaylistMsg().contains(deletedPlaylistMsg));
-
-
+          Assert.assertTrue(getDeletedPlaylistMsg().contains("deletedPlaylistMsg"));
         }
-        public void navigationToPage(){
-        driver.get(url);
+    public void navigationToPage(){driver.get(url);
     }
 
-    public void provideEmail(String email) {
+    public static void provideEmail(String email) {
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
         emailField.sendKeys(email);
     }
-    public void providePassword(String password){
-        WebElement passwordField= driver.findElement(By.cssSelector("input[type='password']"))
+    public static void providePassword(String password){
+        WebElement passwordField= driver.findElement(By.cssSelector("input[type='password']"));
         passwordField.clear();
         passwordField.sendKeys(password);
     }
-    public void clickSubmit(){
+    public static void clickSubmit(){
         WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
     }
