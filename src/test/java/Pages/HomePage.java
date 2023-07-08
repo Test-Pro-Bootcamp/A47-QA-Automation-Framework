@@ -27,6 +27,7 @@ public class HomePage extends BasePage{
         return this;
     }
     public HomePage renamePlaylist(String name){
+        findElement(editField);
         editField.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
         editField.sendKeys(name);
         editField.sendKeys(Keys.ENTER);
