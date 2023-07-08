@@ -16,7 +16,7 @@ public class Homework23 extends BaseTest{
                  .clickSubmit();
          homePage.contextClickFirstPlaylist()
                  .clickEdit()
-                 .renamePlaylist("testPro");
+                 .renamePlaylist("testProTest");
 
         Assert.assertTrue(homePage.verificationMessage().contains(message));
     }
