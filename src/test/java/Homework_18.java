@@ -14,6 +14,7 @@ public class Homework_18 extends  BaseTest{
         BaseTest.clickSubmitButton();
         clickNextSongButton();
         clickPlaySongButton();
+        //clickPlay();
         Assert.assertTrue(songIsPlaying());
 
     }
@@ -23,18 +24,30 @@ public class Homework_18 extends  BaseTest{
     String userPassword = "te$t$tudent";
 
     public void clickPlaySongButton() throws InterruptedException {
-        WebElement playButton = driver.findElement(By.cssSelector("span[data-testid='play-btn']"));
+        //WebElement playButton = driver.findElement(By.cssSelector("span[data-testid='play-btn']"));
+        WebElement playButton = driver.findElement(By.xpath("span[data-testid='play-btn']"));
         playButton.click();
     }
 
     public void clickNextSongButton() throws InterruptedException {
-        WebElement nextButton = driver.findElement(By.cssSelector("span[data-testid='play-next-btn']"));
+        //WebElement nextButton = driver.findElement(By.cssSelector("span[data-testid='play-next-btn']"));
+        WebElement nextButton = driver.findElement(By.xpath("span[data-testid='play-next-btn']"));
         nextButton.click();
     }
 
-    public boolean songIsPlaying(){
+//    public void clickPlay(){
+//        WebElement nextButton = driver.findElement(By.xpath("span[data-testid='play-next-btn']"));
+//        WebElement playButton = driver.findElement(By.xpath("span[data-testid='play-btn']"));
+//
+//        nextButton.click();
+//        playButton.click();
+//    }
+
+    public boolean songIsPlaying() throws InterruptedException {
         WebElement soundbar = driver.findElement(By.cssSelector("div[data-testid='sound-bar-play']"));
         return soundbar.isDisplayed();
     }
+
+
 
 }

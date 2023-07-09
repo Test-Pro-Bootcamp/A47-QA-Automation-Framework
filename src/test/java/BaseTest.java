@@ -29,10 +29,10 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-//    @AfterMethod
-//    public void closeBrowser(){
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void closeBrowser(){
+        driver.quit();
+    }
 
 
     public static void openLoginUrl(String url) {
