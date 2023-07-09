@@ -1,25 +1,43 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class LoginTests extends BaseTest {
-    @Test
-    public void LoginEmptyEmailPasswordTest() {
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+    @Test (enabled = true, priority = 0, description = "Login with invalid email and valid password")
+    public void loginInvalidEmailValidPasswordTest(){
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        navigateToPage();
+        provideEmail("invalid@class.com");
+        providePassword("te$t$tudent");
+        clickSubmit();
 
-        String url = "\"https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        Assert.assertEquals(driver.getCurrentUrl(), url); // https://qa.koel.app/
+    }
+
+    @Test (enabled = true, priority = 1, description = "Login with valid email and valid password")
+    public void loginValidEmailPasswordTest(){
+
+        navigateToPage();
+        provideEmail("demo@class.com");
+        providePassword("te$t$tudent");
+        clickSubmit();
+        isAvatarDisplayed();
+    }
+
+    @Test (enabled = true, priority = 3, description = "Login with valid email and empty password")
+    public static void loginValidEmailEmptyPasswordTest() {
+
+        navigateToPage();
+        provideEmail("demo@class.com");
+        providePassword("");
+        clickSubmit();
+
+        Assert.assertEquals(driver.getCurrentUrl(), url); // https://qa.koel.app/
+    }
+    public static void isAvatarDisplayed() {
+        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        Assert.assertTrue(avatarIcon.isDisplayed());
     }
 }
