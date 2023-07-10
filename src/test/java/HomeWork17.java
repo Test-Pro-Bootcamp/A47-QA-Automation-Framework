@@ -38,6 +38,6 @@ public class HomeWork17 extends BaseTest {
         playlist.click();
 
         WebElement notif = driver.findElement(By.cssSelector("div.success.show"));
-        Assert.assertEquals(notif.getText(), "Add 1 song into \"court playlist.\"");
+        Assert.assertEquals(notif.getText(), "Added 1 song into \"court playlist.\"");
     }
 }
