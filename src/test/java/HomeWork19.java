@@ -9,7 +9,7 @@ public class HomeWork19 extends BaseTest {
     public void deletePlaylist() throws InterruptedException {
 
         navigateToPage();
-        provideEmail("courtney.matthews@testrpo.io");
+        provideEmail("courtney.matthews@testpro.io");
         providePassword("Walkonby08!!");
         clickSubmit();
         Thread.sleep(2000);
@@ -29,9 +29,4 @@ public class HomeWork19 extends BaseTest {
         WebElement notifDeletion = driver.findElement(By.cssSelector("body > div.alertify-logs.top.right"));
         Assert.assertEquals(notifDeletion.getText(), "Deleted Playlist \"court playlist.\"");
     }
-
-
-
-
-
 }
