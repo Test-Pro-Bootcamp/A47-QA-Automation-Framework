@@ -40,4 +40,4 @@ public class HomeWork17 extends BaseTest {
         WebElement notif = driver.findElement(By.cssSelector("div.success.show"));
         Assert.assertEquals(notif.getText(), "Added 1 song into \"court playlist.\"");
     }
-}
+} 
