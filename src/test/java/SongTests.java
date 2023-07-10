@@ -26,9 +26,8 @@ import org.testng.annotations.Test;
 
         Assert.assertTrue(getDeletedPlaylistMsg().contains(deletedPlaylistMsg));
 
-
-
     }
+
 
 
  }

@@ -12,7 +12,7 @@ public class homework21 extends BaseTest {
    @Test
     public void renamePlaylist() {
 
-       provideEmail("art1234@mail.com");
+       provideEmail("demo@class.com");
        providePassword("te$t$tudent");
        clickSubmit();
        doubleClickPlaylist();
