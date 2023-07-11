@@ -7,13 +7,27 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.time.Duration;
 
 public class BaseTest {
 
-    static WebDriver driver = pickBrowser(System.getProperty("browser"));
+    @DataProvider(name = "validCredentials")
+    public static Object[][] getDataFromDataProviders(){
+        return new Object[][]{
+                {"angel.ayala@testpro.io", "school!sc0"},
+        };
+    }
+    protected static WebDriver driver;
+    protected static WebDriverWait wait;
+    protected static String url;
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.75:4444";
@@ -47,9 +61,19 @@ public class BaseTest {
                 chromeOptions.addArguments("--remote-allow-origins=*");
                 chromeOptions.addArguments("--disable-notifications");
                 return driver = new ChromeDriver(chromeOptions);
-
-
         }
+    }
+    @BeforeMethod
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String BaseURL) throws MalformedURLException{
+        driver = pickBrowser(System.getProperty("browser"));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        url = BaseURL;
+        driver.get(url);
+    }
+    @AfterMethod
+    public void closeBrowser(){
+        driver.quit();
     }
 
 }
