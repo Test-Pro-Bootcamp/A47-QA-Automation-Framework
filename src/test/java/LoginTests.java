@@ -1,25 +1,24 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import pages.HomePage;
+import pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 
 public class LoginTests extends BaseTest {
-    @Test
-    public void LoginEmptyEmailPasswordTest() {
+    @Test (dataProvider = "ValidLoginData", dataProviderClass = BaseTest.class)
+    public void successfulLoginTest(String email, String password){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        loginPage.login(email, password);
+        Assert.assertTrue(homePage.getAvatar().isDisplayed());
+    }
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    @Test (dataProvider = "InvalidLoginData", dataProviderClass = BaseTest.class)
+    public void invalidLoginTest(String email, String password){
+        LoginPage loginPage = new LoginPage(driver);
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
+        loginPage.login(email, password);
         Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
     }
 }
