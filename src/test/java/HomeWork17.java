@@ -13,7 +13,7 @@ public class HomeWork17 extends BaseTest {
     public void addSongToPlaylist() throws InterruptedException{
          String playlistName = "court playlist";
 
-         navigateToPage();
+
          provideEmail("courtney.matthews@testpro.io");
          providePassword("Walkonby08!!");
          clickSubmit();

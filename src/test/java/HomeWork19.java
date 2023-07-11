@@ -8,7 +8,7 @@ public class HomeWork19 extends BaseTest {
     @Test
     public void deletePlaylist() throws InterruptedException {
 
-        navigateToPage();
+
         provideEmail("courtney.matthews@testpro.io");
         providePassword("Walkonby08!!");
         clickSubmit();
@@ -18,15 +18,15 @@ public class HomeWork19 extends BaseTest {
         playList.click();
         Thread.sleep(2000);
 
-        WebElement deletePlaylist = driver.findElement(By.cssSelector("#playlistWrapper > header > div.song-list-controls > span > button"));
+        WebElement deletePlaylist = driver.findElement(By.cssSelector("#playlistWrapper > header > div.song-list-controls > span > button.del.btn-delete-playlist"));
         deletePlaylist.click();
         Thread.sleep(2000);
 
-        WebElement deleteNotif = driver.findElement(By.cssSelector("body > div.alertify > div > div > nav > button.ok"));
-        deleteNotif.click();
+        WebElement okButton = driver.findElement(By.cssSelector("body > div.alertify > div > div > nav > button.ok"));
+        okButton.click();
         Thread.sleep(2000);
 
         WebElement notifDeletion = driver.findElement(By.cssSelector("body > div.alertify-logs.top.right"));
-        Assert.assertEquals(notifDeletion.getText(), "Deleted Playlist \"court playlist.\"");
+        Assert.assertEquals(notifDeletion.getText(), "Deleted playlist \"court playlist.\"");
     }
 }
