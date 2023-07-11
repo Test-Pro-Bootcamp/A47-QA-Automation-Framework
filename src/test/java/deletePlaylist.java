@@ -5,7 +5,7 @@ public class deletePlaylist extends BaseTest {
 
     @Test(dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
 
-    public void deletePlaylist(String email, String password) throws InterruptedException {
+    public void deletePlaylist(String email, String password) throws InterruptedException{
         String deletedPlaylistMsg = "Deleted Playlist";
 
         provideEmail(email);

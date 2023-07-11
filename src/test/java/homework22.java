@@ -1,5 +1,7 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class homework22 extends BaseTest{
 

@@ -1,9 +1,10 @@
-
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
@@ -19,6 +20,7 @@ public class HomePage extends BasePage {
     }
 
     public void enterNewPlaylistName(String playlistName) {
+
         findElement(playlistNameFiled).sendKeys(playlistName);
         findElement(playlistNameFiled).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
         findElement(playlistNameFiled).sendKeys(playlistName);
