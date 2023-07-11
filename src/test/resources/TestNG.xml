@@ -3,7 +3,7 @@
 
 <suite name="TestNG">
     <parameter name="browser" value="Url"></parameter>
-    <parameter name="BaseURL" value="https://bbb.testpro.io"></parameter>
+    <parameter name="BaseURL" value="https://qa.koel.app/"></parameter>
 
     <test name="Example Test" preserve-order="false">
         <classes>
@@ -11,7 +11,9 @@
             <class name="BaseTest"/>
             <class name="Homework17"/>
             <class name="homework21"/>
-            <class name="Homework19"/>
+            <class name="homework23"/>
+            <class name="homework22"/>
+            <class name="deletePlaylist"/>
         </classes>
     </test>
 </suite>
