@@ -1,23 +1,26 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import java.security.Key;
 import java.time.Duration;
 
 public class BaseTest {
-    public static WebDriver driver;
-    public static String url;
-    public static WebDriverWait wait;
+    public static WebDriver driver = null;
+    public static String url = null;
+    public static WebDriverWait wait = null;
+    public static Actions actions = null;
 
     @BeforeSuite
     static void setupClass() {
@@ -34,6 +37,7 @@ public class BaseTest {
         //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        actions = new Actions(driver);
         navigateToPage();
     }
 
@@ -80,7 +84,7 @@ public class BaseTest {
         return pauseBtn.isDisplayed();
     }
     public static void openPlaylist() {
-        WebElement clickPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='#!/playlist/64213']")));
+        WebElement clickPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@Class='playlist playlist'])[1]")));
         clickPlaylist.click();
     }
     public static void deletePlaylistBtn() throws InterruptedException {
@@ -91,5 +95,20 @@ public class BaseTest {
     public String getDeleteMsg() {
         WebElement deleteMsg = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.success.show")));
         return deleteMsg.getText();
+    }
+    public static void doubleClickPlaylist() {
+        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@class='playlist playlist'][1]")));
+        actions.doubleClick(playlist).perform();
+    }
+    public static String playlistName = "testHomework21";
+    public static void newPlaylistName() {
+        WebElement nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name= 'name']")));
+        nameField.sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE));
+        nameField.sendKeys(playlistName);
+        nameField.sendKeys(Keys.ENTER);
+    }
+    public boolean playlistIsDisplayed() {
+        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text() = '"+playlistName+"']")));
+        return playlist.isDisplayed();
     }
 }
