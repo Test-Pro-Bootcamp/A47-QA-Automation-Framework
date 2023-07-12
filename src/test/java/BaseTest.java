@@ -75,7 +75,7 @@ protected static WebDriver pickBrowser(String browser) throws MalformedURLExcept
     threadDriver.set(pickBrowser(System.getProperty("browser")));
     wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
     url = BaseURL;
-    getDriver();
+    getDriver().get(url);
     }
 
     protected static WebDriver lambdaTest() throws MalformedURLException{
