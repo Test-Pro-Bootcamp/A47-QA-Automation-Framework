@@ -8,12 +8,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import java.time.Duration;
 import java.util.UUID;
 
 public class BaseTest {
-
+    //public static WebDriverWait wait;
     public static WebDriver driver = null;
 
     public static String url = "";
@@ -29,7 +31,7 @@ public class BaseTest {
         //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
-
+       // wait = new WebDriverWait(driver,Duration.ofSeconds(4));
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url= BaseURL;

@@ -3,6 +3,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 public class LoginTests extends BaseTest {
 
     @Test (enabled = true, priority = 0, description = "Login with invalid email and valid password")
@@ -36,6 +37,9 @@ public class LoginTests extends BaseTest {
 
         Assert.assertEquals(driver.getCurrentUrl(), url); // https://qa.koel.app/
     }
+
+
+
     public static void isAvatarDisplayed() {
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatarIcon.isDisplayed());
