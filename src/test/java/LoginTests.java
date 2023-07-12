@@ -19,13 +19,31 @@ public class LoginTests extends BaseTest {
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://qa.koel.app//";
+        String url = "https://qa.koel.app/";
         driver.get(url);
 
-        WebElement registrationNavigation = driver.findElement(By.cssSelector("[type='submit']"));
-        registrationNavigation.click();
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        openLoginUrl();
+        enterEmail("demo@class.com");
+        enterPassword("Te$t$tudent");
+        clickSubmit();
+
+        WebElement avatar = driver.findElement(By.cssSelector("avatar"));
+        Assert.assertTrue(avatar.isDisplayed());
+
+//        WebElement enterEmail = driver.findElement(By.cssSelector("[type='email]"));
+//        enterEmail.click();
+//        enterEmail.clear();
+//        enterEmail.sendKeys("demo@class.com");
+//
+//        WebElement enterPassword = driver.findElement(By.cssSelector("[type='password']"));
+//        enterPassword.click();
+//        enterPassword.clear();
+//        enterPassword.sendKeys("Te$t$tudent");
+//
+//        WebElement clickSubmit = driver.findElement(By.cssSelector("[type='submit']"));
+//        clickSubmit.click();
+//        driver.quit();
+
 
     }
 }
