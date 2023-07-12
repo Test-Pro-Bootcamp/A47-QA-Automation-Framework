@@ -80,7 +80,11 @@ public class BaseTest {
         return pauseBtn.isDisplayed();
     }
     public static void openPlaylist() {
+<<<<<<< Updated upstream
         WebElement clickPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href='#!/playlist/64213']")));
+=======
+        WebElement clickPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@class='playlist playlist'][1]")));
+>>>>>>> Stashed changes
         clickPlaylist.click();
     }
     public static void deletePlaylistBtn() throws InterruptedException {
