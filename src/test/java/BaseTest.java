@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
@@ -20,12 +21,15 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void launchBrowser() {
+    @Parameters ({"BaseURL"})
+    public void launchBrowser(String BaseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        url = BaseURL;
+        navigateToPage();
     }
 
     @AfterMethod
@@ -69,5 +73,18 @@ public class BaseTest {
     public boolean pauseBtnIsDisplayed() {
         WebElement pauseBtn = driver.findElement(By.className("pause"));
         return pauseBtn.isDisplayed();
+    }
+    public static void openPlaylist() {
+        WebElement clickPlaylist = driver.findElement(By.cssSelector("a[href='#!/playlist/64209']"));
+        clickPlaylist.click();
+    }
+    public static void deletePlaylistBtn() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        WebElement clickDelete = driver.findElement(By.cssSelector(".del"));
+        clickDelete.click();
+    }
+    public String getDeleteMsg() {
+        WebElement deleteMsg = driver.findElement(By.cssSelector("div.success.show"));
+        return deleteMsg.getText();
     }
 }
