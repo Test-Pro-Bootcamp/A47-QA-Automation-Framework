@@ -96,19 +96,19 @@ public class BaseTest {
         WebElement deleteMsg = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.success.show")));
         return deleteMsg.getText();
     }
-    public static void doubleClickPlaylist() {
-        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@class='playlist playlist'][1]")));
-        actions.doubleClick(playlist).perform();
-    }
-    public static String playlistName = "testHomework21";
-    public static void newPlaylistName() {
-        WebElement nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name= 'name']")));
-        nameField.sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE));
-        nameField.sendKeys(playlistName);
-        nameField.sendKeys(Keys.ENTER);
-    }
-    public boolean playlistIsDisplayed() {
-        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text() = '"+playlistName+"']")));
-        return playlist.isDisplayed();
-    }
+//    public static void doubleClickPlaylist() {
+//        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@class='playlist playlist'][1]")));
+//        actions.doubleClick(playlist).perform();
+//    }
+//    public static String playlistName = "testHomework21";
+//    public static void newPlaylistName() {
+//        WebElement nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name= 'name']")));
+//        nameField.sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE));
+//        nameField.sendKeys(playlistName);
+//        nameField.sendKeys(Keys.ENTER);
+//    }
+//    public boolean playlistIsDisplayed() {
+//        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text() = '"+playlistName+"']")));
+//        return playlist.isDisplayed();
+//    }
 }

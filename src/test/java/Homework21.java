@@ -1,15 +1,17 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class Homework21 extends BaseTest {
     @Test
     public void renamePlaylist() {
-        navigateToPage();
-        provideEmail("jasmynmedina1@gmail.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
-        doubleClickPlaylist();
-        newPlaylistName();
-        Assert.assertTrue(playlistIsDisplayed());
+        String playlistName = "Testing Playist";
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        loginPage.login();
+        homePage.doubleClickPlaylist();
+        homePage.newPlaylistName(playlistName);
+        Assert.assertTrue(homePage.playlistIsDisplayed(playlistName));
     }
 }
