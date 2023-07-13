@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,6 +22,7 @@ public class BasePage {
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
+    By overlayLocator = By.cssSelector(".overlay.loading");
     protected WebElement findElement(WebElement webElement) {
         return wait.until(ExpectedConditions.visibilityOf(webElement));
     }
@@ -32,6 +34,9 @@ public class BasePage {
     }
     protected void doubleClick(WebElement webElement) {
         actions.doubleClick(findElement(webElement)).perform();
+    }
+    protected void waitForOverlay() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
     }
 
 }

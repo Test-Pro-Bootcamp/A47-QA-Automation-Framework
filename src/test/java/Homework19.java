@@ -5,7 +5,7 @@ import pages.LoginPage;
 
 public class Homework19 extends BaseTest {
     @Test
-    public void deletePlaylist() throws InterruptedException {
+    public void deletePlaylist() {
         String deleteMsg = "Deleted playlist";
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
