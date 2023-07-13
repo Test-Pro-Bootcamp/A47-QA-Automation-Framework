@@ -1,4 +1,0 @@
-package playSong
-
-class xml {
-}
