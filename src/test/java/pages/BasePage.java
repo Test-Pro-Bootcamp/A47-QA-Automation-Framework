@@ -12,7 +12,7 @@ public class BasePage {
     public static Actions actions = null;
     public static String url = "https://qa.koel.app/";
 
-    private WebElement findElement(By locator) {
+    protected WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
     private void rightClick(By locator) {

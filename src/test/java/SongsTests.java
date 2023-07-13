@@ -6,11 +6,14 @@ import pages.LoginPage;
 public class SongsTests extends BaseTest{
     @Test
     private void playSong(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongs = new AllSongsPage(driver);
 
-        LoginPage.login();
-        HomePage.chooseAllSongsList();
-        HomePage.contextClickFirstSong();
-        HomePage.choosePlayOption();
+        loginPage.login();
+        homePage.chooseAllSongsList();
+        allSongs.contextClickFirstSong();
+        allSongs.choosePlayOption();
 
         Assert.assertTrue(isSongPlaying());
 
