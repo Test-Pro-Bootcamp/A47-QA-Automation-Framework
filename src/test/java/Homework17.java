@@ -2,6 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class Homework17 extends BaseTest{
 
@@ -9,10 +11,8 @@ public class Homework17 extends BaseTest{
     public void addSongToPlaylist() throws InterruptedException {
         String notificationText = "Added 1 song into";
 
-        navigateToPage();
-        provideEmail("jasmynmedina1@gmail.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login();
         searchSong("Epic");
         clickViewAll();
         selectFirstSongResult();
@@ -21,7 +21,7 @@ public class Homework17 extends BaseTest{
         Assert.assertTrue(notificationMessage().contains(notificationText));
     }
     public void searchSong (String songTitle) throws InterruptedException {
-        WebElement searchField = driver.findElement(By.cssSelector("div#searchForm input[type = search]"));
+        WebElement searchField = driver.findElement(By.cssSelector("div#searchForm input[type = 'search']"));
         searchField.sendKeys(songTitle);
         Thread.sleep(2000);
     }

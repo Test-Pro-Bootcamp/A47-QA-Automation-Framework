@@ -34,11 +34,10 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = BaseURL;
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
-        navigateToPage();
+        driver.get(url);
     }
 
     @AfterMethod
@@ -46,56 +45,53 @@ public class BaseTest {
         driver.quit();
     }
 
-    public static void navigateToPage() {
-        driver.get(url);
-    }
-
-    public static void provideEmail(String email) {
-        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type = 'email']")));
-        emailField.click();
-        emailField.clear();
-        emailField.sendKeys(email);
-    }
-
-    public static void providePassword(String password) {
-        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type = 'password'")));
-        passwordField.click();
-        passwordField.clear();
-        passwordField.sendKeys(password);
-    }
-
-    public static void clickSubmit() {
-        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type = 'submit']")));
-        submit.click();
-    }
-    public static void playASong() {
-        WebElement playNextSongBtn = driver.findElement(By.className("next"));
-        WebElement playSongBtn = driver.findElement(By.xpath("//span[@data-testid = 'play-btn']"));
-        playNextSongBtn.click();
-        playSongBtn.click();
-    }
-
-    public boolean soundBarIsDisplayed() {
-        WebElement soundBar = driver.findElement(By.className("bars"));
-        return soundBar.isDisplayed();
-    }
-    public boolean pauseBtnIsDisplayed() {
-        WebElement pauseBtn = driver.findElement(By.className("pause"));
-        return pauseBtn.isDisplayed();
-    }
-    public static void openPlaylist() {
-        WebElement clickPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@Class='playlist playlist'])[1]")));
-        clickPlaylist.click();
-    }
-    public static void deletePlaylistBtn() throws InterruptedException {
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        WebElement clickDelete = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".del")));
-        clickDelete.click();
-    }
-    public String getDeleteMsg() {
-        WebElement deleteMsg = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.success.show")));
-        return deleteMsg.getText();
-    }
+//    public static void navigateToPage() {
+//        driver.get(url);
+//    }
+//
+//    public static void provideEmail(String email) {
+//        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type = 'email']")));
+//        emailField.click();
+//        emailField.clear();
+//    }
+//
+//    public static void providePassword(String password) {
+//        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type = 'password'")));
+//        passwordField.click();
+//        passwordField.clear();
+//    }
+//
+//    public static void clickSubmit() {
+//        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type = 'submit']")));
+//    }
+//    public static void playASong() {
+//        WebElement playNextSongBtn = driver.findElement(By.className("next"));
+//        WebElement playSongBtn = driver.findElement(By.xpath("//span[@data-testid = 'play-btn']"));
+//        playNextSongBtn.click();
+//        playSongBtn.click();
+//    }
+//
+//    public boolean soundBarIsDisplayed() {
+//        WebElement soundBar = driver.findElement(By.className("bars"));
+//        return soundBar.isDisplayed();
+//    }
+//    public boolean pauseBtnIsDisplayed() {
+//        WebElement pauseBtn = driver.findElement(By.className("pause"));
+//        return pauseBtn.isDisplayed();
+//    }
+//    public static void openPlaylist() {
+//        WebElement clickPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@class='playlist playlist'][1]")));
+//        clickPlaylist.click();
+//    }
+//    public static void deletePlaylistBtn() throws InterruptedException {
+//        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//        WebElement clickDelete = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".del")));
+//        clickDelete.click();
+//    }
+//    public String getDeleteMsg() {
+//        WebElement deleteMsg = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.success.show")));
+//        return deleteMsg.getText();
+//    }
 //    public static void doubleClickPlaylist() {
 //        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@class='playlist playlist'][1]")));
 //        actions.doubleClick(playlist).perform();
