@@ -12,6 +12,11 @@ public class HomePage extends BasePage {
 
         super(givenDriver);
     }
+    By avatarIcon = By.xpath("//img[@class='avatar']");
+
+    public WebElement getAvatarIcon() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(avatarIcon));
+    }
 
         public void clickViewAllBtn() {
             WebElement viewAllBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-test='view-all-songs-btn']")));
