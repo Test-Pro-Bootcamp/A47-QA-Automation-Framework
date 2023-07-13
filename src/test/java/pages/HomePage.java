@@ -84,7 +84,7 @@ public class HomePage extends BasePage {
         WebElement deletePlaylistConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alertify-logs top right']")));
         return deletePlaylistConfirm.getText();
     }
-    private void openPlaylist() {
+    public void openPlaylist() {
         WebElement openedPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a")));
         openedPlaylist.click();
     }
