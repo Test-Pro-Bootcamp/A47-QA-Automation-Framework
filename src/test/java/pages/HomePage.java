@@ -13,23 +13,50 @@ public class HomePage extends BasePage {
         super(givenDriver);
     }
 
-        private void clickViewAllBtn() {
+        public void clickViewAllBtn() {
             WebElement viewAllBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-test='view-all-songs-btn']")));
             viewAllBtn.click();
 
         }
+    public void choosePlaylist() {
+        WebElement testPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[15]")));
+        testPlaylist.click();
+    }
 
-        private void verifySearchUrl () {
+        public void verifySearchUrl() {
             WebElement songResultsWrapper = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']")));
             Assert.assertTrue(songResultsWrapper.isDisplayed());
         }
 
-        private void searchForSong (String song){
+        public void searchForSong(String song){
             WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='search']")));
             searchField.click();
             searchField.clear();
             searchField.sendKeys(song);
 
         }
+    public String getNotificationText () {
+        WebElement notificationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.alertify-logs.top.right")));
+        return notificationElement.getText();
+    }
+
+    public void doubleClickChoosePlaylist() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
+        actions.doubleClick(playlistElement).click().perform();
+    }
+    public void rightClickPlaylist () {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement songElement= driver.findElement(By.xpath(".playlist:nth-child(3)"));
+        actions.contextClick(songElement).click().perform();
+    }
+    public void clickDeleteBtn() {
+        WebElement deletePlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
+        deletePlaylistBtn.click();
+
+
+        WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
+        confirmDeleteBtn.click();
+    }
 
     }

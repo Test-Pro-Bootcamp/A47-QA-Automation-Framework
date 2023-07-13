@@ -1,10 +1,11 @@
+package pages;
 
-        import org.openqa.selenium.*;
+import org.openqa.selenium.*;
         import pages.BasePage;
         import pages.*;
 
         public class LoginPage extends BasePage {
-    private LoginPage (WebDriver givenDriver) {
+    public LoginPage(WebDriver givenDriver) {
 
         super(givenDriver);
     }

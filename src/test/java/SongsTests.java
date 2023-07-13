@@ -21,28 +21,44 @@ public class SongsTests extends BaseTest{
     }
 
     @Test
-    public void addSongToPlaylist(String email, String password) throws InterruptedException{
+    private void addSongToPlaylist(){
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongs = new AllSongsPage(driver);
 
+        String newSongAddedNotificationText = "Added 1 song into"
         loginPage.login();
+        homePage.searchForSong("Dark Days");
+        homePage.clickViewAllBtn();
+        homePage.verifySearchUrl();
+        allSongs.selectFirstSongResult();
+        allSongs.clickAddToBtn();
+        homePage.choosePlaylist();
 
-        //search for song
-        searchForSong("Dark Days");
-        //click View All Btn
-        clickViewAllBtn();
-        // verify on search results page
-        verifySearchUrl();
-        //select the first song returned in the search
-        selectFirstSongResult();
-        //click Add To Btn
-        clickAddToBtn();
-        //choose Playlist to add the song to
-        choosePlaylist();
-        //checking for success message notification
         Assert.assertTrue((getNotificationText().contains(newSongAddedNotificationText)));
 
 
+
+
+
+    }
+
+    @Test
+    private void renamePlaylist () {
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongs = new AllSongsPage(driver);
+
+        String editedPlaylistNameMessage = "Updated playlist";
+
+        loginPage.login();
+        homePage.choosePlaylist();
+        homePage.editPlaylistName();
+        homePage.getChangesText();
+
+        // verifies that the Deletion Message contains the deletion text.
+        Assert.assertTrue((getChangesText().contains(editedPlaylistNameMessage)));
     }
 
 }
