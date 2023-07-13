@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class HomePage extends BasePage{
 
     public HomePage (WebDriver givenDriver) {
+
         super(givenDriver);
     }
 
