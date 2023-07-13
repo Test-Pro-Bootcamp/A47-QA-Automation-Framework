@@ -80,5 +80,13 @@ public class HomePage extends BasePage {
         WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
         confirmDeleteBtn.click();
     }
+    public String getDeletionText(){
+        WebElement deletePlaylistConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alertify-logs top right']")));
+        return deletePlaylistConfirm.getText();
+    }
+    private void openPlaylist() {
+        WebElement openedPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a")));
+        openedPlaylist.click();
+    }
 
     }

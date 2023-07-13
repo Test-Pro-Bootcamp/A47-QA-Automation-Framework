@@ -14,14 +14,22 @@ public AllSongsPage (WebDriver givenDriver){
 
 
 
-public static void clickAddToBtn() {
+public void clickAddToBtn() {
         WebElement addTo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn-add-to']")));
         addTo.click();
         }
 
-public static void selectFirstSongResult() {
+public void selectFirstSongResult() {
         WebElement firstResult = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]")));
         firstResult.click();
+        }
+        public void clickDeleteBtn() {
+                WebElement deletePlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
+                deletePlaylistBtn.click();
+
+
+                WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
+                confirmDeleteBtn.click();
         }
     }
 

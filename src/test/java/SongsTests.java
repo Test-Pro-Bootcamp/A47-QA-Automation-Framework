@@ -36,11 +36,7 @@ public class SongsTests extends BaseTest{
         homePage.choosePlaylist();
 
         Assert.assertTrue((getNotificationText().contains(newSongAddedNotificationText)));
-
-
-
-
-
+        
     }
 
     @Test
