@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,6 +41,22 @@ public class HomePage extends BasePage {
             searchField.sendKeys(song);
 
         }
+    public void editPlaylistName() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        WebElement editNameField = driver.findElement(By.cssSelector("[name='name']"));
+        editNameField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+        editNameField.sendKeys("Test Playlist");
+        editNameField.sendKeys(Keys.ENTER);
+    }
+
+
+
+    public String getChangesText() {
+        WebElement renamePlaylistConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alertify-logs top right']")));
+        return renamePlaylistConfirm.getText();
+
+
+    }
     public String getNotificationText () {
         WebElement notificationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.alertify-logs.top.right")));
         return notificationElement.getText();

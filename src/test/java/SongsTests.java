@@ -55,10 +55,9 @@ public class SongsTests extends BaseTest{
         loginPage.login();
         homePage.choosePlaylist();
         homePage.editPlaylistName();
-        homePage.getChangesText();
 
         // verifies that the Deletion Message contains the deletion text.
-        Assert.assertTrue((getChangesText().contains(editedPlaylistNameMessage)));
+        Assert.assertTrue((homePage.getChangesText().contains(editedPlaylistNameMessage)));
     }
 
 }
