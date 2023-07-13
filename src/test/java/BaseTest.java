@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,19 +15,10 @@ import java.util.*;
 import java.time.Duration;
 
 public class BaseTest {
-     @FindBy (css="[type='email']")
-    WebElement emailInput;
-
-    @FindBy (css="[type='password']")
-    WebElement passwordInput;
-
-    @FindBy (xpath = "//section[@id='songResultsWrapper']")
-    WebElement songResultsWrapper;
 
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
     public static Actions actions = null;
-    PageFactory.initElements(driver, this);
     public static String url = "https://qa.koel.app/";
 
     @BeforeSuite
@@ -38,7 +27,7 @@ public class BaseTest {
     }
     @BeforeMethod
     @Parameters ({"BaseURL"})
-    private void launchBrowser(String BaseURL) throws InterruptedException{
+    public void launchBrowser(String BaseURL) throws InterruptedException{
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
@@ -55,19 +44,19 @@ public class BaseTest {
         driver.quit();
     }
     @DataProvider (name="CorrectLoginProviders")
-    protected static Object[][] getDataFromDataProviders(){
+    public static Object[][] getDataFromDataProviders(){
         return new Object[][] {
                 {"matt.pierce@testpro.io", "te$t$tudent"}
         };
     }
 
-    protected static void openLoginUrl() {
+    public static void openLoginUrl() {
         String url = "https://qa.koel.app/";
         driver.get(url);
     }
 
-    protected static void enterEmail(String email){
-
+    protected static void enterEmail(String email) throws InterruptedException{
+        WebElement emailInput = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='email']")));
         emailInput.click();
         emailInput.clear();
         //inputs valid email address into email input field
@@ -76,20 +65,19 @@ public class BaseTest {
 
     protected static void enterPassword(String password) throws InterruptedException{
 
+        WebElement passwordInput = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='password']")));
         passwordInput.clear();
         //inputs valid password for login into password field
         passwordInput.sendKeys(password);
     }
 
-    private void clickSubmit() throws InterruptedException{
-       @FindBy (css="[type='submit'")
-       WebElement loginBtn;
-
-        loginBtn.click();
+    public void clickSubmit() throws InterruptedException{
+        WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable((By.cssSelector("[type='submit']"))));
+        loginButton.click();
     }
 
     @Test
-    private void addSongToPlaylist(String email, String password) {
+    public void addSongToPlaylist(String email, String password) throws InterruptedException{
         String newSongAddedNotificationText = "Added 1 song into";
         //open url
         //openLoginUrl();
@@ -118,76 +106,61 @@ public class BaseTest {
 
     }
 
-    private void choosePlaylist() {
-
-        @FindBy (xpath = "//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[3]")
-        WebElement testPlaylist;
+    public void choosePlaylist() {
+        WebElement testPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[15]")));
         testPlaylist.click();
     }
 
-    private void clickAddToBtn() {
-        @FindBy (xpath = "//button[@class='btn-add-to']")
-        WebElement addTo;
+    public void clickAddToBtn() throws InterruptedException {
+        WebElement addTo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn-add-to']")));
         addTo.click();
     }
 
-    private void selectFirstSongResult() {
-        @FindBy (xpath = "//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]")
-        WebElement firstResult;
+    public void selectFirstSongResult() throws InterruptedException{
+        WebElement firstResult = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]")));
         firstResult.click();
     }
 
-    private void clickViewAllBtn() {
-        @FindBy (xpath ="//button[@data-test='view-all-songs-btn']")
-        WebElement viewAllBtn;
+    public void clickViewAllBtn() {
+        WebElement viewAllBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-test='view-all-songs-btn']")));
         viewAllBtn.click();
 
     }
 
     public void verifySearchUrl()  {
-       @FindBy (xpath = "//section[@id='songResultsWrapper']")
-        WebElement songResultsWrapper;
-
+        WebElement songResultsWrapper = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']")));
         Assert.assertTrue(songResultsWrapper.isDisplayed());
     }
 
-    private void searchForSong(String song) {
-        @FindBy (css = "[type='search']")
-        WebElement searchField;
-
+    public void searchForSong(String song) {
+        WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='search']")));
         searchField.click();
         searchField.clear();
         searchField.sendKeys(song);
 
     }
 
-    private String getNotificationText () {
-        @FindBy (css = "div.alertify-logs.top.right")
-        WebElement notificationElement;
+    public String getNotificationText () {
+        WebElement notificationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.alertify-logs.top.right")));
         return notificationElement.getText();
     }
-    private void doubleClickChoosePlaylist() {
-        @FindBy (css = ".playlist:nth-child(3)")
-        WebElement playlistElement;
-
+    public void doubleClickChoosePlaylist() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         actions.doubleClick(playlistElement).click().perform();
     }
-    private void rightClickPlaylist () {
-        @FindBy (css = ".playlist:nth-child(3)")
-        WebElement songElement;
-
+    public void rightClickPlaylist () {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement songElement= driver.findElement(By.xpath(".playlist:nth-child(3)"));
         actions.contextClick(songElement).click().perform();
     }
 
     public void clickDeleteBtn() {
-        @FindBy (xpath = "//button[@class='del btn-delete-playlist']")
-        WebElement deletePlaylistBtn;
+        WebElement deletePlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
         deletePlaylistBtn.click();
 
 
-        @FindBy(xpath = "//button[@class='ok']")
-        WebElement confirmDeleteBtn;
-
+        WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
         confirmDeleteBtn.click();
     }
 }
