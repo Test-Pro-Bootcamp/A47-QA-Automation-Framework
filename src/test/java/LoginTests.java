@@ -27,7 +27,7 @@ public class LoginTests extends BaseTest {
         enterPassword("Te$t$tudent");
         clickSubmit();
 
-        WebElement avatar = driver.findElement(By.cssSelector("avatar"));
+        WebElement avatar = driver.findElement(By.cssSelector("#app > div > form > div > img"));
         Assert.assertTrue(avatar.isDisplayed());
 
 //        WebElement enterEmail = driver.findElement(By.cssSelector("[type='email]"));

@@ -22,7 +22,7 @@ public class BaseTest {
     public void launchBrowser() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
-        WebDriver driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
     @AfterMethod
@@ -34,7 +34,7 @@ public class BaseTest {
         driver.get(url);
     }
     public void enterEmail(String Email) {
-        WebElement enterEmail = driver.findElement(By.cssSelector("[type='email]"));
+        WebElement enterEmail = driver.findElement(By.cssSelector("[type='email']"));
         enterEmail.click();
         enterEmail.clear();
         enterEmail.sendKeys("demo@class.com");
@@ -50,7 +50,7 @@ public class BaseTest {
         clickSubmit.click();
     }
      public void searchSong(String songTitleKeyword) throws InterruptedException {
-        WebElement searchField = driver.findElement(By.cssSelector(("div#searchForm input[type='search']")));
+        WebElement searchField = driver.findElement(By.cssSelector(("div#searchForm input[type=search]")));
         searchField.clear();
         searchField.sendKeys(songTitleKeyword);
         Thread.sleep(5000);
