@@ -34,12 +34,15 @@ public class BaseTest {
         //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
-        //wait = new WebDriverWait(driver,Duration.ofSeconds(4));
         driver = new ChromeDriver(options);
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        actions = new Actions(driver);
+        wait = new WebDriverWait(driver,Duration.ofSeconds(4));
+
         url= BaseURL;
         navigateToPage();
-        actions = new Actions(driver);
     }
 
     @AfterMethod
