@@ -19,19 +19,26 @@ public class BasePage {
     public static Actions actions = null;
     public static String url = "https://qa.koel.app/";
 
+    By overlayLocator = By.cssSelector(".overlay.loading");
+
     protected WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-    private void rightClick(By locator) {
-        return wait.until(ExpectedConditions.ElementIsClickable(locator));
-        locator.contextClick();
+
+    protected void contextClick(By locator) {
+        WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        actions.contextClick(contextElement).perform();
     }
-    private void waitForOverlay(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    private void rightClick(By locator) {
+        WebElement contextElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        actions.contextClick(contextElement).perform();
+    }
+    public void waitForOverlay() {
+         wait.until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
     }
     private void doubleClick(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        locator.double.click();
+        WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        actions.doubleClick(contextElement).perform();
     }
 }
 

@@ -8,7 +8,7 @@ import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class ProfileTests extends BasePage{
+public class ProfileTests extends BaseTest{
 
     @Test
     public void deletePlaylist (){
@@ -28,7 +28,7 @@ public class ProfileTests extends BasePage{
         homePage.getDeletionText();
 
         // verifies that the Deletion Message contains the deletion text.
-        Assert.assertTrue((getDeletionText().contains(deletedPlaylistMessage)));
+        Assert.assertTrue((homePage.getDeletionText().contains(deletedPlaylistMessage)));
     }
 
 

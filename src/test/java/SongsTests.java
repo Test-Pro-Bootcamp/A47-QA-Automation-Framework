@@ -14,7 +14,7 @@ public class SongsTests extends BaseTest{
         loginPage.login();
         homePage.chooseAllSongsList();
         allSongs.contextClickFirstSong();
-        allSongs.choosePlayOption();
+        allSongs.choosePlaySong();
 
         Assert.assertTrue(allSongs.isSongPlaying());
 
@@ -26,12 +26,13 @@ public class SongsTests extends BaseTest{
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongs = new AllSongsPage(driver);
 
-        String newSongAddedNotificationText = "Added 1 song into"
+        String newSongAddedNotificationText = "Added 1 song into";
         loginPage.login();
+
         homePage.searchForSong("Dark Days");
         homePage.clickViewAllBtn();
         homePage.verifySearchUrl();
-        allSongs.selectFirstSongResult();
+        allSongs.contextClickFirstSong();
         allSongs.clickAddToBtn();
         homePage.choosePlaylist();
 
