@@ -1,4 +1,5 @@
 package pages;
+import pages.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,7 +15,7 @@ public class HomePage extends BasePage {
         super(givenDriver);
     }
     By avatarIcon = By.xpath("//img[@class='avatar']");
-    By allSongs = By.xpath("//a[@class='songs active']");
+    By allSongs = By.xpath("//a[@class='songs']");
 
     public WebElement getAvatarIcon() {
 

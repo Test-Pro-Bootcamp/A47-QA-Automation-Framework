@@ -1,12 +1,14 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.*;
-import pages.*;
+import pages.BasePage;
 import pages.LoginPage;
+import pages.HomePage;
+import pages.AllSongsPage;
 
 public class SongsTests extends BaseTest{
     @Test
-    private void playSong(){
+    public void playSong(){
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongs = new AllSongsPage(driver);
@@ -21,7 +23,7 @@ public class SongsTests extends BaseTest{
     }
 
     @Test
-    private void addSongToPlaylist(){
+    public void addSongToPlaylist(){
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         AllSongsPage allSongs = new AllSongsPage(driver);
@@ -41,7 +43,7 @@ public class SongsTests extends BaseTest{
     }
 
     @Test
-    private void renamePlaylist () {
+    public void renamePlaylist () {
 
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);

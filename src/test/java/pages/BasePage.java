@@ -9,15 +9,16 @@ import java.time.Duration;
 
 
 public class BasePage {
+    public static WebDriver driver = null;
+    public static WebDriverWait wait = null;
+    public static Actions actions = null;
+    public static String url = "https://qa.koel.app/";
     public  BasePage (WebDriver givenDriver) {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
     }
-    public static WebDriver driver = null;
-    public static WebDriverWait wait = null;
-    public static Actions actions = null;
-    public static String url = "https://qa.koel.app/";
+
 
     By overlayLocator = By.cssSelector(".overlay.loading");
 

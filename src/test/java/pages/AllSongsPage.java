@@ -1,5 +1,5 @@
 package pages;
-
+import pages.*;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,7 @@ public AllSongsPage (WebDriver givenDriver){
         super(givenDriver);
         }
 
-        By firstSong = By.cssSelector(".all-song tr.song-item:nth-child(1)");
+        By firstSong = By.cssSelector(".all-song tr.songs-item:nth-child(1)");
         By playSong = By.xpath("/span[@class='play']");
 
         By soundBar = By.xpath("//div[@class='bars']");
