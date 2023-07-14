@@ -1,5 +1,4 @@
 package pages;
-import pages.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,8 +13,13 @@ public class HomePage extends BasePage {
 
         super(givenDriver);
     }
+    LoginPage loginPage = new LoginPage(driver);
+    HomePage homePage = new HomePage(driver);
+    AllSongsPage allSongs = new AllSongsPage(driver);
     By avatarIcon = By.xpath("//img[@class='avatar']");
-    By allSongs = By.xpath("//a[@class='songs']");
+    By allSongsList = By.xpath("//a[@class='songs']");
+
+    By playBtn = By.cssSelector("[data-testid='play-btn]");
 
     public WebElement getAvatarIcon() {
 
@@ -36,7 +40,7 @@ public class HomePage extends BasePage {
 
     public void chooseAllSongsList() {
         waitForOverlay();
-        findElement(allSongs).click();
+        findElement(allSongsList).click();
     }
 
         public void verifySearchUrl() {
@@ -104,6 +108,11 @@ public class HomePage extends BasePage {
     public void openPlaylist() {
         WebElement openedPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a")));
         openedPlaylist.click();
+    }
+    public WebElement hoverOverPlayBtn () {
+       hoverAction(playBtn);
+       return findElement(playBtn);
+
     }
 
     }

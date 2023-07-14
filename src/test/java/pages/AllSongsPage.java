@@ -1,9 +1,9 @@
 package pages;
-import pages.*;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,13 +13,14 @@ public AllSongsPage (WebDriver givenDriver){
         super(givenDriver);
         }
 
-        By firstSong = By.cssSelector(".all-song tr.songs-item:nth-child(1)");
-        By playSong = By.xpath("/span[@class='play']");
+        @FindBy(css="[.all-song tr.songs-item:nth-child(1)]")
+                WebElement firstSong;
+        @FindBy(xpath ="[/span[@class='play']")
+        WebElement playSong;
+        @FindBy(xpath = "[div[@class='bars]")
+        WebElement soundbar;
 
-        By soundBar = By.xpath("//div[@class='bars']");
-
-
-
+        @FindBy(xpath = "[//button[@class='btn-add-to']")
         public void clickAddToBtn() {
         WebElement addTo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn-add-to']")));
         addTo.click();

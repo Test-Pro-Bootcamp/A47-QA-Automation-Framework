@@ -23,6 +23,20 @@ public class SongsTests extends BaseTest{
     }
 
     @Test
+    public void hoverOverPlayBtn(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        AllSongsPage allSongs = new AllSongsPage(driver);
+
+        loginPage.login();
+        homePage.chooseAllSongsList();
+        homePage.hoverOverPlayBtn();
+
+        Assert.assertTrue(homePage.hoverOverPlayBtn().isDisplayed());
+
+    }
+
+    @Test
     public void addSongToPlaylist(){
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
