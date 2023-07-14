@@ -6,7 +6,7 @@ import pages.LoginPage;
 public class Homework21 extends BaseTest {
     @Test
     public void renamePlaylist() {
-        String playlistName = "Testing Playist";
+        String playlistName = "Testing Playlist";
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         loginPage.login();
