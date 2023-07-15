@@ -9,7 +9,7 @@ public class HOME extends BASE{
         super(givenDriver);
 
     }
-    By HBPlaylist = By.cssSelector(".playlist:ntn-child(3)");
+    By HBPlaylist = By.cssSelector("#playlists > ul > li:nth-child(3) > a");
 
     By playlistNameField = By.cssSelector("[name='name']");
 
