@@ -8,8 +8,11 @@
         <classes>
             <class name="LoginTests"/>
             <class name="BaseTest"/>
-            <class name="HomeWork19"/>
-            <class name="HomeWork21"/>
+            <class name="HOME"/>
+            <class name="BASE"/>
+            <class name="LOGIN"/>
+            <class name="HOMEWORK22"/>
+
         </classes>
     </test>
 </suite>

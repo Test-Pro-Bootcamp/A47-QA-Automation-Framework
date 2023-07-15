@@ -10,10 +10,10 @@ import java.time.Duration;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class HomeWork21 extends BaseTest{
-    String newPlaylistname;
+    String playlistName;
 
     public HomeWork21() {
-        newPlaylistname = "Hubba Bubba Jr";
+        playlistName = "Hubba Bubba Jr";
     }
 
     @Test
@@ -36,12 +36,12 @@ public class HomeWork21 extends BaseTest{
     public void enterNewPlaylistName() {
             WebElement playlistInputField = wait.until(visibilityOfElementLocated(By.cssSelector("[name='name']")));
             playlistInputField.sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE));
-            playlistInputField.sendKeys(newPlaylistname);
+            playlistInputField.sendKeys(playlistName);
             playlistInputField.sendKeys(Keys.ENTER);
     }
 
     public boolean doesPlaylistExist(){
-        WebElement playlistElement= wait.until(visibilityOfElementLocated(By.xpath("//a[text()='"+newPlaylistname+"']")));
+        WebElement playlistElement= wait.until(visibilityOfElementLocated(By.xpath("//a[text()='"+playlistName+"']")));
         return playlistElement.isDisplayed();
     }
 }
