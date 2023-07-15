@@ -8,51 +8,80 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 public class AllSongsPage extends BasePage {
-public AllSongsPage (WebDriver givenDriver){
+public AllSongsPage (WebDriver givenDriver) {
 
         super(givenDriver);
-        }
+}
 
-        @FindBy(css="[.all-song tr.songs-item:nth-child(1)]")
-                WebElement firstSong;
-        @FindBy(xpath ="[/span[@class='play']")
-        WebElement playSong;
+
+        @FindBy(css = "[.all-song tr.songs-item:nth-child(1)]")
+        private WebElement firstSong;
+        @FindBy(xpath = "[/span[@class='play']")
+        private WebElement playSong;
         @FindBy(xpath = "[div[@class='bars]")
-        WebElement soundbar;
+        private WebElement soundBar;
 
         @FindBy(xpath = "[//button[@class='btn-add-to']")
-        public void clickAddToBtn() {
-        WebElement addTo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn-add-to']")));
-        addTo.click();
+        private WebElement addTo;
+
+        @FindBy(xpath = "//i[@data-testid='play-next-btn']")
+        private WebElement playNextBtn;
+        @FindBy(xpath = "//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]")
+        private WebElement firstResult;
+
+        @FindBy(xpath = "//button[@class='del btn-delete-playlist']")
+        private WebElement deletePlaylistBtn;
+
+        @FindBy(xpath = "//button[@class='ok']")
+        private WebElement confirmDeleteBtn;
+
+        @FindBy(xpath = "//i[@class='fa fa-plus-circle create']")
+        private WebElement createPlaylistBtn;
+
+        @FindBy (xpath ="//li[@data-testid='playlist-context-menu-create-simple']")
+        private WebElement newPlaylistBtn;
+        public void clickAddToBtn () {
+                addTo.click();
         }
-        public void choosePlaySong() {
-                findElement(playSong).click();
-        }
-        public void playNextSong() {
-                WebElement playNextBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-testid='play-next-btn']")));
-                playNextBtn.click();
+        public void choosePlaySong () {
+                playSong.click();
         }
 
-public void selectFirstSongResult() {
-        WebElement firstResult = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]")));
-        firstResult.click();
+        public void createNewPlaylist() {
+                createPlaylistBtn.click();
+
         }
-        public void clickDeleteBtn() {
-                WebElement deletePlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
+
+        public void clickNewPlaylistBtn() {
+                newPlaylistBtn.click();
+
+        }
+        public AllSongsPage playNextSong () {
+                playNextBtn.click();
+                return this;
+        }
+
+        public AllSongsPage selectFirstSongResult () {
+                firstResult.click();
+                return this;
+        }
+        public AllSongsPage clickDeleteBtn () {
                 deletePlaylistBtn.click();
 
-
-                WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
                 confirmDeleteBtn.click();
+                return this;
         }
 
-        public void contextClickFirstSong() {
-                contextClick(firstSong);
+        public AllSongsPage contextClickFirstSong () {
+                actions.contextClick(firstSong);
+                return this;
         }
-        public boolean isSongPlaying()  {
-                return findElement(soundBar).isDisplayed();
-        }
+        public AllSongsPage isSongPlaying () {
+                return findElement(soundbar).isDisplayed();
 
 
-    }
+        }
+}
+
+
 

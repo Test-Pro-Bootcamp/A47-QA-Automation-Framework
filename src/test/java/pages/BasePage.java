@@ -1,21 +1,24 @@
 package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.testng.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.devtools.v85.page.Page;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.*;
 
 import java.time.Duration;
 
 
 public class BasePage {
-    public static WebDriver driver = null;
-    public static WebDriverWait wait = null;
-    public static Actions actions = null;
-    public static String url = "https://qa.koel.app/";
+    protected WebDriver driver = null;
+    protected WebDriverWait wait = null;
+    protected Actions actions = null;
+    public  String url = "https://qa.koel.app/";
     public  BasePage (WebDriver givenDriver) {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -25,30 +28,43 @@ public class BasePage {
 
 
      @FindBy(css="[.overlay.loading]")
-    WebElement overlayLocator;
+    private WebElement overlayLocator;
+
+    @FindBy(xpath = "[//div[@class='alertify-logs top right']")
+    protected WebElement confirmationMessage;
 
 
-    protected WebElement findElement(By locator) {
+    public WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+    public String getChangesText() {
+        return confirmationMessage.getText();
+
+
+    }
+    public String getNotificationText () {
+
+        return confirmationMessage.getText();
     }
 
     protected void contextClick(By locator) {
         WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         actions.contextClick(contextElement).perform();
     }
-    private void rightClick(By locator) {
+    protected void rightClick(By locator) {
         WebElement contextElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
         actions.contextClick(contextElement).perform();
     }
-    public void waitForOverlay() {
-          wait.until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
+    public BasePage waitForOverlay() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated((By) overlayLocator));
+        return this;
     }
-    private void doubleClick(By locator) {
+    protected void doubleClick(By locator) {
         WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         actions.doubleClick(contextElement).perform();
     }
 
-    public void hoverAction(By locator) {
+    protected void hoverAction(By locator) {
       WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         actions.moveToElement(contextElement).perform();
     }

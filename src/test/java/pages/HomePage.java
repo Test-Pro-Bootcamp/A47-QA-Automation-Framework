@@ -1,11 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
 
@@ -13,105 +12,99 @@ public class HomePage extends BasePage {
 
         super(givenDriver);
     }
-    LoginPage loginPage = new LoginPage(driver);
-    HomePage homePage = new HomePage(driver);
-    AllSongsPage allSongs = new AllSongsPage(driver);
-    By avatarIcon = By.xpath("//img[@class='avatar']");
-    By allSongsList = By.xpath("//a[@class='songs']");
+    @FindBy(xpath ="[//img[@class='avatar']")
+    private WebElement avatarIcon;
+     @FindBy( xpath ="[//a[@class='songs']")
+     private WebElement allSongsList;
 
-    By playBtn = By.cssSelector("[data-testid='play-btn]");
+     @FindBy (css ="[data-testid='play-btn]")
+     private WebElement playBtn;
+
+     @FindBy (xpath = "[//button[@data-test='view-all-songs-btn']")
+     private WebElement viewAllBtn;
+
+     @FindBy (css ="[.playlist:nth-child(3)]")
+     private WebElement firstPlaylist;
+
+     @FindBy (css="[name='name']")
+     private WebElement editPlaylistNameField;
+
+     @FindBy (xpath ="[//section[@id='songResultsWrapper']")
+     private WebElement songResultsWrapper;
+
+     @FindBy(css = "[type='search']")
+     private WebElement searchField;
+
+     @FindBy(xpath = "//button[@class='del btn-delete-playlist']")
+     private WebElement deletePlaylistBtn;
+
+     @FindBy(xpath = "//button[@class='ok']")
+     private WebElement confirmDeleteBtn;
 
     public WebElement getAvatarIcon() {
 
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(avatarIcon));
+       return avatarIcon;
     }
 
         public void clickViewAllBtn() {
-        waitForOverlay();
-            WebElement viewAllBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-test='view-all-songs-btn']")));
+            waitForOverlay();
             viewAllBtn.click();
 
         }
     public void choosePlaylist() {
-        waitForOverlay();
-        WebElement testPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[15]")));
-        testPlaylist.click();
+
+        firstPlaylist.click();
     }
 
     public void chooseAllSongsList() {
-        waitForOverlay();
-        findElement(allSongsList).click();
+       waitForOverlay();
+        allSongsList.click();
     }
 
-        public void verifySearchUrl() {
-        waitForOverlay();
-            WebElement songResultsWrapper = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']")));
-            Assert.assertTrue(songResultsWrapper.isDisplayed());
-        }
 
         public void searchForSong(String song){
         waitForOverlay();
-            WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[type='search']")));
             searchField.click();
             searchField.clear();
             searchField.sendKeys(song);
 
         }
-    public void editPlaylistName() {
-        waitForOverlay();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
-        WebElement editNameField = driver.findElement(By.cssSelector("[name='name']"));
-        editNameField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
-        editNameField.sendKeys("Test Playlist");
-        editNameField.sendKeys(Keys.ENTER);
+    public void editPlaylistName(String playListName) {
+        editPlaylistNameField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+        editPlaylistNameField.sendKeys(playListName);
+        editPlaylistNameField.sendKeys(Keys.ENTER);
     }
 
 
 
-    public String getChangesText() {
-        waitForOverlay();
-        WebElement renamePlaylistConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alertify-logs top right']")));
-        return renamePlaylistConfirm.getText();
+    public HomePage doubleClickChoosePlaylist() {
 
+        actions.doubleClick(firstPlaylist).click().perform();
+        return this;
+    }
+    public HomePage rightClickPlaylist () {
 
+        actions.contextClick(firstPlaylist).click().perform();
     }
-    public String getNotificationText () {
-        WebElement notificationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.alertify-logs.top.right")));
-        return notificationElement.getText();
-    }
-
-    public void doubleClickChoosePlaylist() {
-        waitForOverlay();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
-        WebElement playlistElement = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
-        actions.doubleClick(playlistElement).click().perform();
-    }
-    public void rightClickPlaylist () {
-        waitForOverlay();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".playlist:nth-child(3)")));
-        WebElement songElement= driver.findElement(By.xpath(".playlist:nth-child(3)"));
-        actions.contextClick(songElement).click().perform();
-    }
-    public void clickDeleteBtn() {
-        WebElement deletePlaylistBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='del btn-delete-playlist']")));
+    public HomePage clickDeleteBtn() {
         deletePlaylistBtn.click();
 
-
-        WebElement confirmDeleteBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='ok']")));
         confirmDeleteBtn.click();
+        return this;
     }
     public String getDeletionText(){
-        WebElement deletePlaylistConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alertify-logs top right']")));
-        return deletePlaylistConfirm.getText();
+
+        return confirmationMessage.getText();
     }
 
-    public void openPlaylist() {
-        WebElement openedPlaylist = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"playlists\"]/ul/li[5]/a")));
-        openedPlaylist.click();
+    public HomePage openPlaylist() {
+
+        firstPlaylist.click();
+        return this;
     }
     public WebElement hoverOverPlayBtn () {
-       hoverAction(playBtn);
-       return findElement(playBtn);
+       hoverAction((By) playBtn);
+       return playBtn;
 
     }
 
