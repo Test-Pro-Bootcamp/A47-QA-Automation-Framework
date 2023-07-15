@@ -27,7 +27,7 @@ public class LOGIN extends BASE {
     }
 
     public void login() {
-        provideEmail("courtney.matthews01@testpro.io");
+        provideEmail("courtney.matthews@testpro.io");
         providePassword("Walkonby08!!");
         clickSubmit();
     }
