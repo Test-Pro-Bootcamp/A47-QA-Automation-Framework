@@ -8,8 +8,8 @@ public class Homework17 extends BaseTest {
     public void addSongToPlaylist() throws InterruptedException {
         String newSongAddedNotificationText = "Added 1 song into";
         openLoginUrl();
-        enterEmail("demo@class.com");
-        enterPassword("Te$t$tudent");
+        enterEmail("irene.perdon@testpro.io");
+        enterPassword("te$t$tudent");
         clickSubmit();
 
         searchSong("Dark Days");

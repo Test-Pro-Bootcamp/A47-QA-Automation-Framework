@@ -18,6 +18,7 @@ public class BaseTest {
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeMethod
     public void launchBrowser() {
         ChromeOptions options = new ChromeOptions();
@@ -37,13 +38,13 @@ public class BaseTest {
         WebElement enterEmail = driver.findElement(By.cssSelector("[type='email']"));
         enterEmail.click();
         enterEmail.clear();
-        enterEmail.sendKeys("demo@class.com");
+        enterEmail.sendKeys("irene.perdon@testpro.io");
     }
     public void enterPassword(String Password) {
         WebElement enterPassword = driver.findElement(By.cssSelector("[type='password']"));
         enterPassword.click();
         enterPassword.clear();
-        enterPassword.sendKeys("Te$t$tudent");
+        enterPassword.sendKeys("te$t$tudent");
     }
     public void clickSubmit(){
         WebElement clickSubmit = driver.findElement(By.cssSelector("[type='submit']"));
