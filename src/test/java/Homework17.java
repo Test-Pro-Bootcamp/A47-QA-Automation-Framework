@@ -19,5 +19,6 @@ public class Homework17 extends BaseTest {
         choosePlayList();
 
         Assert.assertTrue(getNotification().contains(newSongAddedNotificationText));
+
     }
 }
