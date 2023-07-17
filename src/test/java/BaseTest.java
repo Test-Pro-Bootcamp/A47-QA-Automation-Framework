@@ -28,7 +28,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
-        WebDriver driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
@@ -78,24 +78,24 @@ public class BaseTest {
     }
 
     public static String getNotificationText() {
-        WebElement notificationText = driver.findElement(By.xpath("//html/body/div[2]"));
+        WebElement notificationText = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
             return    notificationText.getText();
     }
 
     public static void enterEmail(String email){
-        WebElement emailInput = driver.findElement(By.xpath("//*[@id='app'']/div/form/input[1]"));
+        WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
         emailInput.clear();
-        emailInput.sendKeys("beomseo.park@testpro.io");
+        emailInput.sendKeys(email);
     }
 
     public static void enterPassword(String password) {
-        WebElement passwordInput = driver.findElement(By.xpath("//*[@id='app'']/div/form/input[2]"));
+        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
         passwordInput.clear();
-        passwordInput.sendKeys();
+        passwordInput.sendKeys(password);
     }
 
     public static void clickSubmit(){
-        WebElement submitBtn = driver.findElement(By.xpath("//*[@id='app'']/div/form/button"));
+        WebElement submitBtn = driver.findElement(By.cssSelector("button[type='submit']"));
         submitBtn.click();
     }
 
