@@ -35,7 +35,6 @@ public class BaseTest {
     }
     @BeforeSuite
     static void setupClass(){
-       // WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
     @Parameters({"BaseURL"})
@@ -85,7 +84,7 @@ public class BaseTest {
     WebDriverManager.chromedriver().setup();
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.addArguments("--remote-allow-origins=*");
-    return driver = new ChromeDriver();
+    return driver = new ChromeDriver(chromeOptions);
 }
     }
 

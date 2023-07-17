@@ -25,9 +25,11 @@ test {
         }
     }
     task testRegression(type: Test){
-        useTestNG(){
-            suites"src/test/resources/Regression.xml"
+
+        def g = useTestNG(){
+            suites"src/test/resources/${suite}.xml"
             systemProperty "browser", System.getProperty("browserName")
         }
+        g
     }
 }

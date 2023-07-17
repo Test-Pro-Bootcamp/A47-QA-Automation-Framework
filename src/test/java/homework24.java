@@ -5,6 +5,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pages.LoginPage;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -32,6 +35,19 @@ public class homework24 extends BaseTest {
                 chromeOptions.addArguments("--remote-allow-origins=*");
                 return driver = new ChromeDriver();
         }
+
+
     }
 
+
+    @Test
+    public void LoginEmptyPasswordEmailTest() {
+
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.provideEmail("art1234@mail.com")
+                .providePassword("")
+                .clickSubmit();
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
+    }
 }
+

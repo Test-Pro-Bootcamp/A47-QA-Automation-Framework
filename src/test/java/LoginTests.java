@@ -35,10 +35,9 @@ public class LoginTests extends BaseTest {
     public void LoginEmptyEmailPasswordTest() {
 
         LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = new HomePage(getDriver());
         loginPage.provideEmail("")
                 .providePassword("te$t$tudent")
                 .clickSubmit();
-        Assert.assertTrue(homePage.isAvatarDisplayed());
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
 }
