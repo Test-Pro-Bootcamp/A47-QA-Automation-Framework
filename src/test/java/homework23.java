@@ -7,7 +7,7 @@ import pages.BasePage;
 public class homework23 extends BasePage {
 
 
-    WebDriver driver;//
+
 
     @FindBy(css = "[type='email']")
     WebElement emailField;
@@ -20,7 +20,7 @@ public class homework23 extends BasePage {
 
     public homework23(WebDriver d)  //
     {
-        driver=d;
+        WebDriver driver = d;
         //this.driver=driver
     }
 

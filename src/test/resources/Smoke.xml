@@ -9,11 +9,7 @@
         <classes>
             <!--class name="LoginTests"/>
             <class name="BaseTest"/>
-            <class name="Homework17"/>
-            <class name="homework21"/>
-            <class name="homework23"/>
-            <class name="homework22"/-->
-            <class name="deletePlaylist"/>
+            <class name="deletePlaylist"/-->
         </classes>
     </test>
 </suite>

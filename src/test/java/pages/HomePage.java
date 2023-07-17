@@ -10,40 +10,42 @@ public class HomePage extends BasePage {
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
-
-
     By firstPlaylist = By.cssSelector(".playlist:nth-child(3)");
     By playlistNameFiled = By.cssSelector("[name='name']");
 
     public void doubleClickPlaylist() {
-        doubleClick(firstPlaylist);
+        doubleClick((WebElement) firstPlaylist);
     }
 
     public void enterNewPlaylistName(String playlistName) {
 
-        findElement(playlistNameFiled).sendKeys(playlistName);
-        findElement(playlistNameFiled).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
-        findElement(playlistNameFiled).sendKeys(playlistName);
-        findElement(playlistNameFiled).sendKeys(Keys.ENTER);
+        findElement((WebElement) playlistNameFiled).sendKeys(playlistName);
+        findElement((WebElement) playlistNameFiled).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
+        findElement((WebElement) playlistNameFiled).sendKeys(playlistName);
+        findElement((WebElement) playlistNameFiled).sendKeys(Keys.ENTER);
     }
 
     public boolean doesPlaylistExist(String playlistName) {
         By newPlaylist = By.xpath("//a[text()'" + playlistName + "']");
-        return findElement(newPlaylist).isDisplayed();
+        return findElement((WebElement) newPlaylist).isDisplayed();
     }
 
     By userAvatarIcon = By.cssSelector("img.avatar");
     By allSongs = By.cssSelector("li a.songs");
 
     public WebDriver getUserElement() {
-        return (WebDriver) findElement(userAvatarIcon);
+        return (WebDriver) findElement((WebElement) userAvatarIcon);
     }
 
 
     public void chooseAllSongList(){
         waitForOverlayToGoAway();
-        findElement(allSongs).click();
+        findElement((WebElement) allSongs).click();
 
 
+    }
+
+    public boolean isAvatarDisplayed() {
+        return false;
     }
 }
