@@ -13,6 +13,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.openqa.selenium.WebElement;
 import java.time.Duration;
+import java.util.List;
+//import java.util.;
+
 public class BaseTest {
     public static WebDriver driver = null;
     public static String url = null;
@@ -29,6 +32,13 @@ public class BaseTest {
     // Locators: Delete an existing Playlist
     By deletePlaylistBtnLocator = By.cssSelector("button[title='Delete this playlist']");
     By deleteNotifyLocator=By.cssSelector("div.success.show");
+    // is song playing locators
+    By soundBarVisualizer = By.cssSelector("[data-testid='sound-bar-play']");
+    By pauseButton = By.cssSelector("span.pause");
+    // By.xpath("//span[@title ='Pause' and @data-testid='pause-btn']");
+    //play control- play button
+    By PlayControlBtn = By.xpath("//*[@title='Play or resume' and  @data-testid='play-btn']");
+
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -110,11 +120,11 @@ public class BaseTest {
     }
     // Delete Playlist
     //-------------------------
-    public void selectDeletePlaylist (String Playlist) {
-        selectPlaylist (Playlist);
+    public void selectDeletePlaylist (String newPlaylistName) {
+        selectPlaylistByName (newPlaylistName);
         deletePlaylist ();
     }
-    public void selectPlaylist (String Playlist){
+    public void selectPlaylistByName (String Playlist){
         waitForOverlayToVanish();
         String selectedPlaylistLocator = "//section[@id='playlists']//a[contains(text(),'" + Playlist + "')]";
         WebElement selectedPlaylistElement = wait.until(ExpectedConditions.elementToBeClickable
@@ -138,11 +148,32 @@ public class BaseTest {
 //-------------------------
         public void doubleClickPlaylist (String Playlist) {
         waitForOverlayToVanish();
-        WebElement choosePlaylistElement = wait.until(ExpectedConditions.elementToBeClickable
-                (By.xpath("//section[@id='playlists']//li[@class='playlist playlist'] /a")));
+//        WebElement choosePlaylistElement = wait.until(ExpectedConditions.elementToBeClickable
+//                  (By.xpath("//section[@id='playlists']//li[@class='playlist playlist'] /a")));
+        WebElement choosePlaylistElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+                    (By.cssSelector(".playlist:nth-child(3)")));
         actions.doubleClick(choosePlaylistElement).perform();
-        System.out.println("Playlist " + Playlist + " is clicked");
+        System.out.println("Playlist " + Playlist + " is double clicked");
     }
+
+    public void contextClickPlaylist (String Playlist){
+        waitForOverlayToVanish();
+        WebElement choosePlaylistElement = wait.until(ExpectedConditions.elementToBeClickable
+                (By.cssSelector(".playlist:nth-child(3)")));
+      // By playlistElementLocator= By.xpath("//section[@id='playlists']//li[@class='playlist playlist'] /a");
+
+        actions.contextClick(choosePlaylistElement).perform();
+        System.out.println("Playlist " + Playlist + " is right/context clicked");
+    }
+    public void clickEditMenu (){
+        WebElement choosePlaylistElement = wait.until(ExpectedConditions.elementToBeClickable
+    // (By.cssSelector("nav.menu.playlist-item-menu li[data-testid='playlist-context-menu-edit-63429']")));
+    //  (By.xpath("//nav[@class='menu playlist-item-menu']//li[data-testid='playlist-context-menu-edit-63429']")));
+      (By.xpath("//*[@id='playlists']/ul/li[3]/nav/ul/li[1]")));
+        choosePlaylistElement.click();
+        System.out.println("Edit is clicked");
+    }
+
     public void enterNewPlaylistName (String newPlaylistName) {
         WebElement playListInputField = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("[name='name']")));
@@ -152,9 +183,46 @@ public class BaseTest {
         playListInputField.sendKeys(Keys.ENTER);
         System.out.println("New playlist name " + newPlaylistName + " is entered");
     }
-    public String doesPlaylistExists(){
+//    public String playlistNameChangeNotify(){
+//        WebElement playListElement = wait.until(ExpectedConditions.presenceOfElementLocated
+//                (By.cssSelector("div.success.show")));
+//        return playListElement.getText();
+//    }
+    public boolean doesPlaylistExist(String NewPlaylistName){
         WebElement playListElement = wait.until(ExpectedConditions.presenceOfElementLocated
-                (By.cssSelector("div.success.show")));
-        return playListElement.getText();
+                (By.xpath("//a[text()='" + NewPlaylistName + "']" )));
+        return playListElement.isDisplayed();
+    }
+
+// Play song using context click
+    public void chooseAllSongsList() {
+        waitForOverlayToVanish();
+    wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("li a.songs"))).click();
+    }
+    public void contextClickFirstSong() {
+        WebElement firstSongElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector(".all-songs tr.song-item:nth-child(1)")));
+        actions.contextClick(firstSongElement).perform();
+    }
+    public void choosePlayOption() {
+        WebElement playOptionElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("li.playback")));
+        actions.click(playOptionElement).perform();
+    }
+    public boolean isSongPlaying() {
+         WebElement soundBarVisualizerBarElement = wait.until(ExpectedConditions.presenceOfElementLocated
+            (soundBarVisualizer));
+        return soundBarVisualizerBarElement.isDisplayed();
+    }
+    public void hoverOverPlayControl(){
+        waitForOverlayToVanish();
+        WebElement hoverOverPlayBtnElement = wait.until(ExpectedConditions.presenceOfElementLocated(PlayControlBtn));
+        actions.moveToElement(hoverOverPlayBtnElement).perform();
+        System.out.println("Hovered Over Play Control");
+    }
+    public WebElement isPlayHoveredOver(){
+        WebElement PlayBtnElement = wait.until(ExpectedConditions.visibilityOfElementLocated(PlayControlBtn));
+        System.out.println("Play Control is visible");
+        return PlayBtnElement;
     }
 }
