@@ -14,7 +14,7 @@ public class Homework27 extends BaseTest{
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.enterEmail(email).enterPassword(password).clickSubmit();
-        homePage.selectPlaylist().selectEdit().enterName("testPro123");
+        homePage.selectPlaylist().selectEdit().enterName("testPro123456");
         Assert.assertTrue(homePage.verifications().contains(message));
     }
 }

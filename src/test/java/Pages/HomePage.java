@@ -29,7 +29,7 @@ public class HomePage extends BasePage{
         return this;
     }
     public HomePage enterName(String name){
-        findElement(editField).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.ENTER));
+        findElement(editField).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.BACK_SPACE));
         editField.sendKeys(name);
         editField.sendKeys(Keys.ENTER);
         return this;
