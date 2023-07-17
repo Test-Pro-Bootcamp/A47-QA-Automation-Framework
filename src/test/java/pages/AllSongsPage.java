@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class AllSongsPage extends BasePage {
 
@@ -19,7 +20,7 @@ public class AllSongsPage extends BasePage {
     }
 
     public void choosePlayOption() {
-        findElement(playSong).click();
+        findElement((WebElement) playSong).click();
 
     }
 //    public void isSongPlaying(){

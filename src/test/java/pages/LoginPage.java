@@ -5,35 +5,30 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
     //  public LoginPage(WebDriver givenDriver) {super(givenDriver);
-
-    WebDriver driver;//
-
+    //  WebDriver driver;//
     @FindBy(css = "[type='email']")
     WebElement emailField;
     @FindBy(css = "[type='password']")
     WebElement passwordField;
     @FindBy(css = "button[type='submit']")
     WebElement submitBtn;
-
-
-    public LoginPage(WebDriver d)  //
-    {
-        driver=d;
-        //this.driver=driver
+    public LoginPage(WebDriver givenDriver) {
+        super(givenDriver);
     }
-
-    public void provideEmail(String email) {
-      emailField.sendKeys(email);
+    public LoginPage provideEmail(String email){
+        emailField.sendKeys(email);
+        return this;
     }
-
-    public void providePassword(String password) {
+    public LoginPage providePassword(String password) {
        passwordField.sendKeys(password);
+       return this;
     }
-
-    public void clickSubmit() {
-        submitBtn.click();
+    public LoginPage clickSubmit() {
+        click(submitBtn);
+        return this;
     }
-
+    private void click(WebElement submitBtn) {
+    }
     public void login() {
     }
 
