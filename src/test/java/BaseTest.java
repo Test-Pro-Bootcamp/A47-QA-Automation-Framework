@@ -57,14 +57,14 @@ public class BaseTest {
         Thread.sleep(5000);
     }
     public void clickViewAllBtn() throws InterruptedException {
-        WebElement viewAllSearchResult = driver.findElement(By.cssSelector("#homeWrapper > div > div.two-cols > section.recent > h1 > button"));
+        WebElement viewAllSearchResult = driver.findElement(By.cssSelector("#searchExcerptsWrapper > div > div > section.songs > h1 > button"));
         viewAllSearchResult.click();
         Thread.sleep(5000);
         }
 
-    public void selectFirstSong() throws InterruptedException {
-        WebElement firstSongResult = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.item-container"));
-        firstSongResult.click();
+    public void selectFirstSongResult() throws InterruptedException {
+        WebElement FirstSongResult = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.resize-observer"));
+        FirstSongResult.click();
         Thread.sleep(5000);
         }
     public void clickAddToBtn() throws InterruptedException {
@@ -78,7 +78,7 @@ public class BaseTest {
         Thread.sleep(5000);
         }
 
-    public String getNotification() {
+    public String getNotificationText() {
         WebElement notificationElement = driver.findElement(By.cssSelector("div.success.show"));
         return notificationElement.getText();
 

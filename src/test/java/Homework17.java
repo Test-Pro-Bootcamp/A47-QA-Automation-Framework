@@ -11,14 +11,15 @@ public class Homework17 extends BaseTest {
         enterEmail("irene.perdon@testpro.io");
         enterPassword("te$t$tudent");
         clickSubmit();
+        Thread.sleep(5000);
 
         searchSong("Dark Days");
         clickViewAllBtn();
-        selectFirstSong();
+        selectFirstSongResult();
         clickAddToBtn();
         choosePlayList();
 
-        Assert.assertTrue(getNotification().contains(newSongAddedNotificationText));
+        Assert.assertTrue(getNotificationText().contains(newSongAddedNotificationText));
 
     }
 }
