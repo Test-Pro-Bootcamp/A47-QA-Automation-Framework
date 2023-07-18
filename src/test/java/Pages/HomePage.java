@@ -17,6 +17,8 @@ public class HomePage extends BasePage{
     private WebElement editField;
     @FindBy(css = "div.show.success")
     private WebElement updateMessage;
+    @FindBy(css = "img.avatar")
+    private WebElement avatar;
 
     public HomePage selectPlaylist(){
         findElement(playlist);
@@ -33,6 +35,10 @@ public class HomePage extends BasePage{
         editField.sendKeys(name);
         editField.sendKeys(Keys.ENTER);
         return this;
+    }
+    public WebElement avatarIcon(){
+        return findElement(avatar);
+
     }
     public String verifications(){
         return findElement(updateMessage).getText();
