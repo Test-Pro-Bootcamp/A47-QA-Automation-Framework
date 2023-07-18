@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProfilePage extends BasePage{
+public class ProfilePage extends BasePage {
 
     public ProfilePage (WebDriver givenDriver) {
 
@@ -13,25 +13,25 @@ public class ProfilePage extends BasePage{
     }
 
     @FindBy (xpath = "//input[@id='inputProfileCurrentPassword']")
-    protected WebElement currentPasswordField;
+    public WebElement currentPasswordField;
 
     @FindBy (xpath = "//input[@id='inputProfileName']")
-    protected WebElement profileNameField;
+    public WebElement profileNameField;
 
     @FindBy (xpath = "//input[@id='inputProfileEmail']")
-    protected WebElement emailAddressField;
+    public WebElement emailAddressField;
 
     @FindBy (xpath = "//input[@id='inputProfileNewPassword']")
-    protected WebElement newPasswordField;
+    public WebElement newPasswordField;
 
     @FindBy (xpath = "//button[@class='btn-submit']")
-    protected WebElement saveBtn;
+    public WebElement saveBtn;
 
     @FindBy (xpath = "//span[@class='name']")
-    protected WebElement changeProfileBtn;
+    public WebElement changeProfileBtn;
 
     @FindBy (xpath = "//div[@data-testid='theme-card-violet']")
-    protected WebElement changeTheme;
+    public WebElement changeTheme;
 
     public ProfilePage enterCurrentPassword(String currentPassword) {
         currentPasswordField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
@@ -62,7 +62,7 @@ public class ProfilePage extends BasePage{
         return this;
     }
     public ProfilePage clickProfileBtn(){
-        waitForOverlay();
+        //waitForOverlay();
         changeProfileBtn.click();
         return this;
     }

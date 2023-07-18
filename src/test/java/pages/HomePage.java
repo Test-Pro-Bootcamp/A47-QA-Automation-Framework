@@ -1,9 +1,9 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.*;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
@@ -12,9 +12,9 @@ public class HomePage extends BasePage {
 
         super(givenDriver);
     }
-    @FindBy(xpath ="[//img[@class='avatar']")
+    @FindBy(xpath ="//img[@class='avatar']")
     private WebElement avatarIcon;
-     @FindBy( xpath ="[//a[@class='songs']")
+     @FindBy( xpath ="//a[@class='songs']")
      private WebElement allSongsList;
 
      @FindBy (css ="[data-testid='play-btn]")
@@ -41,13 +41,13 @@ public class HomePage extends BasePage {
      @FindBy(xpath = "//button[@class='ok']")
      private WebElement confirmDeleteBtn;
 
-    public WebElement getAvatarIcon() {
+    private WebElement getAvatarIcon() {
 
        return avatarIcon;
     }
 
-        public void clickViewAllBtn() {
-            waitForOverlay();
+    public void clickViewAllBtn() {
+            //waitForOverlay();
             viewAllBtn.click();
 
         }
@@ -57,13 +57,13 @@ public class HomePage extends BasePage {
     }
 
     public void chooseAllSongsList() {
-       waitForOverlay();
+      // waitForOverlay();
         allSongsList.click();
     }
 
 
         public void searchForSong(String song){
-        waitForOverlay();
+       // waitForOverlay();
             searchField.click();
             searchField.clear();
             searchField.sendKeys(song);
@@ -77,24 +77,22 @@ public class HomePage extends BasePage {
 
 
 
-    public HomePage doubleClickChoosePlaylist() {
+    public void doubleClickChoosePlaylist() {
 
         actions.doubleClick(firstPlaylist).click().perform();
-        return this;
     }
-    public HomePage rightClickPlaylist () {
+    public void rightClickPlaylist () {
 
         actions.contextClick(firstPlaylist).click().perform();
     }
-    public HomePage clickDeleteBtn() {
+    public void clickDeleteBtn() {
         deletePlaylistBtn.click();
 
         confirmDeleteBtn.click();
-        return this;
     }
-    public String getDeletionText(){
+    public void getDeletionText(){
 
-        return confirmationMessage.getText();
+        confirmationMessage.getText();
     }
 
     public HomePage openPlaylist() {

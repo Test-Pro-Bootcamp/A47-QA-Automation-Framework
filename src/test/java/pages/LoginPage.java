@@ -1,8 +1,7 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
         public class LoginPage extends BasePage {
@@ -12,13 +11,13 @@ import org.openqa.selenium.support.FindBy;
     }
 
     @FindBy(css = "[type='email']")
-            protected WebElement emailField;
+            public WebElement emailField;
 
     @FindBy(css = "[type='password']")
-           protected WebElement passwordField;
+           public WebElement passwordField;
 
     @FindBy(css = "[type='submit']")
-            protected WebElement submitBtn;
+            public WebElement submitBtn;
 
 
     public LoginPage provideEmail(String email) {

@@ -19,4 +19,9 @@ test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
     }
+    task POMTest(type: Test) {
+        useTestNG() {
+            suites "src/test/resources/TestNG.xml"
+        }
+    }
 }

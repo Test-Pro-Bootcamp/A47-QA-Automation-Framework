@@ -76,8 +76,8 @@ public AllSongsPage (WebDriver givenDriver) {
                 actions.contextClick(firstSong);
                 return this;
         }
-        public AllSongsPage isSongPlaying () {
-                return findElement(soundbar).isDisplayed();
+        public Boolean isSongPlaying () {
+                return findElement((By) soundBar).isDisplayed();
 
 
         }
