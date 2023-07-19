@@ -1,8 +1,11 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.nio.charset.MalformedInputException;
 import java.time.Duration;
+import java.util.HashMap;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,7 +41,7 @@ public class BaseTest {
     }
     @BeforeMethod
     @Parameters({"BaseURL"})
-   public void launchBrowser(String BaseURL) throws MalformedURLException, MalformedInputException {
+    public void launchBrowser(String BaseURL) throws MalformedURLException, MalformedInputException {
 
 
 //       ChromeOptions options = new ChromeOptions();
@@ -66,6 +69,25 @@ public class BaseTest {
     public WebDriver getDriver() {
         return threadDriver.get();
     }
+
+    public static WebDriver lambdaTest() throws MalformedInputException, MalformedURLException {
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("MacOS Ventura");
+        browserOptions.setBrowserVersion("114.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "arthurolusiani");
+        ltOptions.put("accessKey", "6QGKOzrBgTvK6UBrY06A6IlhHkWBrMUhhcJ9QP4Oa8q2swtXWs");
+        ltOptions.put("resolution", "2560x1440");
+        ltOptions.put("project", "homework-25");
+        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL),browserOptions);
+    }
+
     public static WebDriver pickBrowser(String browser) throws MalformedInputException, MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.160:4444";
@@ -80,6 +102,8 @@ public class BaseTest {
     case "grid-chrome":
         caps.setCapability("browserName", "chrome");
         return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+        case "cloud":
+                return lambdaTest();
     default:
     WebDriverManager.chromedriver().setup();
     ChromeOptions chromeOptions = new ChromeOptions();
