@@ -14,14 +14,14 @@ public class ProfileTests extends BaseTest {
         ProfilePage profilePage = new ProfilePage(driver);
 
         loginPage.login();
-        profilePage.clickProfileBtn();
+        homePage.clickProfileBtn();
         profilePage.enterCurrentPassword("te$t$tudent");
         profilePage.changeProfileName("Matt");
         profilePage.enterEmailAddress("mattpierce.testpro.io");
         profilePage.changePassword("test password");
         profilePage.clickSave();
 
-        Assert.assertTrue((homePage.getNotificationText().contains(profileChangesConfirmedText)));
+        Assert.assertTrue(homePage.getConfirmationText().contains(profileChangesConfirmedText));
     }
 
     @Test
@@ -32,11 +32,11 @@ public class ProfileTests extends BaseTest {
         ProfilePage profilePage = new ProfilePage(driver);
 
         loginPage.login();
-        profilePage.clickProfileBtn();
+        homePage.clickProfileBtn();
         profilePage.changeBackgroundTheme();
         profilePage.clickSave();
 
-        Assert.assertTrue((homePage.getNotificationText().contains(profileChangesConfirmedText)));
+        Assert.assertTrue((homePage.getConfirmationText().contains(profileChangesConfirmedText)));
 
     }
 }

@@ -47,7 +47,7 @@ public class SongsTests extends BaseTest{
         allSongs.clickNewPlaylistBtn();
         homePage.editPlaylistName("New Test Playlist");
 
-        Assert.assertTrue(homePage.getNotificationText().contains(confirmationText));
+        Assert.assertTrue(homePage.getConfirmationText().contains(confirmationText));
 
 
     }
@@ -67,7 +67,7 @@ public class SongsTests extends BaseTest{
         allSongs.clickAddToBtn();
         homePage.choosePlaylist();
 
-        Assert.assertTrue((homePage.getNotificationText().contains(newSongAddedNotificationText)));
+        Assert.assertTrue((homePage.getConfirmationText().contains(newSongAddedNotificationText)));
 
     }
 
@@ -83,10 +83,9 @@ public class SongsTests extends BaseTest{
         loginPage.login();
         homePage.doubleClickChoosePlaylist();
         homePage.editPlaylistName("Test Playlist");
-        homePage.getNotificationText();
 
         // verifies that the Deletion Message contains the deletion text.
-        Assert.assertTrue((homePage.getChangesText().contains(editedPlaylistNameMessage)));
+        Assert.assertTrue((homePage.getConfirmationText().contains(editedPlaylistNameMessage)));
     }
     @Test
     public void deletePlaylist() {
@@ -99,7 +98,8 @@ public class SongsTests extends BaseTest{
         loginPage.login();
         homePage.choosePlaylist();
         homePage.clickDeleteBtn();
-        homePage.getDeletionText();
+
+        Assert.assertTrue(homePage.getConfirmationText().contains(deletedPlaylistMessage));
 
     }
 

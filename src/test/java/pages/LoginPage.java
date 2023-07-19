@@ -11,13 +11,13 @@ import org.openqa.selenium.support.FindBy;
     }
 
     @FindBy(css = "[type='email']")
-            public WebElement emailField;
+            private WebElement emailField;
 
     @FindBy(css = "[type='password']")
-           public WebElement passwordField;
+           private WebElement passwordField;
 
     @FindBy(css = "[type='submit']")
-            public WebElement submitBtn;
+            private WebElement submitBtn;
 
 
     public LoginPage provideEmail(String email) {

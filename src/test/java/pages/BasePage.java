@@ -26,36 +26,31 @@ public class BasePage {
 
 
      @FindBy(css="[.overlay.loading]")
-    private WebElement overlayLocator;
+    public WebElement overlayLocator;
 
     @FindBy(xpath = "[//div[@class='alertify-logs top right']")
     private WebElement confirmationMessage;
 
 
-    public WebElement findElement(By locator) {
+    protected WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-    public String getChangesText() {
-        return confirmationMessage.getText();
+    public String getConfirmationText(){
 
-
-    }
-    public String getNotificationText () {
-
-        return confirmationMessage.getText();
+       return confirmationMessage.getText();
     }
 
-    public void contextClick(By locator) {
+    protected void contextClick(By locator) {
         WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         actions.contextClick(contextElement).perform();
     }
-    public void rightClick(By locator) {
+    protected void rightClick(By locator) {
         WebElement contextElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
         actions.contextClick(contextElement).perform();
     }
- //   public void waitForOverlay() {
-     //   wait.until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
-   // }
+    public  void waitForOverlay(By locator) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
     public void doubleClick(By locator) {
         WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         actions.doubleClick(contextElement).perform();

@@ -13,25 +13,23 @@ public class ProfilePage extends BasePage {
     }
 
     @FindBy (xpath = "//input[@id='inputProfileCurrentPassword']")
-    public WebElement currentPasswordField;
+    private WebElement currentPasswordField;
 
     @FindBy (xpath = "//input[@id='inputProfileName']")
-    public WebElement profileNameField;
+    private WebElement profileNameField;
 
     @FindBy (xpath = "//input[@id='inputProfileEmail']")
-    public WebElement emailAddressField;
+    private WebElement emailAddressField;
 
     @FindBy (xpath = "//input[@id='inputProfileNewPassword']")
-    public WebElement newPasswordField;
+    private WebElement newPasswordField;
 
     @FindBy (xpath = "//button[@class='btn-submit']")
-    public WebElement saveBtn;
+    private WebElement saveBtn;
 
-    @FindBy (xpath = "//span[@class='name']")
-    public WebElement changeProfileBtn;
 
     @FindBy (xpath = "//div[@data-testid='theme-card-violet']")
-    public WebElement changeTheme;
+    private WebElement changeTheme;
 
     public ProfilePage enterCurrentPassword(String currentPassword) {
         currentPasswordField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
@@ -61,18 +59,9 @@ public class ProfilePage extends BasePage {
         saveBtn.click();
         return this;
     }
-    public ProfilePage clickProfileBtn(){
-        //waitForOverlay();
-        changeProfileBtn.click();
-        return this;
-    }
 
     public ProfilePage changeBackgroundTheme() {
         changeTheme.click();
         return this;
     }
-
-
-
-
 }

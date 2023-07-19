@@ -14,6 +14,8 @@ public class HomePage extends BasePage {
     }
     @FindBy(xpath ="//img[@class='avatar']")
     private WebElement avatarIcon;
+
+
      @FindBy( xpath ="//a[@class='songs']")
      private WebElement allSongsList;
 
@@ -22,6 +24,9 @@ public class HomePage extends BasePage {
 
      @FindBy (xpath = "[//button[@data-test='view-all-songs-btn']")
      private WebElement viewAllBtn;
+
+    @FindBy (xpath = "//span[@class='name']")
+    private WebElement changeProfileBtn;
 
      @FindBy (css ="[.playlist:nth-child(3)]")
      private WebElement firstPlaylist;
@@ -41,7 +46,7 @@ public class HomePage extends BasePage {
      @FindBy(xpath = "//button[@class='ok']")
      private WebElement confirmDeleteBtn;
 
-    private WebElement getAvatarIcon() {
+    public WebElement getAvatarIcon() {
 
        return avatarIcon;
     }
@@ -90,20 +95,21 @@ public class HomePage extends BasePage {
 
         confirmDeleteBtn.click();
     }
-    public void getDeletionText(){
-
-        confirmationMessage.getText();
-    }
 
     public HomePage openPlaylist() {
 
         firstPlaylist.click();
         return this;
     }
-    public WebElement hoverOverPlayBtn () {
+    public WebElement hoverOverPlayBtn() {
        hoverAction((By) playBtn);
        return playBtn;
 
+    }
+    public HomePage clickProfileBtn(){
+        //waitForOverlay();
+        changeProfileBtn.click();
+        return this;
     }
 
     }
