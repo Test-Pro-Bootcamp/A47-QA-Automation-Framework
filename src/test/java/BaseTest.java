@@ -63,7 +63,7 @@ public class BaseTest {
         }
 
     public void selectFirstSongResult() throws InterruptedException {
-        WebElement FirstSongResult = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.resize-observer"));
+        WebElement FirstSongResult = driver.findElement(By.cssSelector("#songResultsWrapper tr:nth-child(1) td.title"));
         FirstSongResult.click();
         Thread.sleep(5000);
         }
@@ -73,7 +73,7 @@ public class BaseTest {
         Thread.sleep(5000);
         }
     public void choosePlayList() throws InterruptedException {
-        WebElement playListElement = driver.findElement(By.xpath("//*[@id='recentlyPlayedWrapper']/header/div[3]/div/section[1]/ul/li[4]"));
+        WebElement playListElement = driver.findElement(By.xpath("//*[@id=\"songResultsWrapper\"]/header/div[3]/div/section[1]/ul/li[4]"));
         playListElement.click();
         Thread.sleep(5000);
         }
