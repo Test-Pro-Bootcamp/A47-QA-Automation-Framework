@@ -30,6 +30,6 @@ test {
             suites"src/test/resources/${suite}.xml"
             systemProperty "browser", System.getProperty("browserName")
         }
-        g
+
     }
 }
