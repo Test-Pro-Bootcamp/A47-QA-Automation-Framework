@@ -99,5 +99,20 @@ public class BaseTest {
         submitBtn.click();
     }
 
+    public void clickPlayNext(){
+        WebElement playNextBtn = driver.findElement(By.cssSelector("[title='Play next song']"));
+        playNextBtn.click();
+    }
+
+    public void clickPlay(){
+        WebElement playBtn = driver.findElement(By.cssSelector("span.play"));
+        playBtn.click();
+    }
+
+    public Boolean isSongPlay() {
+        WebElement soundBar = driver.findElement(By.cssSelector("div.bars"));
+        return soundBar.isDisplayed();
+    }
+
 }
 
