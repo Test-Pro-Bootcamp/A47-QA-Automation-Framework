@@ -4,8 +4,8 @@ import pages.LoginPage;
 public class LoginTests extends BaseTest {
     @Test
     public void LoginValidEmailPasswordTest() {
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.login();
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
 }

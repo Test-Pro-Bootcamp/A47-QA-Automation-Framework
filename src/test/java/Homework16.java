@@ -5,8 +5,8 @@ import org.testng.annotations.Test;
 public class Homework16 extends BaseTest {
     @Test
     public void registrationNavigation() {
-        driver.findElement(By.id("hel")).click();
+        getDriver().findElement(By.id("hel")).click();
         String url = "https://qa.koel.app/registration.php";
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
 }

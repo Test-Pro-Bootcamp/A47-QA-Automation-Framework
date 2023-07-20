@@ -9,8 +9,8 @@ public class Homework17 extends BaseTest {
     public void addSongToPlaylist() throws InterruptedException {
         String notificationText = "Added 1 song into";
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         loginPage.login();
         homePage.searchSong("Lobo");
