@@ -73,9 +73,9 @@ public class BaseTest {
         Thread.sleep(5000);
         }
     public void choosePlayList() throws InterruptedException {
-        WebElement playListElement = driver.findElement(By.xpath("//*[@id='recentlyPlayedWrapper']/header/div[3]/div/section[1]/ul/li[5]"));
+        WebElement playListElement = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/header/div[3]/div/section[1]/ul/li[5]"));
         playListElement.click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         }
 
     public String getNotificationText() {
