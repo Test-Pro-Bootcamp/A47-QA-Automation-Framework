@@ -10,12 +10,26 @@ public class LoginPage extends BasePage{
         super(givenDriver);
     }
     protected String url;
+
+    @FindBy(css = "[value='register']")
+    private WebElement regButton;
+    @FindBy(css = "#hel")
+    private WebElement registrationLink;
     @FindBy(css = "[type='email']")
     private WebElement emailField;
     @FindBy(css = "[type='password']")
     private WebElement passwordField;
     @FindBy(css = "button[type='submit']")
     private WebElement submitButton;
+
+    public LoginPage getRegistered(){
+        findElement(registrationLink);
+        click(registrationLink);
+        return this;
+    }
+    public WebElement registerButton(){
+        return findElement(regButton);
+    }
 
     public LoginPage enterEmail(String email){
         findElement(emailField);

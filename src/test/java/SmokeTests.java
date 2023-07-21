@@ -5,6 +5,14 @@ import org.testng.annotations.Test;
 
 public class SmokeTests extends BaseTest{
 
+    @Test
+    public void registrationNavigation(){
+        LoginPage loginPage = new LoginPage(getDriver());
+
+        loginPage.getRegistered();
+        Assert.assertTrue(loginPage.registerButton().isDisplayed());
+    }
+
     @Test(dataProvider = "validCredentials", dataProviderClass = BaseTest.class)
     public void loginValidCredentials(String email, String password){
         LoginPage loginPage = new LoginPage(getDriver());
