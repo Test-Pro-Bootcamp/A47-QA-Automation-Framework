@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
@@ -21,7 +22,8 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void lunchBrowser() {
+    @Parameters ({"baseURL"})
+    public void lunchBrowser(String baseURL) {
 
         //      Added ChromeOptions argument below to fix websocket error
 
@@ -30,6 +32,7 @@ public class BaseTest {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        url = baseURL;
     }
 
     @AfterMethod
@@ -41,6 +44,9 @@ public class BaseTest {
         String url = "https://qa.koel.app/";
         driver.get(url);
     }
+
+
+
 
     //Helper functions
     public static void searchSong(String songTileKeyword) throws InterruptedException {
@@ -112,6 +118,24 @@ public class BaseTest {
     public Boolean isSongPlay() {
         WebElement soundBar = driver.findElement(By.cssSelector("div.bars"));
         return soundBar.isDisplayed();
+    }
+
+    public static void openPlaylist () throws InterruptedException {
+        WebElement accessPlaylist = driver.findElement(By.cssSelector("a[href='#!/playlist/65027']"));
+        accessPlaylist.click();
+    }
+    public static void deleteItem () throws InterruptedException{
+        WebElement item = driver.findElement(By.cssSelector(".del"));
+        item.click();
+    }
+    public static void deleteBtn () throws InterruptedException {
+        WebElement btn = driver.findElement(By.cssSelector("button.ok"));
+        btn.click();
+    }
+
+    public String getDeleteMsg() {
+        WebElement deleteMsg = driver.findElement(By.cssSelector("div.success.show"));
+        return deleteMsg.getText();
     }
 
 }
