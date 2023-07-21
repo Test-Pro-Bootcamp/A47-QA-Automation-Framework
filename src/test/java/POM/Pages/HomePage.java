@@ -30,12 +30,12 @@ public class HomePage extends BasePage{
         return findElement(avatarIcon);
     }
 
-    public HomePage selectFirstPlaylist(){
+    public HomePage clickFirstPlaylist(){
         findElement(playlistSelection);
         click(playlistSelection);
         return this;
     }
-    public HomePage selectPlaylist(){
+    public HomePage contextPlaylist(){
         findElement(playlistSelection);
         contextClick(playlistSelection);
         return this;
@@ -52,7 +52,7 @@ public class HomePage extends BasePage{
         editField.sendKeys(Keys.ENTER);
         return this;
     }
-    public HomePage clickDeletePlaylist(){
+    public HomePage clickDeleteButton(){
         findElement(deletePlaylist);
         click(deletePlaylist);
         return this;
