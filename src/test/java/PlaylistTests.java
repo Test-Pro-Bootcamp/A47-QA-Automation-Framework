@@ -7,6 +7,16 @@ import org.testng.annotations.Test;
 public class PlaylistTests extends BaseTest{
 
     @Test
+    public void createNewPlaylist(){
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+
+        loginPage.login("angel.ayala@testpro.io", "school!sc0");
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("playTest");
+
+        Assert.assertTrue(homePage.verificationMessage().contains("Created"));
+    }
+    @Test
     public void deleteActivePlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());

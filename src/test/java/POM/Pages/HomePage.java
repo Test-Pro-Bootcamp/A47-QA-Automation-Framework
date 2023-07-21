@@ -21,6 +21,10 @@ public class HomePage extends BasePage{
     protected WebElement avatarIcon;
     @FindBy(css = ".btn-delete-playlist")
     protected WebElement deletePlaylist;
+    @FindBy(css = "#playlists > h1 > i")
+    protected WebElement newPlaylist;
+    @FindBy(css = "#playlists > nav > ul > li:nth-child(1)")
+    protected WebElement selectNewPlaylist;
 
     public WebElement avatar(){
         return findElement(avatarIcon);
@@ -51,6 +55,22 @@ public class HomePage extends BasePage{
     public HomePage clickDeletePlaylist(){
         findElement(deletePlaylist);
         click(deletePlaylist);
+        return this;
+    }
+    public HomePage createPlaylist(){
+    findElement(newPlaylist);
+    click(newPlaylist);
+    return this;
+    }
+    public HomePage newPlaylistSelection(){
+        findElement(selectNewPlaylist);
+        click(selectNewPlaylist);
+        return this;
+    }
+    public HomePage enterNewPlaylistName(String name){
+        findElement(editField);
+        editField.sendKeys(name);
+        editField.sendKeys(Keys.ENTER);
         return this;
     }
     public String verificationMessage(){
