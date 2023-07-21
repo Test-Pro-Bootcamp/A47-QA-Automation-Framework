@@ -10,18 +10,26 @@ public class HomePage extends BasePage{
         super(givenDriver);
     }
     @FindBy(css = "#playlists > ul > li:nth-child(3) > a")
-    private WebElement playlistSelection;
+    protected WebElement playlistSelection;
     @FindBy(css = "#playlists > ul > li:nth-child(3) > nav > li:nth-child(1)")
-    private WebElement editSelection;
+    protected WebElement editSelection;
     @FindBy(css = "[name='name']")
-    private WebElement editField;
+    protected WebElement editField;
     @FindBy(css = "div.show.success")
-    private WebElement messageBox;
+    protected WebElement messageBox;
     @FindBy(css = "img.avatar")
-    private WebElement avatarIcon;
+    protected WebElement avatarIcon;
+    @FindBy(css = ".btn-delete-playlist")
+    protected WebElement deletePlaylist;
 
     public WebElement avatar(){
         return findElement(avatarIcon);
+    }
+
+    public HomePage selectFirstPlaylist(){
+        findElement(playlistSelection);
+        click(playlistSelection);
+        return this;
     }
     public HomePage selectPlaylist(){
         findElement(playlistSelection);
@@ -40,8 +48,12 @@ public class HomePage extends BasePage{
         editField.sendKeys(Keys.ENTER);
         return this;
     }
-    public HomePage verificationMessage(){
-        findElement(messageBox).getText();
+    public HomePage clickDeletePlaylist(){
+        findElement(deletePlaylist);
+        click(deletePlaylist);
         return this;
+    }
+    public String verificationMessage(){
+        return findElement(messageBox).getText();
     }
 }

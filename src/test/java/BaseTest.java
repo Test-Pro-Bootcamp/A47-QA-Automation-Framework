@@ -20,9 +20,11 @@ import java.util.HashMap;
 
 public class BaseTest {
 
-    @DataProvider(name = "validCredentials")
+    @DataProvider(name = "regressionTests")
     protected static Object[][] getDataFromDataProvider() {
-        return new Object[][]{{"angel.ayala@testpro.io", "school!sc0"},};
+        return new Object[][]{{"invalid@invalid.com", "school!sc0"},
+                {"angel.ayala@testpro.io", "wrongPassword"},{"angel.ayala@testpro.io", ""},{"","school!sc0"},
+                {"",""},};
     }
     protected static WebDriver driver;
     protected static WebDriverWait wait;
