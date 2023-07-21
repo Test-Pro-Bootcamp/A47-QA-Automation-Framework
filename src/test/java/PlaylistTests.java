@@ -33,6 +33,7 @@ public class PlaylistTests extends BaseTest{
         SongsPage songsPage = new SongsPage(getDriver());
 
         loginPage.login("angel.ayala@testpro","school!sc0");
-        songsPage.goToAllSongs().clickFirstSong()
+        songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
+        Assert.assertTrue(homePage.verificationMessage().contains("Added"));
     }
 }

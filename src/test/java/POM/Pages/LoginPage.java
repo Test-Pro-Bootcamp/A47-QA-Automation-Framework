@@ -11,7 +11,7 @@ public class LoginPage extends BasePage{
     }
     protected String url;
 
-    @FindBy(css = "[value='register']")
+    @FindBy(css = "[value='Register']")
     private WebElement regButton;
     @FindBy(css = "#hel")
     private WebElement registrationLink;
