@@ -53,7 +53,7 @@ public class LoginStepDefinition {
     }
     @Then("I am logged into the website")
     public void userIsLoggedIn(){
-        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))));
+        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))).isDisplayed();
     }
 
 
