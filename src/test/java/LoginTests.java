@@ -19,7 +19,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginValidCredentials(String email, String password){
+    public void loginValidCredentials(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
