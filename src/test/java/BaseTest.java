@@ -1,11 +1,4 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.nio.charset.MalformedInputException;
-import java.time.Duration;
-import java.util.HashMap;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +11,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.nio.charset.MalformedInputException;
+import java.time.Duration;
+import java.util.HashMap;
 
 public class BaseTest {
     public static WebDriver driver = null;
@@ -43,14 +43,7 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException, MalformedInputException {
 
-
-//       ChromeOptions options = new ChromeOptions();
-//       options.addArguments("--remote-allow-origins=*")
-//      driver = pickBrowser(System.getProperty("browser"));
-
         threadDriver.set(pickBrowser((System.getProperty("browser"))) );
-     //   threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-       // threadDriver.get().manage().timeouts();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         getDriver().manage().window().maximize();
 
