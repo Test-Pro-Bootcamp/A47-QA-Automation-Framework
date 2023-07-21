@@ -31,5 +31,10 @@ public class LoginPage extends BasePage{
         click(submitButton);
         return this;
     }
+    public void login(String email, String password){
+        enterEmail(email);
+        enterPassword(password);
+        clickSubmit();
+    }
 }
 
