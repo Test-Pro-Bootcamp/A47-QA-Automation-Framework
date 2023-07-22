@@ -1,5 +1,6 @@
 package POM.Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -25,6 +26,9 @@ public class BasePage {
     }
     public WebElement findElement(WebElement webElement){
         return wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+    public WebElement waitToClick(WebElement webElement){
+        return wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
     public void contextClick(WebElement webElement){
         actions.contextClick(webElement).perform();

@@ -13,7 +13,7 @@ public class PlaylistTests extends BaseTest{
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("playTest12");
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("playTest123");
 
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }

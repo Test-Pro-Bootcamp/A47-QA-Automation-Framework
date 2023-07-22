@@ -26,7 +26,7 @@ public class SongsPage extends BasePage{
         return this;
     }
     public SongsPage doubleClickSong(){
-        findElement(fistSongSelection);
+        waitToClick(fistSongSelection);
         doubleClick(fistSongSelection);
         return this;
     }
