@@ -27,10 +27,10 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOf(webElement));
     }
     public void contextClick(WebElement webElement){
-        actions.contextClick(findElement(webElement)).perform();
+        actions.contextClick(webElement).perform();
     }
     public void doubleClick(WebElement webElement){
-        actions.doubleClick(findElement(webElement)).perform();
+        actions.doubleClick(webElement).perform();
     }
     public void click(WebElement webElement){
         findElement(webElement).click();

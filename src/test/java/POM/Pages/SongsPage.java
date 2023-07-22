@@ -8,13 +8,13 @@ public class SongsPage extends BasePage{
 
     @FindBy(css = "#sidebar > section.music > ul > li:nth-child(3) > a")
     protected WebElement allSongs;
-    @FindBy(css = "#songsWrapper > div > div > div.item-container > table > tr.song-item.playing.selected > td.title ")
+    @FindBy(css = "#songsWrapper > div > div > div.item-container > table > tr:nth-child(1) > td.title ")
     protected WebElement fistSongSelection;
     @FindBy(css = "div.bars")
     protected WebElement playBars;
     @FindBy(css = ".btn-add-to")
     protected WebElement addButton;
-    @FindBy(css = "#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(5)")
+    @FindBy(css = "#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(7)")
     protected WebElement playlistSelection;
     public SongsPage(WebDriver givenDriver) {
         super(givenDriver);

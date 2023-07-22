@@ -13,7 +13,7 @@ public class PlaylistTests extends BaseTest{
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("playTest1");
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("playTest12");
 
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
@@ -32,7 +32,7 @@ public class PlaylistTests extends BaseTest{
         HomePage homePage = new HomePage(getDriver());
         SongsPage songsPage = new SongsPage(getDriver());
 
-        loginPage.login("angel.ayala@testpro","school!sc0");
+        loginPage.login("angel.ayala@testpro.io","school!sc0");
         songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
         Assert.assertTrue(homePage.verificationMessage().contains("Added"));
     }

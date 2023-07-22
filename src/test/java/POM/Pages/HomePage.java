@@ -19,7 +19,7 @@ public class HomePage extends BasePage{
     protected WebElement messageBox;
     @FindBy(css = "img.avatar")
     protected WebElement avatarIcon;
-    @FindBy(css = ".btn-delete-playlist")
+    @FindBy(css = ".del.btn-delete-playlist")
     protected WebElement deletePlaylist;
     @FindBy(css = "#playlists > h1 > i")
     protected WebElement newPlaylist;
