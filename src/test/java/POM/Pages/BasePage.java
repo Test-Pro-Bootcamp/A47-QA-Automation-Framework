@@ -16,8 +16,7 @@ public class BasePage {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected static Actions actions;
-    @FindBy(css = ".logout.control")
-    protected WebElement logoutBtn;
+
     public BasePage (WebDriver givenDriver){
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -27,8 +26,8 @@ public class BasePage {
     public WebElement findElement(WebElement webElement){
         return wait.until(ExpectedConditions.visibilityOf(webElement));
     }
-    public WebElement waitToClick(WebElement webElement){
-        return wait.until(ExpectedConditions.elementToBeClickable(webElement));
+    public void waitToClick(WebElement webElement){
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
     public void contextClick(WebElement webElement){
         actions.contextClick(webElement).perform();
@@ -39,10 +38,6 @@ public class BasePage {
     public void click(WebElement webElement){
         findElement(webElement).click();
     }
-    public BasePage logUserOut(){
-        findElement(logoutBtn);
-        click(logoutBtn);
-        return this;
-    }
+
 
 }

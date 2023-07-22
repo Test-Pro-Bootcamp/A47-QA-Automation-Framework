@@ -7,15 +7,15 @@ import org.openqa.selenium.support.FindBy;
 public class SongsPage extends BasePage{
 
     @FindBy(css = "#sidebar > section.music > ul > li:nth-child(3) > a")
-    protected WebElement allSongs;
+    private WebElement allSongs;
     @FindBy(css = "#songsWrapper > div > div > div.item-container > table > tr:nth-child(1) > td.title ")
-    protected WebElement fistSongSelection;
+    private WebElement fistSongSelection;
     @FindBy(css = "div.bars")
-    protected WebElement playBars;
+    private WebElement playBars;
     @FindBy(css = ".btn-add-to")
-    protected WebElement addButton;
+    private WebElement addButton;
     @FindBy(css = "#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(7)")
-    protected WebElement playlistSelection;
+    private WebElement playlistSelection;
     public SongsPage(WebDriver givenDriver) {
         super(givenDriver);
     }

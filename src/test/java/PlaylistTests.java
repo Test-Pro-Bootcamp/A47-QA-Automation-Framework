@@ -13,10 +13,9 @@ public class PlaylistTests extends BaseTest{
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("playTest12345");
-
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("autoTest1");
+        Thread.sleep(2000);
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
-        Thread.sleep(3000);
     }
     @Test
     public void deleteActivePlaylist() throws InterruptedException{
@@ -25,8 +24,8 @@ public class PlaylistTests extends BaseTest{
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         homePage.clickFirstPlaylist().clickDeleteButton();
+        Thread.sleep(2000);
         Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-        Thread.sleep(3000);
     }
     @Test
     public void addSongToPlaylist() throws InterruptedException{
@@ -36,7 +35,18 @@ public class PlaylistTests extends BaseTest{
 
         loginPage.login("angel.ayala@testpro.io","school!sc0");
         songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
+        Thread.sleep(2000);
         Assert.assertTrue(homePage.verificationMessage().contains("Added"));
-        Thread.sleep(3000);
+
+    }
+    @Test
+    public void renamePlaylist()throws InterruptedException{
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage =new HomePage(getDriver());
+
+        loginPage.login("angel.ayala@testpro.io", "school!sc0");
+        homePage.contextPlaylist().selectEdit().editName("editName12");
+        Thread.sleep(2000);
+        Assert.assertTrue(homePage.verificationMessage().contains("Updated"));
     }
 }

@@ -10,21 +10,21 @@ public class HomePage extends BasePage{
         super(givenDriver);
     }
     @FindBy(css = "#playlists > ul > li:nth-child(3) > a")
-    protected WebElement playlistSelection;
-    @FindBy(css = "#playlists > ul > li:nth-child(3) > nav > li:nth-child(1)")
-    protected WebElement editSelection;
+    private WebElement playlistSelection;
+    @FindBy(css = "#playlists > ul > li:nth-child(3) > nav > ul > li:nth-child(1)")
+    private WebElement editSelection;
     @FindBy(css = "[name='name']")
     protected WebElement editField;
     @FindBy(css = "div.show.success")
-    protected WebElement messageBox;
+    private WebElement messageBox;
     @FindBy(css = "img.avatar")
-    protected WebElement avatarIcon;
+    private WebElement avatarIcon;
     @FindBy(css = ".del.btn-delete-playlist")
-    protected WebElement deletePlaylist;
+    private WebElement deletePlaylist;
     @FindBy(css = "#playlists > h1 > i")
-    protected WebElement newPlaylist;
+    private WebElement newPlaylist;
     @FindBy(css = "#playlists > nav > ul > li:nth-child(1)")
-    protected WebElement selectNewPlaylist;
+    private WebElement selectNewPlaylist;
 
     public WebElement avatar(){
         return findElement(avatarIcon);
