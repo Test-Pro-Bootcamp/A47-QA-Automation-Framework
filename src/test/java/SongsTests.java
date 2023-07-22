@@ -12,12 +12,11 @@ public class SongsTests extends BaseTest{
         AllSongsPage allSongs = new AllSongsPage(driver);
 
         loginPage.login();
+        allSongs.waitForOverlay(homePage.overlayLocator);
         homePage.chooseAllSongsList();
-        allSongs.contextClickFirstSong();
-        allSongs.choosePlaySong();
+        allSongs.doubleClick(allSongs.firstSong);
 
         Assert.assertTrue(allSongs.isSongPlaying());
-
     }
 
     @Test
@@ -27,10 +26,9 @@ public class SongsTests extends BaseTest{
 
         loginPage.login();
         homePage.chooseAllSongsList();
-        homePage.hoverOverPlayBtn();
+        homePage.hoverAction(homePage.playBtn);
 
-        Assert.assertTrue(homePage.hoverOverPlayBtn().isDisplayed());
-
+        Assert.assertTrue(homePage.playBtn.isDisplayed());
     }
 
     @Test
@@ -46,6 +44,7 @@ public class SongsTests extends BaseTest{
         allSongs.createNewPlaylist();
         allSongs.clickNewPlaylistBtn();
         homePage.editPlaylistName("New Test Playlist");
+        homePage.getConfirmationText();
 
         Assert.assertTrue(homePage.getConfirmationText().contains(confirmationText));
 
@@ -63,7 +62,7 @@ public class SongsTests extends BaseTest{
 
         homePage.searchForSong("Dark Days");
         homePage.clickViewAllBtn();
-        allSongs.contextClickFirstSong();
+        allSongs.selectFirstSongResult();
         allSongs.clickAddToBtn();
         homePage.choosePlaylist();
 

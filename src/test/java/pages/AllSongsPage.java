@@ -14,11 +14,14 @@ public AllSongsPage (WebDriver givenDriver) {
 }
 
 
-        @FindBy(css = "[.all-song tr.songs-item:nth-child(1)]")
-        private WebElement firstSong;
-        @FindBy(xpath = "[/span[@class='play']")
+        @FindBy(xpath = "//*[@id='songsWrapper']/div/div/div[1]/table/tr[1]/td[2]")
+        public WebElement firstSong;
+        @FindBy(xpath = "//span[@class='play']")
         private WebElement playSong;
-        @FindBy(xpath = "[div[@class='bars]")
+
+        @FindBy(xpath = " //*[@id='app']/nav/ul/li[1]")
+        private WebElement popupPlayBtn;
+        @FindBy(xpath = "//div[@class='bars']")
         private WebElement soundBar;
 
         @FindBy(xpath = "[//button[@class='btn-add-to']")
@@ -26,7 +29,7 @@ public AllSongsPage (WebDriver givenDriver) {
 
         @FindBy(xpath = "//i[@data-testid='play-next-btn']")
         private WebElement playNextBtn;
-        @FindBy(xpath = "//*[@id=\"songResultsWrapper\"]//tr[contains(@class,'song-item')])[1]")
+        @FindBy(xpath = "//*[@id='songResultsWrapper']//tr[contains(@class,'song-item')])[1]")
         private WebElement firstResult;
 
         @FindBy(xpath = "//button[@class='del btn-delete-playlist']")
@@ -47,12 +50,15 @@ public AllSongsPage (WebDriver givenDriver) {
                 playSong.click();
         }
 
-        public void createNewPlaylist() {
-                createPlaylistBtn.click();
+        public AllSongsPage createNewPlaylist() {
+              waitForOverlayElement(createPlaylistBtn);
+              createPlaylistBtn.click();
+              return this;
 
         }
 
         public void clickNewPlaylistBtn() {
+                waitForOverlayElement(newPlaylistBtn);
                 newPlaylistBtn.click();
 
         }
@@ -61,10 +67,25 @@ public AllSongsPage (WebDriver givenDriver) {
                 return this;
         }
 
-        public AllSongsPage selectFirstSongResult () {
-                firstResult.click();
+        public AllSongsPage clickPlayPopup() {
+                waitForOverlayElement(popupPlayBtn);
+                popupPlayBtn.click();
                 return this;
         }
+
+        public AllSongsPage clickPlayBtn () {
+                waitForOverlayElement(playSong);
+                playSong.click();
+                return this;
+        }
+
+        public AllSongsPage selectFirstSongResult () {
+                waitForOverlayElement(firstResult);
+
+                firstSong.click();
+                return this;
+        }
+
         public AllSongsPage clickDeleteBtn () {
                 deletePlaylistBtn.click();
 
@@ -76,8 +97,8 @@ public AllSongsPage (WebDriver givenDriver) {
                 actions.contextClick(firstSong);
                 return this;
         }
-        public Boolean isSongPlaying () {
-                return findElement((By) soundBar).isDisplayed();
+        public boolean isSongPlaying () {
+                return soundBar.isDisplayed();
 
 
         }

@@ -12,7 +12,7 @@ public class LoginTests extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
         loginPage.login();
-        homePage.waitForOverlay(overlayLocator);
+        homePage.getAvatarIcon();
 
         Assert.assertTrue(homePage.getAvatarIcon().isDisplayed());
     }

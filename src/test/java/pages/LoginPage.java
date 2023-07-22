@@ -26,6 +26,7 @@ import org.openqa.selenium.support.FindBy;
     }
 
     public LoginPage providePassword(String password) {
+
         passwordField.sendKeys(password);
         return this;
     }

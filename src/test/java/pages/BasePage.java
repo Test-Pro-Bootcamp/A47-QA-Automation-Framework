@@ -19,7 +19,7 @@ public class BasePage {
     public  String url = "https://qa.koel.app/";
     public  BasePage (WebDriver givenDriver) {
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         actions = new Actions(driver);
         PageFactory.initElements(driver,this);
     }
@@ -28,15 +28,18 @@ public class BasePage {
      @FindBy(css="[.overlay.loading]")
     public WebElement overlayLocator;
 
-    @FindBy(xpath = "[//div[@class='alertify-logs top right']")
+    @FindBy(xpath = "/html/body/div[2]")
     private WebElement confirmationMessage;
 
 
     protected WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+    public  void waitForOverlayElement (WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
     public String getConfirmationText(){
-
+    waitForOverlay(confirmationMessage);
        return confirmationMessage.getText();
     }
 
@@ -48,17 +51,22 @@ public class BasePage {
         WebElement contextElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
         actions.contextClick(contextElement).perform();
     }
-    public  void waitForOverlay(By locator) {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    public  void waitForOverlay(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
     }
-    public void doubleClick(By locator) {
-        WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public void doubleClick(WebElement element) {
+        WebElement contextElement = wait.until(ExpectedConditions.elementToBeClickable(element));
         actions.doubleClick(contextElement).perform();
     }
 
-    public void hoverAction(By locator) {
-      WebElement contextElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public void hoverAction(WebElement element) {
+      WebElement contextElement = wait.until(ExpectedConditions.visibilityOf(element));
         actions.moveToElement(contextElement).perform();
+    }
+    public void clickOn(WebElement element) {
+        WebElement contextElement = wait.until(ExpectedConditions.elementToBeClickable(element));
+        actions.click(contextElement).perform();
+
     }
 }
 
