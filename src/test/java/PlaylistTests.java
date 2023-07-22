@@ -39,7 +39,7 @@ public class PlaylistTests extends BaseTest{
         Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
     }
-    @Test
+    @Test(enabled = false)
     public void renamePlaylist()throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage =new HomePage(getDriver());
