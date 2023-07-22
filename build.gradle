@@ -25,8 +25,8 @@ test {
         systemProperty "browser", System.getProperty("browser")
     }
 }
-task SmokeTest(type:Test){
-    useTestNG(){
+task SmokeTest(type:Test) {
+    useTestNG() {
         suites "src/test/resources/${suite}.xml"
         systemProperty "browser", System.getProperty("browser")
     }

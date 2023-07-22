@@ -7,7 +7,8 @@
         <classes>
             <class name="LoginTests">
                 <methods>
-                    <exclude name="loginInvalidCredentials"/>
+                    <include name="registrationNavigation"/>
+                    <include name="loginValidCredentials"/>
                 </methods>
             </class>
             <class name="PlaylistTests"/>
