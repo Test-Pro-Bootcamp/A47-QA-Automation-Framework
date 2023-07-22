@@ -34,6 +34,8 @@ public class HomePage extends BasePage {
     private WebElement addToButton;
     @FindBy(xpath = "//section[@id = 'songResultsWrapper']//li[contains(text(), 'Epic Playlist')]")
     private WebElement choosePlaylist;
+    @FindBy(css = "img[class='avatar']")
+    private WebElement avatarIcon;
     public HomePage doubleClickPlaylist() {
         doubleClick(firstPlaylist);
         return this;
@@ -87,5 +89,7 @@ public class HomePage extends BasePage {
     public String notificationMessage() {
         return findElement(notification).getText();
     }
-
+    public boolean isAvatarDisplayed() {
+        return findElement(avatarIcon).isDisplayed();
+    }
 }
