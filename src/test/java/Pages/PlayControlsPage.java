@@ -7,19 +7,19 @@ public class PlayControlsPage extends BasePage{
         super(givenDriver);
     }
 
-    By soundBarVisualizer = By.cssSelector("[data-testid='sound-bar-play']");
-    By pauseButton = By.cssSelector("span.pause");
-    //By pauseButton = By.xpath("//span[@title ='Pause' and @data-testid='pause-btn']");
+    private By soundBarVisualizer = By.cssSelector("[data-testid='sound-bar-play']");
+    private By pauseButton = By.cssSelector("span.pause");
+    // private By pauseButton = By.xpath("//span[@title ='Pause' and @data-testid='pause-btn']");
 
     //play control - play button
-    By PlayControlBtn = By.xpath("//*[@title='Play or resume' and  @data-testid='play-btn']");
+    private By PlayControlBtn = By.xpath("//*[@title='Play or resume' and  @data-testid='play-btn']");
 
     //------------------------------
     // Locators: Play Song
-    By playNextSongButton = By.xpath("//*[@title = 'Play next song' and @data-testid='play-next-btn']");
-    By progressBarLocator = By.xpath("//progress[@class='plyr__progress--played']");
+    private By playNextSongButton = By.xpath("//*[@title = 'Play next song' and @data-testid='play-next-btn']");
+    private By progressBarLocator = By.xpath("//progress[@class='plyr__progress--played']");
 
-    //    By progressBar = By.xpath(“//input[@type ='range' and @class = 'plyr__progress--seek’]”);
+//    private By progressBar = By.xpath(“//input[@type ='range' and @class = 'plyr__progress--seek’]”);
 //    XPath for Play Next Song: //*[@title = 'Play next song' and @data-testid='play-next-btn']
 //    XPath for Play button: //*[@title='Play or resume' and  @data-testid='play-btn']
 //    XPath for Pause button: //span[@title ='Pause' and @data-testid='pause-btn']

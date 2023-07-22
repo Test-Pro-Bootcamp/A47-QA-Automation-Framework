@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class PlaylistTest extends BaseTest {
         @Test(priority = 1, description = "Validate new empty playlist is created")
         @Parameters({"Playlist"})
-        public void createPlaylist (String Playlist) throws InterruptedException {
+        public void createPlaylist (String Playlist) {
             LoginPage loginPage = new LoginPage(driver);
             PlayListPage playListPage = new PlayListPage(driver);
             loginPage.login();
@@ -21,13 +21,12 @@ public class PlaylistTest extends BaseTest {
         }
     @Test(priority = 2, description = "Validate song is added to playlist")
     @Parameters({"Playlist"})
-    public void addSongToPlaylist(String Playlist) throws InterruptedException {
+    public void addSongToPlaylist(String Playlist) {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         loginPage.login();
 
         homePage.searchSong ("Metre");
-        Thread.sleep(2000);
         homePage.searchSong ("Metre");
         homePage.clickViewAllButton ();
         homePage.clickFirstSong ();
@@ -77,7 +76,7 @@ public class PlaylistTest extends BaseTest {
     }
         @Test(priority = 6, description = "Validate playlist is renamed using contextClick")
         @Parameters({"Playlist", "NewPlaylistName"})
-        public void renamePlaylistContextClick (String Playlist, String NewPlaylistName) throws InterruptedException {
+        public void renamePlaylistContextClick (String Playlist, String NewPlaylistName) {
             LoginPage loginPage = new LoginPage(driver);
             PlayListPage playListPage = new PlayListPage(driver);
             loginPage.login();

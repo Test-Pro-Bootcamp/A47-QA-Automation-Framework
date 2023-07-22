@@ -7,24 +7,24 @@ public class PlayListPage extends BasePage {
     }
 
     //locators: Create a new playlist
-    By plusIconLocator = By.cssSelector("i.fa.fa-plus-circle.create");
-    By newSimplePlaylistLocator = By.cssSelector("li[data-testid='playlist-context-menu-create-simple']");
-    By playlistNameFieldLocator = By.cssSelector("input[name='name']");
-    By newPlaylistMsgLocator = By.xpath
+    private By plusIconLocator = By.cssSelector("i.fa.fa-plus-circle.create");
+    private By newSimplePlaylistLocator = By.cssSelector("li[data-testid='playlist-context-menu-create-simple']");
+    private By playlistNameFieldLocator = By.cssSelector("input[name='name']");
+    private By newPlaylistMsgLocator = By.xpath
             ("//div[@class='alertify-logs top right']//div[@class='success show']");
-    By newPlaylistLocator = By.xpath("//li[@class='playlist playlist']//a[@class='active']");
+    private By newPlaylistLocator = By.xpath("//li[@class='playlist playlist']//a[@class='active']");
 
     // Locators: Delete a Playlist
-    By deletePlaylistBtnLocator = By.cssSelector("button[title='Delete this playlist']");
+    private By deletePlaylistBtnLocator = By.cssSelector("button[title='Delete this playlist']");
     // By deletePlaylistBtnLocator = By.xpath("//button[@class='del btn-delete-playlist']");
-    By deletePlaylistOKLocator = By.cssSelector("button.ok");
-    By deleteNotifyLocator = By.cssSelector("div.success.show");
+    private By deletePlaylistOKLocator = By.cssSelector("button.ok");
+    private By deleteNotifyLocator = By.cssSelector("div.success.show");
 
     // Rename Playlist Locators
-    By playlistLocator = By.cssSelector(".playlist:nth-child(3)");
-    By editMenuContextClickLocator = By.xpath("//*[@id='playlists']/ul/li[3]/nav/ul/li[1]");
-    By playListInputFieldLocator = By.cssSelector("[name='name']");
-    By playlistNameChangeMsgLocator = By.cssSelector("div.success.show");
+    private By playlistLocator = By.cssSelector(".playlist:nth-child(3)");
+    private By editMenuContextClickLocator = By.xpath("//*[@id='playlists']/ul/li[3]/nav/ul/li[1]");
+    private By playListInputFieldLocator = By.cssSelector("[name='name']");
+    private By playlistNameChangeMsgLocator = By.cssSelector("div.success.show");
             // By playlistLocator= By.xpath("//section[@id='playlists']//li[@class='playlist playlist'] /a");
             // editMenuContextClick= (By.cssSelector
             //                      ("nav.menu.playlist-item-menu li[data-testid='playlist-context-menu-edit-63429']")));
@@ -32,23 +32,22 @@ public class PlayListPage extends BasePage {
             //          ("//nav[@class='menu playlist-item-menu']//li[data-testid='playlist-context-menu-edit-63429']")));
 
     // Play song Locators - using context click
-    By allSongsListLocator = By.cssSelector("li a.songs");
-    By firstSongLocator = By.cssSelector(".all-songs tr.song-item:nth-child(1)");
-    By playOptionLocator = By.cssSelector("li.playback");
+    private By allSongsListLocator = By.cssSelector("li a.songs");
+    private By firstSongLocator = By.cssSelector(".all-songs tr.song-item:nth-child(1)");
+    private By playOptionLocator = By.cssSelector("li.playback");
 
     // Delete Song from playlist Locators
-    By selectSongLocator = By.cssSelector
+    private By selectSongLocator = By.cssSelector
             ("div[class='song-list-wrap main-scroll-wrap playlist'] td[class='title']");
-    //By selectSong = By.cssSelector("section#songResultsWrapper tr.song-item td.title");
+    //private By selectSong = By.cssSelector("section#songResultsWrapper tr.song-item td.title");
 
 
 
     //Create a new playlist
     //-------------------------
-    public void createNewPlaylist(String Playlist) throws InterruptedException {
+    public void createNewPlaylist(String Playlist) {
         waitForOverlayToVanish();
         WebElement plusIconElement = findElementPresence(plusIconLocator);
-        Thread.sleep(2000);
         plusIconElement.click();
         //
         WebElement newSimplePlaylistMenuElement = findElementClickable(newSimplePlaylistLocator);

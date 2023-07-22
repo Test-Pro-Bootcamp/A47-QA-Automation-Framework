@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class HomepageTest extends BaseTest {
     @Test(priority = 1, description = "Validate playlist is created")
     @Parameters({"Playlist"})
-    public void createPlaylist(String Playlist) throws InterruptedException {
+    public void createPlaylist(String Playlist) {
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         loginPage.login();
@@ -17,13 +17,12 @@ public class HomepageTest extends BaseTest {
     }
     @Test(priority = 2, description = "Validate song is added to playlist")
     @Parameters({"Playlist"})
-    public void addSongToPlaylist(String Playlist) throws InterruptedException {
+    public void addSongToPlaylist(String Playlist)  {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         loginPage.login();
 
         homePage.searchSong ("Metre");
-        Thread.sleep(2000);
         homePage.searchSong ("Metre");
         homePage.clickViewAllButton ();
         homePage.clickFirstSong ();
@@ -41,7 +40,6 @@ public class HomepageTest extends BaseTest {
         loginPage.login();
 
         playListPage.selectDeletePlaylistWithSong(Playlist);
-        Thread.sleep(2000);
         Assert.assertTrue(playListPage.isPlaylistDeleted(Playlist));
 
 //        String notifyText = "Deleted playlist \"" + Playlist + ".\"";

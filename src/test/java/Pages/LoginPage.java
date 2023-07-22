@@ -6,9 +6,9 @@ public class LoginPage extends BasePage{
         //This method initializes the WebDriver using the super (givenDriver)
         super(givenDriver);
     }
-    By emailFieldLocator = By.cssSelector("[type = 'email']");
-    By passwordFieldLocator = By.cssSelector("[type = 'password']");
-    By submitButtonLocator = By.cssSelector("[type = 'submit']");
+    private By emailFieldLocator = By.cssSelector("[type = 'email']");
+    private By passwordFieldLocator = By.cssSelector("[type = 'password']");
+    private By submitButtonLocator = By.cssSelector("[type = 'submit']");
 
     // Login
     //-------------------------
@@ -26,5 +26,4 @@ public class LoginPage extends BasePage{
         providePW("te$t$tudent");
         clickSubmit();
     }
-
 }

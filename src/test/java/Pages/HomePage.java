@@ -2,21 +2,20 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 public class HomePage extends BasePage{
     public HomePage(WebDriver givenDriver) {
         //This method initializes the WebDriver using the super (givenDriver)
         super(givenDriver);
     }
     // Avatar icon on Homepage
-    By userAvatarIcon = By.cssSelector("img.avatar");
+    private By userAvatarIcon = By.cssSelector("img.avatar");
     // Locators: Add Song to Playlist
-    By searchField = By.cssSelector("[type='search']");
-    By viewAllButton = By.cssSelector("[data-test ='view-all-songs-btn']");
-    By selectSong = By.cssSelector("section#songResultsWrapper tr.song-item td.title");
-    By addToButton = By.cssSelector("[data-test = 'add-to-btn']");
-    By notification = By.cssSelector("div.success.show");
-//  By choosePlaylist =
+    private By searchField = By.cssSelector("[type='search']");
+    private By viewAllButton = By.cssSelector("[data-test ='view-all-songs-btn']");
+    private By selectSong = By.cssSelector("section#songResultsWrapper tr.song-item td.title");
+    private By addToButton = By.cssSelector("[data-test = 'add-to-btn']");
+    private By notification = By.cssSelector("div.success.show");
+//  private By choosePlaylist =
 //            By.xpath("//section[@id='songResultsWrapper']//li[contains(text(), 'Beta')]");
     public WebElement getUserAvatar(){
         waitForOverlayToVanish();
