@@ -5,13 +5,7 @@
     <parameter name="BaseURL" value="https://qa.koel.app/"/>
     <test name="SmokeTest" preserve-order="false">
         <classes>
-            <class name="LoginTests">
-                <methods>
-                    <include name="registrationNavigation"/>
-                    <include name="loginValidCredentials"/>
-                </methods>
-            </class>
-            <class name="PlaybackTests"/>
+            <class name="PlaylistTests"/>
         </classes>
     </test>
 </suite>
