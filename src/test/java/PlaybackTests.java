@@ -7,13 +7,13 @@ import org.testng.annotations.Test;
 public class PlaybackTests extends BaseTest{
 
     @Test
-    public void playSongDoubleClick(){
+    public void playSongDoubleClick() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         SongsPage songsPage = new SongsPage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         songsPage.goToAllSongs().doubleClickSong();
         Assert.assertTrue(songsPage.songIsPlaying().isDisplayed());
-
+    Thread.sleep(3000);
     }
 }
