@@ -7,17 +7,17 @@ import org.testng.annotations.Test;
 
 public class PlaylistTests extends BaseTest{
 
-    @Test
+    @Test(priority = 1)
     public void createNewPlaylist() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("autoTest123");
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work");
         Thread.sleep(2000);
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
-    @Test
+    @Test(priority = 4)
     public void deleteActivePlaylist() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -27,7 +27,7 @@ public class PlaylistTests extends BaseTest{
         Thread.sleep(2000);
         Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
     }
-    @Test
+    @Test(priority = 2)
     public void addSongToPlaylist() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -39,13 +39,13 @@ public class PlaylistTests extends BaseTest{
         Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
     }
-    @Test(enabled = false)
+    @Test(priority = 3)
     public void renamePlaylist()throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage =new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.contextPlaylist().selectEdit().editName("editName123");
+        homePage.contextPlaylist().selectEdit().editName("editName1");
         Thread.sleep(2000);
         Assert.assertTrue(homePage.verificationMessage().contains("Updated"));
     }

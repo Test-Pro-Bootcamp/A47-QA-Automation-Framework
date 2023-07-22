@@ -14,7 +14,7 @@ public class SongsPage extends BasePage{
     private WebElement playBars;
     @FindBy(css = ".btn-add-to")
     private WebElement addButton;
-    @FindBy(css = "#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(7)")
+    @FindBy(css = "#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(5)")
     private WebElement playlistSelection;
     public SongsPage(WebDriver givenDriver) {
         super(givenDriver);
