@@ -27,16 +27,16 @@ dependencies {
 //}
 test {
     useTestNG() {
-        suites "src/test/resources/SmokeTest2.xml"
+        suites "src/test/resources/SmokeTest.xml"
         systemProperty "browser", System.getProperty("browser")
     }
 }
-task SmokeTest (type: Test){
-    useTestNG(){
-        suites "src/test/resources/SmokeTest2.xml"
-        systemProperty "browser", System.getProperty("browser")
-    }
-}
+//task SmokeTest2 (type: Test){
+//    useTestNG(){
+//        suites "src/test/resources/SmokeTest2.xml"
+//        systemProperty "browser", System.getProperty("browser")
+//    }
+//}
 //task RegressionTest(type: Test){
     //useTestNG(){
        // suites "src/test/resources/RegressionTest.xml"
