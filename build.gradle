@@ -22,7 +22,7 @@ dependencies {
 
 test {
     useTestNG() {
-        suites "src/test/resources/SmokeTest2.xml"
+        suites "src/test/resources/SmokeTest.xml"
         systemProperty "browser", System.getProperty("browser")
     }
 }

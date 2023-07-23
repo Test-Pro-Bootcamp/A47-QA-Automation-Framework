@@ -11,11 +11,9 @@ public class PlaylistTests extends BaseTest{
     public void createNewPlaylist() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
-        Thread.sleep(2000);
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
-        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work12");
-        Thread.sleep(3000);
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work123");
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
     @Test(priority = 4)
@@ -23,14 +21,13 @@ public class PlaylistTests extends BaseTest{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        Thread.sleep(2000);
+
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
         homePage.clickFirstPlaylist().clickDeleteButton();
         Thread.sleep(2000);
         if(homePage.areYouSureBox().isDisplayed()){
             homePage.areYouSureBox().click();}
-        Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
     }
     @Test(priority = 3)
@@ -38,11 +35,10 @@ public class PlaylistTests extends BaseTest{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
         SongsPage songsPage = new SongsPage(getDriver());
-        Thread.sleep(2000);
+
         loginPage.login("angel.ayala@testpro.io","school!sc0");
         Thread.sleep(2000);
         songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
-        Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
     }
@@ -51,11 +47,11 @@ public class PlaylistTests extends BaseTest{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage =new HomePage(getDriver());
 
-        Thread.sleep(3000);
+
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
         homePage.contextPlaylist().selectEdit().editName("z");
-        Thread.sleep(3000);
+
         Assert.assertTrue(homePage.verificationMessage().contains("Updated"));
     }
 }
