@@ -13,8 +13,9 @@ public class PlaylistTests extends BaseTest{
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work");
         Thread.sleep(2000);
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work");
+        Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
     @Test(priority = 4)
@@ -23,8 +24,9 @@ public class PlaylistTests extends BaseTest{
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.clickFirstPlaylist().clickDeleteButton();
         Thread.sleep(2000);
+        homePage.clickFirstPlaylist().clickDeleteButton();
+        Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
     }
     @Test(priority = 2)
@@ -34,8 +36,9 @@ public class PlaylistTests extends BaseTest{
         SongsPage songsPage = new SongsPage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io","school!sc0");
-        songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
         Thread.sleep(2000);
+        songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
+        Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
     }
@@ -45,8 +48,9 @@ public class PlaylistTests extends BaseTest{
         HomePage homePage =new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.contextPlaylist().selectEdit().editName("editName1");
         Thread.sleep(2000);
+        homePage.contextPlaylist().selectEdit().editName("z");
+        Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Updated"));
     }
 }
