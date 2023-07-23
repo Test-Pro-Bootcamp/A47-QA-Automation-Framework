@@ -55,7 +55,7 @@ public class HomePage extends BasePage{
         return this;
     }
     public HomePage clickDeleteButton(){
-        findElement(deletePlaylist);
+        waitToClick(deletePlaylist);
         click(deletePlaylist);
         return this;
     }
@@ -81,5 +81,8 @@ public class HomePage extends BasePage{
     }
     public String verificationMessage(){
         return findElement(messageBox).getText();
+    }
+    public WebElement displayMessage(){
+        return findElement(messageBox);
     }
 }

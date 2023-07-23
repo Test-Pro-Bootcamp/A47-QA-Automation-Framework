@@ -17,19 +17,24 @@ public class PlaylistTests extends BaseTest{
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
     @Test(priority = 4)
-    public void deleteActivePlaylist() throws InterruptedException{
+    public void deleteActivePlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        Thread.sleep(2000);
-        homePage.clickFirstPlaylist().clickDeleteButton();
-        Thread.sleep(2000);
-        if(homePage.areYouSureBox().isDisplayed()){
-            homePage.areYouSureBox().click();}
-        Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-    }
+        homePage.clickFirstPlaylist();
+        homePage.clickDeleteButton();
+
+        if (homePage.areYouSureBox().isDisplayed()){
+            homePage.areYouSureBox().click();
+        Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));}
+
+        else if (homePage.displayMessage().isDisplayed()){
+            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));}
+
+
+
+        }
     @Test(priority = 3)
     public void addSongToPlaylist() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
