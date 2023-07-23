@@ -7,14 +7,14 @@ import org.testng.annotations.Test;
 
 public class PlaylistTests extends BaseTest{
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void createNewPlaylist() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
         Thread.sleep(2000);
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
-        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work");
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work1");
         Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
@@ -32,7 +32,7 @@ public class PlaylistTests extends BaseTest{
         Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
     }
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void addSongToPlaylist() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -45,7 +45,7 @@ public class PlaylistTests extends BaseTest{
         Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
     }
-    @Test(priority = 2)
+    @Test(priority = 1)
     public void renamePlaylist()throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage =new HomePage(getDriver());
