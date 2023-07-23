@@ -5,7 +5,16 @@
     <parameter name="BaseURL" value="https://qa.koel.app/"/>
     <test name="SmokeTest" preserve-order="false">
         <classes>
-            <class name="PlaylistTests"/>
+            <class name="PlaylistTests">
+                <methods>
+                    <include name="deleteActivePlaylist"/>
+                </methods>
+            </class>
+            <class name="LoginTests">
+                <methods>
+                    <exclude name="loginInvalidCredentials"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
