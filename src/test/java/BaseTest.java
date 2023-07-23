@@ -53,13 +53,13 @@ public class BaseTest {
                 edgeOptions.addArguments("--disable-notifications");
                 return driver = new EdgeDriver(edgeOptions);
             case "grid-chrome":
-                caps.setCapability("browser", "chrome");
+                caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-firefox":
-                caps.setCapability("browser", "firefox");
+                caps.setCapability("browserName", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "grid-edge":
-                caps.setCapability("browser", "MicrosoftEdge");
+                caps.setCapability("browserName", "MicrosoftEdge");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
             case "cloud":
                 return lambdaTest();
