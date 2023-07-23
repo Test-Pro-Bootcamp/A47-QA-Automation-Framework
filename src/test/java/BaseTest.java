@@ -34,13 +34,7 @@ public class BaseTest {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.1.75:4444";
 
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*");
-        chromeOptions.addArguments("--disable-notifications");
-
         switch ("browser"){
-            case "chrome":
-                return driver = new ChromeDriver(chromeOptions);
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions foxOptions = new FirefoxOptions();
@@ -65,6 +59,9 @@ public class BaseTest {
                 return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                chromeOptions.addArguments("--disable-notifications");
                 return driver = new ChromeDriver(chromeOptions);
         }
 
