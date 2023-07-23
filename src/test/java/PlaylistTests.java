@@ -45,12 +45,12 @@ public class PlaylistTests extends BaseTest{
         Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
     }
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void renamePlaylist()throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage =new HomePage(getDriver());
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
         homePage.contextPlaylist().selectEdit().editName("z");
