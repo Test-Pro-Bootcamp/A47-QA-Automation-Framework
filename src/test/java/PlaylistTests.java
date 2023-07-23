@@ -14,7 +14,7 @@ public class PlaylistTests extends BaseTest{
         Thread.sleep(2000);
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
-        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work1");
+        homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work12");
         Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
@@ -27,6 +27,7 @@ public class PlaylistTests extends BaseTest{
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
         homePage.clickFirstPlaylist().clickDeleteButton();
+        Thread.sleep(2000);
         if(homePage.areYouSureBox().isDisplayed()){
             homePage.areYouSureBox().click();}
         Thread.sleep(3000);

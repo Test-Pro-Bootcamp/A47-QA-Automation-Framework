@@ -11,19 +11,22 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
 
     @Test
-    public void registrationNavigation(){
+    public void registrationNavigation() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
-
+        Thread.sleep(3000);
         loginPage.getRegistered();
+        Thread.sleep(3000);
         Assert.assertTrue(loginPage.registerButton().isDisplayed());
     }
 
     @Test
-    public void loginValidCredentials(){
+    public void loginValidCredentials()throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
+        Thread.sleep(3000);
         loginPage.enterEmail("angel.ayala@testpro.io").enterPassword("school!sc0").clickSubmit();
+        Thread.sleep(2000);
         Assert.assertTrue(homePage.avatar().isDisplayed());
     }
     @Test(dataProvider = "regressionTests", dataProviderClass = BaseTest.class)
