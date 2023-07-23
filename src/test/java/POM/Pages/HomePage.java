@@ -25,6 +25,8 @@ public class HomePage extends BasePage{
     private WebElement newPlaylist;
     @FindBy(css = "#playlists > nav > ul > li:nth-child(1)")
     private WebElement selectNewPlaylist;
+    @FindBy(css = ".ok")
+    private WebElement okDeleteButton;
 
     public WebElement avatar(){
         return findElement(avatarIcon);
@@ -72,6 +74,10 @@ public class HomePage extends BasePage{
         editField.sendKeys(name);
         editField.sendKeys(Keys.ENTER);
         return this;
+    }
+    public WebElement areYouSureBox(){
+        return findElement(okDeleteButton);
+
     }
     public String verificationMessage(){
         return findElement(messageBox).getText();

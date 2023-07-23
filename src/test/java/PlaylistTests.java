@@ -11,7 +11,7 @@ public class PlaylistTests extends BaseTest{
     public void createNewPlaylist() throws InterruptedException{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
-
+        Thread.sleep(2000);
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
         homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work");
@@ -23,9 +23,12 @@ public class PlaylistTests extends BaseTest{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
+        Thread.sleep(2000);
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
         homePage.clickFirstPlaylist().clickDeleteButton();
+        if(homePage.areYouSureBox().isDisplayed()){
+            homePage.areYouSureBox().click();}
         Thread.sleep(3000);
         Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
     }
@@ -34,7 +37,7 @@ public class PlaylistTests extends BaseTest{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
         SongsPage songsPage = new SongsPage(getDriver());
-
+        Thread.sleep(2000);
         loginPage.login("angel.ayala@testpro.io","school!sc0");
         Thread.sleep(2000);
         songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
@@ -47,6 +50,7 @@ public class PlaylistTests extends BaseTest{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage =new HomePage(getDriver());
 
+        Thread.sleep(5000);
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         Thread.sleep(2000);
         homePage.contextPlaylist().selectEdit().editName("z");
