@@ -68,6 +68,7 @@ public class BaseTest {
 
     void selectPlaylist() {
         WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(3) > a")));
+
         actions.contextClick(playlist).perform();
     }
 
