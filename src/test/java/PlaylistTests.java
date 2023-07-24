@@ -25,11 +25,11 @@ public class PlaylistTests extends BaseTest{
         homePage.clickFirstPlaylist();
         homePage.clickDeleteButton();
 
-        if (homePage.areYouSureBox().isDisplayed()){
-            homePage.areYouSureBox().click();
-        Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));}
+        if  (homePage.displayMessage().isDisplayed()){
+            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));}
 
-        else if (homePage.displayMessage().isDisplayed()){
+
+            homePage.areYouSureBox().click();
             Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));}
 
 
