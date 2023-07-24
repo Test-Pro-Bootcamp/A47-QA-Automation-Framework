@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+<<<<<<< Updated upstream
 import POM.Pages.BasePage;
 import POM.Pages.HomePage;
 import POM.Pages.LoginPage;
@@ -62,4 +63,18 @@ public class loginStepDefinition {
         driver.quit();
     }
     
+=======
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+
+import java.net.MalformedURLException;
+import java.time.Duration;
+
+import static java.sql.DriverManager.getDriver;
+
+public class loginStepDefinition {
+
+
+>>>>>>> Stashed changes
 }
