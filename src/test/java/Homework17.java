@@ -29,7 +29,7 @@ public class Homework17 extends BaseTest {
         setSelectFirstSong();
         addTo();
         choosePlayList();
-        Assert.assertTrue(notification().contains(newSongAddedNotificationText));
+        Assert.assertTrue(notificationAdded().contains(newSongAddedNotificationText));
 
 
 

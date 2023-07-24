@@ -98,7 +98,7 @@ public class BaseTest {
     }
 
     // Verity notification message
-   public String notification() {
+   public String notificationAdded() {
      WebElement notificationMessage = driver.findElement(By.cssSelector("div.success.show"));
      return notificationMessage.getText();
 
