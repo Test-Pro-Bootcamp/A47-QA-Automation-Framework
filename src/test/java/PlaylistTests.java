@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static java.sql.DriverManager.getDriver;
+
 public class PlaylistTests extends BaseTest{
 
     @Test(priority = 2)
@@ -25,11 +27,9 @@ public class PlaylistTests extends BaseTest{
         homePage.clickFirstPlaylist();
         homePage.clickDeleteButton();
 
-        if  (homePage.displayMessage().isDisplayed()){
-            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));}
-
-
-            homePage.areYouSureBox().click();
+        if(homePage.displayMessage().isDisplayed()){
+            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
+        }else{homePage.areYouSureBox().click();
             Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));}
 
 
