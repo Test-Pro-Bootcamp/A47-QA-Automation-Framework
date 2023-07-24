@@ -11,17 +11,17 @@ import static java.sql.DriverManager.getDriver;
 public class PlaylistTests extends BaseTest {
 
     @Test(priority = 1)
-    public void createNewPlaylist() throws InterruptedException {
+    public void createNewPlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
+
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        Thread.sleep(2000);
         homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work123");
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
 
     @Test(priority = 4)
-    public void deleteActivePlaylist() {
+    public void deleteActivePlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
@@ -32,27 +32,23 @@ public class PlaylistTests extends BaseTest {
 
         }
         @Test(priority = 2)
-        public void addSongToPlaylist () throws InterruptedException {
+        public void addSongToPlaylist (){
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
             SongsPage songsPage = new SongsPage(getDriver());
 
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            Thread.sleep(2000);
             songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
             Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
         }
         @Test(priority = 3)
-        public void renamePlaylist ()throws InterruptedException {
+        public void renamePlaylist (){
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
 
-
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            Thread.sleep(2000);
             homePage.contextPlaylist().selectEdit().editName("z");
-
             Assert.assertTrue(homePage.verificationMessage().contains("Updated"));
         }
 }
