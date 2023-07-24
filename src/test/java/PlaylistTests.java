@@ -9,11 +9,8 @@ import org.testng.annotations.Test;
 import static java.sql.DriverManager.getDriver;
 
 public class PlaylistTests extends BaseTest {
-    @FindBy(css = ".ok")
-    protected WebElement okButton;
 
-
-    @Test(priority = 2)
+    @Test(priority = 1)
     public void createNewPlaylist() throws InterruptedException {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
@@ -33,11 +30,8 @@ public class PlaylistTests extends BaseTest {
         homePage.clickDeleteButton();
         Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
 
-        if (homePage.areYouSureBox().isDisplayed()) {
-            homePage.areYouSureBox().click();}
-            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
         }
-        @Test(priority = 3)
+        @Test(priority = 2)
         public void addSongToPlaylist () throws InterruptedException {
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
@@ -49,7 +43,7 @@ public class PlaylistTests extends BaseTest {
             Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
         }
-        @Test(priority = 1)
+        @Test(priority = 3)
         public void renamePlaylist ()throws InterruptedException {
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
