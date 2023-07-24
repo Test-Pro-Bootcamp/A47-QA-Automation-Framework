@@ -31,13 +31,11 @@ public class PlaylistTests extends BaseTest {
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         homePage.clickFirstPlaylist();
         homePage.clickDeleteButton();
+        Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
 
-        if (homePage.displayMessage().isDisplayed()) {
+        if (homePage.areYouSureBox().isDisplayed()) {
+            homePage.areYouSureBox().click();}
             Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-        } else if (homePage.areYouSureBox().isDisplayed()) {
-            homePage.waitToClick(homePage.areYouSureBox());
-            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));}
-
         }
         @Test(priority = 3)
         public void addSongToPlaylist () throws InterruptedException {
