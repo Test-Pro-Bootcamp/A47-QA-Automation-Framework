@@ -22,8 +22,8 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    @Parameters ({"baseURL"})
-    public void lunchBrowser(String baseURL) {
+    @Parameters ({"baseUrl"})
+    public void lunchBrowser(String baseUrl) {
 
         //      Added ChromeOptions argument below to fix websocket error
 
@@ -32,7 +32,8 @@ public class BaseTest {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        url = baseURL;
+        url = baseUrl;
+        openLoginUrl();
     }
 
     @AfterMethod
@@ -121,16 +122,19 @@ public class BaseTest {
     }
 
     public static void openPlaylist () throws InterruptedException {
-        WebElement accessPlaylist = driver.findElement(By.cssSelector("a[href='#!/playlist/65027']"));
+        WebElement accessPlaylist = driver.findElement(By.cssSelector("a[href='#!/playlist/65494']"));
         accessPlaylist.click();
+        Thread.sleep(5000);
     }
     public static void deleteItem () throws InterruptedException{
         WebElement item = driver.findElement(By.cssSelector(".del"));
         item.click();
+        Thread.sleep(5000);
     }
     public static void deleteBtn () throws InterruptedException {
         WebElement btn = driver.findElement(By.cssSelector("button.ok"));
         btn.click();
+        Thread.sleep(5000);
     }
 
     public String getDeleteMsg() {
