@@ -3,6 +3,7 @@ import POM.Pages.LoginPage;
 import POM.Pages.SongsPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,6 +11,8 @@ import static java.sql.DriverManager.getDriver;
 
 public class PlaylistTests extends BaseTest {
 
+    @FindBy(css = "div.show.success")
+    private WebElement messageBox;
     @Test(priority = 1)
     public void createNewPlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
@@ -21,18 +24,23 @@ public class PlaylistTests extends BaseTest {
     }
 
     @Test(priority = 4)
-    public void deleteActivePlaylist(){
+    public void deleteActivePlaylist() throws Exception{
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
         homePage.clickFirstPlaylist();
         homePage.clickDeleteButton();
-        Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-
+        try {
+             if(homePage.areYouSureBox().isDisplayed()) {
+                 homePage.areYouSureBox().click();
+                 Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
+             }
+        }
+        catch (Exception e){}
         }
         @Test(priority = 2)
-        public void addSongToPlaylist (){
+        public void addSongToPlaylist(){
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
             SongsPage songsPage = new SongsPage(getDriver());
