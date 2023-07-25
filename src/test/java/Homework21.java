@@ -1,7 +1,7 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homewor21 extends BaseTest{
+public class Homework21 extends BaseTest{
     String message ="Updated playlist";
 
     @Test(dataProvider = "validCredentials")

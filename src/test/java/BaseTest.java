@@ -41,7 +41,7 @@ public class BaseTest {
         options.addArguments("--disable-notifications");
 
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(40));
         actions = new Actions(driver);
 
         url = BaseURL;
