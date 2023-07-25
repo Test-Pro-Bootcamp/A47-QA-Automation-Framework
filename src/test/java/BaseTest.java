@@ -31,7 +31,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         url = BaseURL;
         driver.get(url);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(80));
     }
     @AfterMethod
     static void closeBrowser(){
