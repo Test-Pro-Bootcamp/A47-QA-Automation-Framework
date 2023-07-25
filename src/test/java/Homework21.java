@@ -6,12 +6,14 @@ public class Homework21 extends BaseTest{
 
     @Test(dataProvider = "validCredentials")
     public void renamePlaylist(String email, String password){
+
         enterEmail(email);
         enterPassword(password);
         clickSubmit();
         selectPlaylist();
         selectEdit();
-        renamePlaylist("something NEW");
+        renamePlaylist( "Favourite");
         Assert.assertTrue(validateAction().contains(message));
+        driver.quit();
     }
 }
