@@ -11,8 +11,6 @@ import static java.sql.DriverManager.getDriver;
 
 public class PlaylistTests extends BaseTest {
 
-    @FindBy(css = "div.show.success")
-    private WebElement messageBox;
     @Test(priority = 1)
     public void createNewPlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
@@ -22,7 +20,6 @@ public class PlaylistTests extends BaseTest {
         homePage.createPlaylist().newPlaylistSelection().enterNewPlaylistName("work123");
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
-
     @Test(priority = 4)
     public void deleteActivePlaylist() throws Exception{
         LoginPage loginPage = new LoginPage(getDriver());
@@ -32,12 +29,14 @@ public class PlaylistTests extends BaseTest {
         homePage.clickFirstPlaylist();
         homePage.clickDeleteButton();
         try {
-             if(homePage.areYouSureBox().isDisplayed()) {
-                 homePage.areYouSureBox().click();
-                 Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-             }
+        if(homePage.displayMessage().isDisplayed()){
+            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
         }
-        catch (Exception e){}
+        }
+        catch (Exception e){
+            homePage.areYouSureBox().click();
+            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
+        }
         }
         @Test(priority = 2)
         public void addSongToPlaylist(){

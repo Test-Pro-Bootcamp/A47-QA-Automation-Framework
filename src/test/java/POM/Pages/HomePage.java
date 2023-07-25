@@ -82,7 +82,7 @@ public class HomePage extends BasePage{
     public String verificationMessage(){
         return findElement(messageBox).getText();
     }
-    public void displayMessage(){
-         findElement(messageBox);
+    public WebElement displayMessage(){
+          return findElement(messageBox);
     }
 }
