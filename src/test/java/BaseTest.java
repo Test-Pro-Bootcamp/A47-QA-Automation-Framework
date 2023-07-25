@@ -4,10 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -16,6 +19,7 @@ public class BaseTest {
 
     public static String url = "https://qa.koel.app/";
 
+    public static WebDriverWait wait = null;
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -33,7 +37,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = baseUrl;
-        openLoginUrl();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
     }
 
     @AfterMethod
@@ -90,19 +94,19 @@ public class BaseTest {
     }
 
     public static void enterEmail(String email){
-        WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type = 'email']")));
         emailInput.clear();
         emailInput.sendKeys(email);
     }
 
     public static void enterPassword(String password) {
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
+        WebElement passwordInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type = 'password']")));
         passwordInput.clear();
         passwordInput.sendKeys(password);
     }
 
     public static void clickSubmit(){
-        WebElement submitBtn = driver.findElement(By.cssSelector("button[type='submit']"));
+        WebElement submitBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type = 'submit']")));
         submitBtn.click();
     }
 
@@ -122,23 +126,20 @@ public class BaseTest {
     }
 
     public static void openPlaylist () throws InterruptedException {
-        WebElement accessPlaylist = driver.findElement(By.cssSelector("a[href='#!/playlist/65494']"));
+        WebElement accessPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='#!/playlist/65568']")));
         accessPlaylist.click();
-        Thread.sleep(5000);
     }
     public static void deleteItem () throws InterruptedException{
-        WebElement item = driver.findElement(By.cssSelector(".del"));
+        WebElement item = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".del")));
         item.click();
-        Thread.sleep(5000);
     }
     public static void deleteBtn () throws InterruptedException {
-        WebElement btn = driver.findElement(By.cssSelector("button.ok"));
+        WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.ok")));
         btn.click();
-        Thread.sleep(5000);
     }
 
     public String getDeleteMsg() {
-        WebElement deleteMsg = driver.findElement(By.cssSelector("div.success.show"));
+        WebElement deleteMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return deleteMsg.getText();
     }
 
