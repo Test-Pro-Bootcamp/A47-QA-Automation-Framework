@@ -13,7 +13,7 @@ public class Homework22 extends BaseTest {
 
         loginPage.login();
         homePage.selectPlaylist();
-        homePage.enterName("anyName");
+        homePage.enterName("Favourite");
 
         Assert.assertTrue(homePage.verificationMessage().contains(message));
     }
