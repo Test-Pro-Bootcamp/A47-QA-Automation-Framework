@@ -10,8 +10,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.Keys;
 
+import javax.swing.*;
 import java.time.Duration;
 
 public class BaseTest {
@@ -20,6 +22,8 @@ public class BaseTest {
     public static String url = "https://qa.koel.app/";
 
     public static WebDriverWait wait = null;
+
+    public static Actions actions = null;
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
@@ -38,6 +42,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = baseUrl;
         wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        actions = new Actions(driver);
     }
 
     @AfterMethod
@@ -106,7 +111,7 @@ public class BaseTest {
     }
 
     public static void clickSubmit(){
-        WebElement submitBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type = 'submit']")));
+        WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[type = 'submit']")));
         submitBtn.click();
     }
 
@@ -142,6 +147,24 @@ public class BaseTest {
         WebElement deleteMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return deleteMsg.getText();
     }
+
+    public static void openOption () throws InterruptedException{
+        WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='#!/playlist/65758']")));
+        actions.contextClick(option).perform();
+    }
+
+    public static void clickEdit () throws InterruptedException{
+        WebElement edit = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#playlists > ul > li:nth-child(3) > nav > ul > li:nth-child(1)")));
+        edit.click();
+    }
+
+    public static void rename(String playlistName) {
+        WebElement naming = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        naming.sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
+        naming.sendKeys(playlistName);
+        naming.sendKeys(Keys.RETURN);
+    }
+
 
 }
 
