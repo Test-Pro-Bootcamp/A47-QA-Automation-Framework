@@ -5,19 +5,16 @@ import pages.LoginPage;
 
 import static java.sql.DriverManager.getDriver;
 
-public class LoginTests extends BaseTest{
-
+public class Homework26 extends BaseTest{
     @Test
-    public void loginValidEmailPasswordTest(){
+    public void renamePlaylist(){
+        String playlistName = "New TestPro Playlist";
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
         loginPage.login();
-
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-
+        homePage.doubleClickPlaylist();
+        homePage.enterNewPlaylistName(playlistName);
+        Assert.assertTrue(homePage.doesPlaylistExist(playlistName));
     }
-
-
-
 }
