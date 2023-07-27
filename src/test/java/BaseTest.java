@@ -32,10 +32,13 @@ public class BaseTest {
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
         url = BaseURL;
         driver.get(url);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
+        waitForLoadingScreenToDisappear();
 
     }
     @AfterMethod
@@ -46,9 +49,14 @@ public class BaseTest {
     @DataProvider (name="CorrectLoginProviders")
     public static Object[][] getDataFromDataProviders(){
         return new Object[][] {
-                {"matt.pierce@testpro.io", "te$t$tudent"}
+                {"matt.pierce@testpro.io", "te$t$tudent1"}
         };
     }
+
+    public void waitForLoadingScreenToDisappear(){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("#overlay")));
+    }
+
 
 
 

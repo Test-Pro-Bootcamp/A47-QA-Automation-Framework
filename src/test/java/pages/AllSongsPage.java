@@ -24,12 +24,14 @@ public AllSongsPage (WebDriver givenDriver) {
         @FindBy(xpath = "//div[@class='bars']")
         private WebElement soundBar;
 
-        @FindBy(xpath = "[//button[@class='btn-add-to']")
+//        @FindBy(xpath = "[//button[@class='btn-add-to']")
+        @FindBy(xpath = "//button[@class='btn-add-to']")
         private WebElement addTo;
 
         @FindBy(xpath = "//i[@data-testid='play-next-btn']")
         private WebElement playNextBtn;
-        @FindBy(xpath = "//*[@id='songResultsWrapper']//tr[contains(@class,'song-item')])[1]")
+//        @FindBy(xpath = "//*[@id='songResultsWrapper']//tr[contains(@class,'song-item')])[1]")
+        @FindBy(xpath = "//*[@id='songResultsWrapper']//tr[contains(@class,'song-item')][1]")
         private WebElement firstResult;
 
         @FindBy(xpath = "//button[@class='del btn-delete-playlist']")
@@ -82,7 +84,7 @@ public AllSongsPage (WebDriver givenDriver) {
         public AllSongsPage selectFirstSongResult () {
                 waitForOverlayElement(firstResult);
 
-                firstSong.click();
+                firstResult.click();
                 return this;
         }
 

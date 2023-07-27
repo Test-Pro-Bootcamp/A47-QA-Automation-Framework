@@ -20,20 +20,19 @@ public class SongsTests extends BaseTest{
     }
 
     @Test
-    public void hoverOverPlayBtn(){
+    public void hoverOverPlayBtn()  {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
         loginPage.login();
-        homePage.chooseAllSongsList();
-        homePage.hoverAction(homePage.playBtn);
-
-        Assert.assertTrue(homePage.playBtn.isDisplayed());
+        homePage.hoverAction(homePage.sidePlayerControl);
+//        Thread.sleep(2000);
+        Assert.assertTrue(homePage.isPlayBtnDisplayed());
     }
 
     @Test
 
-    public void createNewPlaylist(){
+    public void createNewPlaylist() throws InterruptedException {
 
         String confirmationText = "Created playlist";
         LoginPage loginPage = new LoginPage(driver);
@@ -44,11 +43,9 @@ public class SongsTests extends BaseTest{
         allSongs.createNewPlaylist();
         allSongs.clickNewPlaylistBtn();
         homePage.editPlaylistName("New Test Playlist");
-        homePage.getConfirmationText();
+//        homePage.getConfirmationText();
 
-        Assert.assertTrue(homePage.getConfirmationText().contains(confirmationText));
-
-
+        Assert.assertTrue(homePage.getConfirmationText().contains((confirmationText)));
     }
 
     @Test
@@ -66,8 +63,8 @@ public class SongsTests extends BaseTest{
         allSongs.clickAddToBtn();
         homePage.choosePlaylist();
 
+        //delete song from the playlist or add a different song for every test execution
         Assert.assertTrue((homePage.getConfirmationText().contains(newSongAddedNotificationText)));
-
     }
 
     @Test
@@ -95,8 +92,8 @@ public class SongsTests extends BaseTest{
         AllSongsPage allSongs = new AllSongsPage(driver);
 
         loginPage.login();
-        homePage.choosePlaylist();
-        homePage.clickDeleteBtn();
+        homePage.choosePlaylistFromPlaylistPane();
+        homePage.clickDeleteBtnForEmptyPlaylist();
 
         Assert.assertTrue(homePage.getConfirmationText().contains(deletedPlaylistMessage));
 

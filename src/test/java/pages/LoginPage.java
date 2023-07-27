@@ -38,7 +38,7 @@ import org.openqa.selenium.support.FindBy;
 
     public LoginPage login () {
         provideEmail("matt.pierce@testpro.io");
-        providePassword("te$t$tudent");
+        providePassword("te$t$tudent1");
         clickSubmitBtn();
         return this;
     }

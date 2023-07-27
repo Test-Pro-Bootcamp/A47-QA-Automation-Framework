@@ -28,8 +28,8 @@ public class BasePage {
      @FindBy(css="[.overlay.loading]")
     public WebElement overlayLocator;
 
-    @FindBy(xpath = "/html/body/div[2]")
-    private WebElement confirmationMessage;
+    @FindBy(css = "div.success.show")
+    public WebElement confirmationMessage;
 
 
     protected WebElement findElement(By locator) {
@@ -39,7 +39,7 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
     public String getConfirmationText(){
-    waitForOverlay(confirmationMessage);
+        waitForOverlayElement(confirmationMessage);
        return confirmationMessage.getText();
     }
 
@@ -60,8 +60,8 @@ public class BasePage {
     }
 
     public void hoverAction(WebElement element) {
-      WebElement contextElement = wait.until(ExpectedConditions.visibilityOf(element));
-        actions.moveToElement(contextElement).perform();
+      wait.until(ExpectedConditions.visibilityOf(element));
+        actions.moveToElement(element).perform();
     }
     public void clickOn(WebElement element) {
         WebElement contextElement = wait.until(ExpectedConditions.elementToBeClickable(element));

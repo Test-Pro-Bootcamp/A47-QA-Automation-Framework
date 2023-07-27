@@ -61,6 +61,7 @@ public class ProfilePage extends BasePage {
     }
 
     public ProfilePage changeBackgroundTheme() {
+        waitForOverlayElement(changeTheme);
         changeTheme.click();
         return this;
     }

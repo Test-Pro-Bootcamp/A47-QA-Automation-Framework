@@ -20,17 +20,23 @@ public class HomePage extends BasePage {
      @FindBy(xpath = "//*[@id='sidebar']/section[1]/ul/li[3]/a")
      private WebElement allSongsList;
 
-     @FindBy (xpath =" //span[@class='play']")
+     @FindBy (xpath ="//span[@data-testid='play-btn']")
      public WebElement playBtn;
+    @FindBy (xpath ="//*[@id=\"mainFooter\"]/div[1]")
+    public WebElement sidePlayerControl;
 
-     @FindBy (xpath = "[//button[@data-test='view-all-songs-btn']")
+
+     @FindBy (xpath = "//button[@data-test='view-all-songs-btn']")
      private WebElement viewAllBtn;
 
-    @FindBy (xpath = "//span[@class='name']")
+    @FindBy (xpath = "//a[@class='view-profile']")
     private WebElement changeProfileBtn;
 
-     @FindBy (css ="[.playlist:nth-child(3)]")
+     @FindBy (css =".playlist:nth-child(3)")//this is the first playlist in the playlist pane (different element)
      private WebElement firstPlaylist;
+
+     @FindBy (css ="#songResultsWrapper section.existing-playlists li:nth-child(5)")
+     private WebElement firstPlaylistSongResult;
 
      @FindBy (css="[name='name']")
      private WebElement editPlaylistNameField;
@@ -59,6 +65,12 @@ public class HomePage extends BasePage {
             return this;
         }
     public HomePage choosePlaylist() {
+        waitForOverlayElement(firstPlaylistSongResult);
+        firstPlaylistSongResult.click();
+        return this;
+    }
+
+    public HomePage choosePlaylistFromPlaylistPane() {
         waitForOverlayElement(firstPlaylist);
         firstPlaylist.click();
         return this;
@@ -107,6 +119,12 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    public HomePage clickDeleteBtnForEmptyPlaylist() {
+        waitForOverlayElement(deletePlaylistBtn);
+        deletePlaylistBtn.click();
+        return this;
+    }
+
     public HomePage openPlaylist() {
         waitForOverlayElement(firstPlaylist);
         firstPlaylist.click();
@@ -116,6 +134,11 @@ public class HomePage extends BasePage {
         waitForOverlayElement(changeProfileBtn);
         changeProfileBtn.click();
         return this;
+    }
+
+    public boolean isPlayBtnDisplayed(){
+        waitForOverlayElement(playBtn);
+        return playBtn.isDisplayed();
     }
 
     }
