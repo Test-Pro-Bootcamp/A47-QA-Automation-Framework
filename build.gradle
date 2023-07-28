@@ -18,10 +18,45 @@ dependencies {
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
-    }
-    task POMTest(type: Test) {
-        useTestNG() {
-            suites "src/test/resources/TestNG.xml"
-        }
+        suites "src/test/resources/HomePage.xml"
+        suites "src/test/resources/Playlists.xml"
+        suites "src/test/resources/PlaySongs.xml"
+        suites "src/test/resources/Profile.xml"
+        systemProperty "browser", System.getProperty("browser")
     }
 }
+
+    task testHome (type: Test) {
+        useTestNG() {
+
+            systemProperty "browser", System.getProperty("")
+        }
+    }
+
+    task testPlaylists (type: Test) {
+            useTestNG() {
+
+                systemProperty "browser", System.getProperty("")
+            }
+    }
+
+    task testPlaySongs (type: Test) {
+        useTestNG() {
+
+            systemProperty "browser", System.getProperty("")
+        }
+    }
+
+    task testProfile (type: Test) {
+        useTestNG() {
+
+            systemProperty "browser", System.getProperty("")
+        }
+    }
+
+    task testTestNG (type: Test) {
+        useTestNG() {
+
+            systemProperty "browser", System.getProperty("")
+        }
+    }
