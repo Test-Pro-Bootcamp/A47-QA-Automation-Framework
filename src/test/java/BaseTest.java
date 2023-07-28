@@ -46,15 +46,15 @@ public class BaseTest {
                 return driver = new EdgeDriver();
 
             case "grid-firefox":
-                caps.setCapability("browser", "firefox");
+                caps.setCapability("browserName", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
 
             case "grid-edge":
-                caps.setCapability("browser", "MSEdge");
+                caps.setCapability("browserName", "MSEdge");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
 
             case "grid-chrome":
-                caps.setCapability("browser", "chrome");
+                caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
 
 
