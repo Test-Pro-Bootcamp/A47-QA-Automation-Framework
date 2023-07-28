@@ -18,10 +18,6 @@ dependencies {
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
-        suites "src/test/resources/HomePage.xml"
-        suites "src/test/resources/Playlists.xml"
-        suites "src/test/resources/PlaySongs.xml"
-        suites "src/test/resources/Profile.xml"
         systemProperty "browser", System.getProperty("browser")
     }
 }
