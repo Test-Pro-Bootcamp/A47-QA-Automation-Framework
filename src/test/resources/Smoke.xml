@@ -7,8 +7,9 @@
 
     <test name="Example Test" preserve-order="false">
         <classes>
-            <class name="homework24"/>
-            <!--class name="deletePlaylist"/-->
+            <!--class name="LoginTests"/>
+            <class name="BaseTest"/>
+            <class name="deletePlaylist"/-->
         </classes>
     </test>
 </suite>
