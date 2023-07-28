@@ -1,8 +1,6 @@
 package POM.Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -28,17 +26,18 @@ public class SongsPage extends BasePage{
         super(givenDriver);
     }
 
-    public SongsPage selectRandom(){
-        clickAddButton();
-        for(int i = 5; i<11;i++){
-            findElement(itemsList);
-            List<WebElement> listItems = driver.findElements(By.cssSelector(".existing-playlists ul > li"));
-            int size = listItems.size();
-            int randomNumber = ThreadLocalRandom.current().nextInt(5, size);
-            listItems.get(randomNumber).click();
+    public SongsPage selectRandom() throws NoAlertPresentException {
+        HomePage homePage = new HomePage(driver);
+            for (int i = 5; i < 16; i++) {
+                waitToClick(itemsList);
+                List<WebElement> listItems = driver.findElements(By.cssSelector(".existing-playlists ul > li"));
+                int size = listItems.size();
+                int randomNumber = ThreadLocalRandom.current().nextInt(5, 15);
+                listItems.get(randomNumber).click();
+                Assert.assertTrue(homePage.getAlertMessage().contains("Added"));
+            }
+            return this;
         }
-        return this;
-    }
     public SongsPage goToAllSongs(){
         findElement(allSongs);
         click(allSongs);

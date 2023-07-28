@@ -1,6 +1,7 @@
 import POM.Pages.HomePage;
 import POM.Pages.LoginPage;
 import POM.Pages.SongsPage;
+import org.openqa.selenium.NoAlertPresentException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -35,16 +36,14 @@ public class PlaylistTests extends BaseTest {
         }
         }
         @Test(priority = 2)
-        public void addSongToPlaylist(){
+        public void addSongToPlaylist() throws NoAlertPresentException {
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
             SongsPage songsPage = new SongsPage(getDriver());
 
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            songsPage.goToAllSongs().clickFirstSong();
+            songsPage.goToAllSongs().clickFirstSong().clickAddButton();
             songsPage.selectRandom();
-          //Assert.assertTrue(homePage.verificationMessage().contains("Added"));
-
         }
         @Test(priority = 3)
         public void renamePlaylist (){
