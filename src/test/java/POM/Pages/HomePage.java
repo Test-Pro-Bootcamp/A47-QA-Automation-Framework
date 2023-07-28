@@ -80,10 +80,7 @@ public class HomePage extends BasePage{
     public String verificationMessage(){
         return findElement(messageBox).getText();
     }
-    public String getAlertMessage() throws NoAlertPresentException {
-        String alertMessage = driver.switchTo().alert().getText();
-        return alertMessage;
-    }
+
     public WebElement displayMessage(){
           return findElement(messageBox);
     }

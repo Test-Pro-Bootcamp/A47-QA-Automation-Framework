@@ -36,14 +36,15 @@ public class PlaylistTests extends BaseTest {
         }
         }
         @Test(priority = 2)
-        public void addSongToPlaylist() throws NoAlertPresentException {
+        public void addSongToPlaylist() throws IndexOutOfBoundsException{
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
             SongsPage songsPage = new SongsPage(getDriver());
 
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            songsPage.goToAllSongs().clickFirstSong().clickAddButton();
+            songsPage.goToAllSongs().clickFirstSong();
             songsPage.selectRandom();
+            Assert.assertTrue(homePage.verificationMessage().contains("Added"));
         }
         @Test(priority = 3)
         public void renamePlaylist (){

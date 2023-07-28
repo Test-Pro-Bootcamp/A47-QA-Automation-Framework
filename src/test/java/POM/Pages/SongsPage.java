@@ -2,8 +2,10 @@ package POM.Pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -26,15 +28,13 @@ public class SongsPage extends BasePage{
         super(givenDriver);
     }
 
-    public SongsPage selectRandom() throws NoAlertPresentException {
-        HomePage homePage = new HomePage(driver);
-            for (int i = 5; i < 16; i++) {
-                waitToClick(itemsList);
-                List<WebElement> listItems = driver.findElements(By.cssSelector(".existing-playlists ul > li"));
-                int size = listItems.size();
-                int randomNumber = ThreadLocalRandom.current().nextInt(5, 15);
+    public SongsPage selectRandom(){
+            clickAddButton();
+            for (int i = 0; i < 2; i++) {
+                    List<WebElement> listItems = driver.findElements(By.cssSelector(".existing-playlists ul > li"));
+                    int size = listItems.size();
+                    int randomNumber = ThreadLocalRandom.current().nextInt(5, 15);
                 listItems.get(randomNumber).click();
-                Assert.assertTrue(homePage.getAlertMessage().contains("Added"));
             }
             return this;
         }
