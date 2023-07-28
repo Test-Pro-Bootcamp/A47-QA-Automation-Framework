@@ -28,35 +28,35 @@ test {
 
     task testHome (type: Test) {
         useTestNG() {
-
-            systemProperty "browser", System.getProperty("")
+            suites "src/test/resources/HomePage.xml"
+            systemProperty "browser", System.getProperty("browser")
         }
     }
 
     task testPlaylists (type: Test) {
             useTestNG() {
-
-                systemProperty "browser", System.getProperty("")
+                suites "src/test/resources/Playlists.xml"
+                systemProperty "browser", System.getProperty("browser")
             }
     }
 
     task testPlaySongs (type: Test) {
         useTestNG() {
-
-            systemProperty "browser", System.getProperty("")
+            suites "src/test/resources/PlaySongs.xml"
+            systemProperty "browser", System.getProperty("browser")
         }
     }
 
     task testProfile (type: Test) {
         useTestNG() {
-
-            systemProperty "browser", System.getProperty("")
+            suites "src/test/resources/Profile.xml"
+            systemProperty "browser", System.getProperty("browser")
         }
     }
 
     task testTestNG (type: Test) {
         useTestNG() {
-
-            systemProperty "browser", System.getProperty("")
+            suites "src/test/resources/TestNG.xml"
+            systemProperty "browser", System.getProperty("browser")
         }
     }

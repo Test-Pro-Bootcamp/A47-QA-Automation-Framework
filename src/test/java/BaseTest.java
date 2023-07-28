@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,6 +26,26 @@ public class BaseTest {
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
+    }
+
+    public static WebDriver pickBrowser(String browser){
+        switch (browser){
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+               return driver = new FirefoxDriver();
+
+            case "MSEdge":
+                WebDriverManager.edgedriver().setup();
+                return driver = new EdgeDriver();
+
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--remote-allow-origins=*");
+
+                return driver = new ChromeDriver();
+        }
+
     }
     @BeforeMethod
     @Parameters ({"BaseURL"})
