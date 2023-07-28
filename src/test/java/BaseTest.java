@@ -92,6 +92,7 @@ public class BaseTest {
         url = BaseURL;
         getDriver().get(url);
         getDriver().manage().window().maximize();
+        System.out.println(".existing-playlists ul >li");
     }
     @AfterMethod
     public void closeBrowser(){
