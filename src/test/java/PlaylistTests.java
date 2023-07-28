@@ -36,7 +36,7 @@ public class PlaylistTests extends BaseTest {
         }
         }
         @Test(priority = 2)
-        public void addSongToPlaylist() throws IndexOutOfBoundsException{
+        public void addSongToPlaylist(){
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
             SongsPage songsPage = new SongsPage(getDriver());

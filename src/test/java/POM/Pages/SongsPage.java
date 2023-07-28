@@ -32,8 +32,7 @@ public class SongsPage extends BasePage{
             clickAddButton();
             for (int i = 0; i < 2; i++) {
                     List<WebElement> listItems = driver.findElements(By.cssSelector(".existing-playlists ul > li"));
-                    int size = listItems.size();
-                    int randomNumber = ThreadLocalRandom.current().nextInt(5, 15);
+                    int randomNumber = ThreadLocalRandom.current().nextInt(5, 14);
                 listItems.get(randomNumber).click();
             }
             return this;
