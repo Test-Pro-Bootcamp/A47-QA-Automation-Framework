@@ -21,15 +21,12 @@ public class SongsPage extends BasePage{
     private WebElement addButton;
     @FindBy(css = "#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(6)")
     private WebElement playlistSelection;
-    @FindBy(css = ".existing-playlists ul > li")
-    private WebElement itemsList;
 
     public SongsPage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
-    public SongsPage selectRandom(){
-            clickAddButton();
+    public SongsPage selectRandomPlaylistDrpDwn(){
             for (int i = 0; i < 2; i++) {
                     List<WebElement> listItems = driver.findElements(By.cssSelector(".existing-playlists ul > li"));
                     int randomNumber = ThreadLocalRandom.current().nextInt(5, 14);

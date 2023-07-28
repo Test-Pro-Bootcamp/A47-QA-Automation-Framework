@@ -43,8 +43,8 @@ public class PlaylistTests extends BaseTest {
             SongsPage songsPage = new SongsPage(getDriver());
             try{
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            songsPage.goToAllSongs().clickFirstSong();
-            songsPage.selectRandom();}
+            songsPage.goToAllSongs().clickFirstSong().clickAddButton();
+            songsPage.selectRandomPlaylistDrpDwn();}
             catch (ElementNotInteractableException e){
             Assert.assertTrue(homePage.verificationMessage().contains("Added"));}
         }
