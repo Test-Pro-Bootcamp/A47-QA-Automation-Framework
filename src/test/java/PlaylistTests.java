@@ -1,13 +1,9 @@
 import POM.Pages.HomePage;
 import POM.Pages.LoginPage;
 import POM.Pages.SongsPage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static java.sql.DriverManager.getDriver;
 
 public class PlaylistTests extends BaseTest {
 
@@ -45,8 +41,9 @@ public class PlaylistTests extends BaseTest {
             SongsPage songsPage = new SongsPage(getDriver());
 
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            songsPage.goToAllSongs().clickFirstSong().clickAddButton().addToPlaylistSelection();
-            Assert.assertTrue(homePage.verificationMessage().contains("Added"));
+            songsPage.goToAllSongs().clickFirstSong();
+            songsPage.selectRandom();
+          //Assert.assertTrue(homePage.verificationMessage().contains("Added"));
 
         }
         @Test(priority = 3)

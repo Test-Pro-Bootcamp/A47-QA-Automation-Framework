@@ -1,8 +1,13 @@
 package POM.Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
+
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SongsPage extends BasePage{
 
@@ -16,10 +21,24 @@ public class SongsPage extends BasePage{
     private WebElement addButton;
     @FindBy(css = "#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(6)")
     private WebElement playlistSelection;
+    @FindBy(css = ".existing-playlists ul > li")
+    private WebElement itemsList;
+
     public SongsPage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
+    public SongsPage selectRandom(){
+        clickAddButton();
+        for(int i = 5; i<11;i++){
+            findElement(itemsList);
+            List<WebElement> listItems = driver.findElements(By.cssSelector(".existing-playlists ul > li"));
+            int size = listItems.size();
+            int randomNumber = ThreadLocalRandom.current().nextInt(5, size);
+            listItems.get(randomNumber).click();
+        }
+        return this;
+    }
     public SongsPage goToAllSongs(){
         findElement(allSongs);
         click(allSongs);
@@ -48,5 +67,6 @@ public class SongsPage extends BasePage{
     public WebElement songIsPlaying(){
         return findElement(playBars);
     }
+    }
 
-}
+

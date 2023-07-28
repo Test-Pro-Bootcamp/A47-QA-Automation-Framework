@@ -16,10 +16,9 @@ public class BasePage {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected static Actions actions;
-
     public BasePage (WebDriver givenDriver){
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
@@ -38,6 +37,5 @@ public class BasePage {
     public void click(WebElement webElement){
         findElement(webElement).click();
     }
-
 
 }
