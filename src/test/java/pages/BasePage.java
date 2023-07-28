@@ -36,9 +36,11 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
     public  void waitForOverlayElement (WebElement element) {
+
         wait.until(ExpectedConditions.visibilityOf(element));
     }
     public String getConfirmationText(){
+
         waitForOverlayElement(confirmationMessage);
        return confirmationMessage.getText();
     }
@@ -52,6 +54,7 @@ public class BasePage {
         actions.contextClick(contextElement).perform();
     }
     public  void waitForOverlay(WebElement element) {
+
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
     public void doubleClick(WebElement element) {

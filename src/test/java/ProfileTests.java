@@ -7,7 +7,7 @@ import pages.ProfilePage;
 public class ProfileTests extends BaseTest {
 
     @Test
-    public void updateProfileName () throws InterruptedException {
+    public void updateProfileName ()  {
         String profileChangesConfirmedText = "Profile updated";
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -19,12 +19,11 @@ public class ProfileTests extends BaseTest {
         profilePage.changeProfileName("Matthew");
         profilePage.enterEmailAddress("matt.pierce@testpro.io");
         profilePage.clickSave();
-        Thread.sleep(2000);
         Assert.assertTrue(homePage.getConfirmationText().contains(profileChangesConfirmedText));
     }
 
     @Test
-    public void updateProfileTheme() throws InterruptedException {
+    public void updateProfileTheme() {
         String profileChangesConfirmedText = "Profile updated";
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -35,7 +34,6 @@ public class ProfileTests extends BaseTest {
         profilePage.enterCurrentPassword("te$t$tudent1");
         profilePage.changeBackgroundTheme();
         profilePage.clickSave();
-        Thread.sleep(2000);
 
        Assert.assertTrue((homePage.getConfirmationText().contains(profileChangesConfirmedText)));
 
