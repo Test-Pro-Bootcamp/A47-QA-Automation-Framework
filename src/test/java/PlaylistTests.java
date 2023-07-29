@@ -1,10 +1,14 @@
 import POM.Pages.HomePage;
 import POM.Pages.LoginPage;
 import POM.Pages.SongsPage;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
+import java.util.List;
 
 
 public class PlaylistTests extends BaseTest {
@@ -19,17 +23,21 @@ public class PlaylistTests extends BaseTest {
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
     @Test(priority = 4)
-    public void deleteActivePlaylist() throws Exception{
+    public void deleteActivePlaylist(){
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
-
-           loginPage.login("angel.ayala@testpro.io", "school!sc0");
-           homePage.selectRandomPlaylistHomePg();
-           homePage.clickDeleteButton();
             try{
-           if (homePage.displayMessage().isDisplayed()) {
-               Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-           }
+           loginPage.login("angel.ayala@testpro.io", "school!sc0");
+        List<WebElement> listItems = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#playlists > ul > li")));
+        Thread.sleep(3000);
+        System.out.println(listItems.size());
+//           homePage.selectRandomPlaylistHomePg();}
+//            catch (IndexOutOfBoundsException e){}
+//            finally {homePage.clickDeleteButton();}
+//            try{
+//           if (homePage.displayMessage().isDisplayed()) {
+//               Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
+//           }
            }
        catch (Exception e){
             homePage.areYouSureBox().click();

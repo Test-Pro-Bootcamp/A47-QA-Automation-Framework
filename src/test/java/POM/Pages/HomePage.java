@@ -34,10 +34,10 @@ public class HomePage extends BasePage{
     }
 
     public HomePage selectRandomPlaylistHomePg(){
-        for (int i = 0; i < 2; i++){
-            List<WebElement> listItems = driver.findElements(By.cssSelector("#playlists ul >li"));
-           // int size = listItems.size();
-            int randomNumber = ThreadLocalRandom.current().nextInt(3, 13);
+        for (int i = 1; i < 2; i++){
+          List<WebElement> listItems = driver.findElements(By.cssSelector("li.playlist"));
+           //int size = listItems.size();
+            int randomNumber = ThreadLocalRandom.current().nextInt(3, 12);
             listItems.get(randomNumber).click();
         }
         return this;
