@@ -29,10 +29,19 @@ public class SongsPage extends BasePage{
     public SongsPage selectRandomPlaylistDrpDwn(){
             for (int i = 0; i < 2; i++) {
                     List<WebElement> listItems = driver.findElements(By.cssSelector(".existing-playlists ul > li"));
-                    int randomNumber = ThreadLocalRandom.current().nextInt(5, 14);
+                    int size = listItems.size();
+                    int randomNumber = ThreadLocalRandom.current().nextInt(5, size);
                 listItems.get(randomNumber).click();
             }
             return this;
+        }
+        public SongsPage selectRandomSong(){
+        for(int i = 0; i < 2; i++){
+            List<WebElement> listItems = driver.findElements(By.cssSelector("table.items > tr"));
+            int randomNumber = ThreadLocalRandom.current().nextInt(1,63);
+            listItems.get(randomNumber).click();
+        }
+        return this;
         }
     public SongsPage goToAllSongs(){
         findElement(allSongs);

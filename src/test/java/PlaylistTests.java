@@ -23,15 +23,15 @@ public class PlaylistTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        homePage.clickFirstPlaylist();
-        homePage.clickDeleteButton();
-        try {
-        if(homePage.displayMessage().isDisplayed()){
-            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-        }
-        }
-        catch (Exception e){
+           loginPage.login("angel.ayala@testpro.io", "school!sc0");
+           homePage.selectRandomPlaylistHomePg();
+           homePage.clickDeleteButton();
+            try{
+           if (homePage.displayMessage().isDisplayed()) {
+               Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
+           }
+           }
+       catch (Exception e){
             homePage.areYouSureBox().click();
             Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
         }
@@ -43,7 +43,7 @@ public class PlaylistTests extends BaseTest {
             SongsPage songsPage = new SongsPage(getDriver());
             try{
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            songsPage.goToAllSongs().clickFirstSong().clickAddButton();
+            songsPage.goToAllSongs().selectRandomSong().clickAddButton();
             songsPage.selectRandomPlaylistDrpDwn();}
             catch (ElementNotInteractableException e){
             Assert.assertTrue(homePage.verificationMessage().contains("Added"));}

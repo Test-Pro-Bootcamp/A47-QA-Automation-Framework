@@ -3,6 +3,9 @@ package POM.Pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class HomePage extends BasePage{
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
@@ -30,6 +33,15 @@ public class HomePage extends BasePage{
         return findElement(avatarIcon);
     }
 
+    public HomePage selectRandomPlaylistHomePg(){
+        for (int i = 0; i < 2; i++){
+            List<WebElement> listItems = driver.findElements(By.cssSelector("#playlists ul >li"));
+           // int size = listItems.size();
+            int randomNumber = ThreadLocalRandom.current().nextInt(3, 13);
+            listItems.get(randomNumber).click();
+        }
+        return this;
+    }
     public HomePage clickFirstPlaylist(){
         findElement(playlistSelection);
         click(playlistSelection);
