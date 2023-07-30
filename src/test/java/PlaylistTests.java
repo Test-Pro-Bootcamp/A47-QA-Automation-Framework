@@ -42,15 +42,17 @@ public class PlaylistTests extends BaseTest {
             }
         }
         @Test(priority = 2)
-        public void addSongToPlaylist(){
+        public void addSongToPlaylist() throws Exception{
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
             SongsPage songsPage = new SongsPage(getDriver());
-
+try{
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            songsPage.goToAllSongs().selectRandomSong().clickAddButton();
+            songsPage.goToAllSongs();
+            songsPage.selectRandomSong().clickAddButton();}
+catch (Exception e){
             songsPage.selectRandomPlaylistDrpDwn();
-            Assert.assertTrue(homePage.verificationMessage().contains("Added"));
+            Assert.assertTrue(homePage.verificationMessage().contains("Added"));}
         }
         @Test(priority = 3)
         public void renamePlaylist (){

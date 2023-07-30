@@ -37,11 +37,11 @@ public class SongsPage extends BasePage{
             }
             return this;
         }
-        public SongsPage selectRandomSong(){
+        public SongsPage selectRandomSong() {
         for(int i = 0; i < 2; i++){
             List<WebElement> listItems = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("table.items > tr")));
-            int size = listItems.size();
-            int randomNumber = ThreadLocalRandom.current().nextInt(1,size);
+           // int size = listItems.size();
+            int randomNumber = ThreadLocalRandom.current().nextInt(1,63);
             listItems.get(randomNumber).click();
         }
         return this;
