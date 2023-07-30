@@ -23,38 +23,34 @@ public class PlaylistTests extends BaseTest {
         Assert.assertTrue(homePage.verificationMessage().contains("Created"));
     }
     @Test(priority = 4)
-    public void deleteActivePlaylist(){
+    public void deleteActivePlaylist() throws Exception{
+
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
-            try{
+
            loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        List<WebElement> listItems = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#playlists > ul > li")));
-        Thread.sleep(3000);
-        System.out.println(listItems.size());
-//           homePage.selectRandomPlaylistHomePg();}
-//            catch (IndexOutOfBoundsException e){}
-//            finally {homePage.clickDeleteButton();}
-//            try{
-//           if (homePage.displayMessage().isDisplayed()) {
-//               Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-//           }
+           homePage.selectRandomPlaylistHomePg();
+            homePage.clickDeleteButton();
+            try{
+           if (homePage.displayMessage().isDisplayed()) {
+               Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
            }
-       catch (Exception e){
-            homePage.areYouSureBox().click();
-            Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
-        }
+           }
+            catch(Exception e) {
+                homePage.areYouSureBox().click();
+                Assert.assertTrue(homePage.verificationMessage().contains("Deleted"));
+            }
         }
         @Test(priority = 2)
-        public void addSongToPlaylist() throws ElementNotInteractableException {
+        public void addSongToPlaylist(){
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
             SongsPage songsPage = new SongsPage(getDriver());
-            try{
+
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
             songsPage.goToAllSongs().selectRandomSong().clickAddButton();
-            songsPage.selectRandomPlaylistDrpDwn();}
-            catch (ElementNotInteractableException e){
-            Assert.assertTrue(homePage.verificationMessage().contains("Added"));}
+            songsPage.selectRandomPlaylistDrpDwn();
+            Assert.assertTrue(homePage.verificationMessage().contains("Added"));
         }
         @Test(priority = 3)
         public void renamePlaylist (){

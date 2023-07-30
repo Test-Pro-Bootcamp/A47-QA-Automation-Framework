@@ -2,6 +2,7 @@ package POM.Pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -35,9 +36,9 @@ public class HomePage extends BasePage{
 
     public HomePage selectRandomPlaylistHomePg(){
         for (int i = 1; i < 2; i++){
-          List<WebElement> listItems = driver.findElements(By.cssSelector("li.playlist"));
-           //int size = listItems.size();
-            int randomNumber = ThreadLocalRandom.current().nextInt(3, 12);
+          List<WebElement> listItems = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#playlists >ul >li")));
+           int size = listItems.size();
+            int randomNumber = ThreadLocalRandom.current().nextInt(3, size);
             listItems.get(randomNumber).click();
         }
         return this;
