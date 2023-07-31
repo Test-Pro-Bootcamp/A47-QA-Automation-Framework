@@ -23,7 +23,7 @@ public class BasePage {
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
-    public List<WebElement> findListByLocator(String locator){
+    public List <WebElement> findListByLocator(String locator){
         return driver.findElements(By.cssSelector(locator));
     }
     public WebElement findElement(WebElement webElement){
