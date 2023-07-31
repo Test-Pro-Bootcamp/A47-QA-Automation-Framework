@@ -30,18 +30,18 @@ public class SongsPage extends BasePage{
 
     public SongsPage selectRandomPlaylistDrpDwn(){
             for (int i = 0; i < 2; i++) {
-                List<WebElement> listItems = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul >li.playlist")));
+                List<WebElement> listItems = driver.findElements(By.cssSelector("#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul >li.playlist"));
                  int size = listItems.size();
-                 int randomNumber = ThreadLocalRandom.current().nextInt(5, size);
+                 int randomNumber = ThreadLocalRandom.current().nextInt(1, size);
                 listItems.get(randomNumber).click();
             }
             return this;
         }
         public SongsPage selectRandomSong() {
         for(int i = 0; i < 2; i++){
-            List<WebElement> listItems = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("table.items > tr")));
-           // int size = listItems.size();
-            int randomNumber = ThreadLocalRandom.current().nextInt(1,63);
+            List<WebElement> listItems = driver.findElements(By.cssSelector("table.items > tr"));
+            int size = listItems.size();
+            int randomNumber = ThreadLocalRandom.current().nextInt(1,size);
             listItems.get(randomNumber).click();
         }
         return this;
