@@ -57,7 +57,7 @@ public class PlaylistTests extends BaseTest {
         }
         @Test(priority = 3)
         public void renamePlaylist (){
-        String randomName = RandomStringUtils.randomAlphabetic(5);
+         String randomName = RandomStringUtils.randomAlphabetic(5);
 
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());

@@ -51,7 +51,6 @@ public class HomePage extends BasePage{
             List<WebElement> listItems = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#playlists >ul >li")));
             int size = listItems.size();
             int randomNumber = ThreadLocalRandom.current().nextInt(3, size);
-            //listItems.get(randomNumber);
             contextClick(listItems.get(randomNumber));
         }
         return this;

@@ -12,7 +12,7 @@ public class PlaybackTests extends BaseTest{
         SongsPage songsPage = new SongsPage(getDriver());
 
         loginPage.login("angel.ayala@testpro.io", "school!sc0");
-        songsPage.goToAllSongs().doubleClickSong();
+        songsPage.goToAllSongs().doubleClickRandomSong();
         Assert.assertTrue(songsPage.songIsPlaying().isDisplayed());
     }
 }

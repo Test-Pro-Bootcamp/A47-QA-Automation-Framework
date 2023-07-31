@@ -23,6 +23,8 @@ public class SongsPage extends BasePage{
     private WebElement addButton;
     @FindBy(css = "#songsWrapper > header > div.song-list-controls > div > section.existing-playlists > ul > li:nth-child(6)")
     private WebElement playlistSelection;
+    @FindBy(css = "table.items > tr")
+    private String allSongList;
 
     public SongsPage(WebDriver givenDriver) {
         super(givenDriver);
@@ -39,12 +41,21 @@ public class SongsPage extends BasePage{
         }
         public SongsPage selectRandomSong() {
         for(int i = 0; i < 2; i++){
-            List<WebElement> listItems = driver.findElements(By.cssSelector("table.items > tr"));
+            List<WebElement> listItems = findListByLocator(allSongList);
             int size = listItems.size();
             int randomNumber = ThreadLocalRandom.current().nextInt(1,size);
             listItems.get(randomNumber).click();
         }
         return this;
+        }
+        public SongsPage doubleClickRandomSong(){
+            for(int i = 0; i < 2; i++) {
+                List<WebElement> listItems = driver.findElements(By.cssSelector("table.items > tr"));
+                int size = listItems.size();
+                int randomNumber = ThreadLocalRandom.current().nextInt(1, size);
+                doubleClick(listItems.get(randomNumber));
+            }
+            return this;
         }
     public SongsPage goToAllSongs(){
         findElement(allSongs);

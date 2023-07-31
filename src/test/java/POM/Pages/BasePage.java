@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
     protected static WebDriver driver;
@@ -21,6 +22,9 @@ public class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
+    }
+    public List<WebElement> findListByLocator(String locator){
+        return driver.findElements(By.cssSelector(locator));
     }
     public WebElement findElement(WebElement webElement){
         return wait.until(ExpectedConditions.visibilityOf(webElement));
