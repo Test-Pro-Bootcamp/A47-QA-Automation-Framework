@@ -1,6 +1,7 @@
 import POM.Pages.HomePage;
 import POM.Pages.LoginPage;
 import POM.Pages.SongsPage;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -56,11 +57,14 @@ public class PlaylistTests extends BaseTest {
         }
         @Test(priority = 3)
         public void renamePlaylist (){
+        String randomName = RandomStringUtils.randomAlphabetic(5);
+
             LoginPage loginPage = new LoginPage(getDriver());
             HomePage homePage = new HomePage(getDriver());
 
             loginPage.login("angel.ayala@testpro.io", "school!sc0");
-            homePage.contextPlaylist().selectEdit().editName("z");
+            homePage.contextRandomPlaylistHmPg();
+            homePage.selectEdit().editName(randomName);
             Assert.assertTrue(homePage.verificationMessage().contains("Updated"));
         }
 }

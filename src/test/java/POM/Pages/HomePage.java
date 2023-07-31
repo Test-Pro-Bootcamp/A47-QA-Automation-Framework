@@ -1,6 +1,9 @@
 package POM.Pages;
 
+import net.bytebuddy.utility.RandomString;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -13,7 +16,7 @@ public class HomePage extends BasePage{
     }
     @FindBy(css = "#playlists > ul > li:nth-child(3) > a")
     private WebElement playlistSelection;
-    @FindBy(css = "#playlists > ul > li:nth-child(3) > nav > ul > li:nth-child(1)")
+    @FindBy(css = "nav > ul > li:nth-child(1)")
     private WebElement editSelection;
     @FindBy(css = "[name='name']")
     protected WebElement editField;
@@ -43,6 +46,16 @@ public class HomePage extends BasePage{
         }
         return this;
     }
+    public HomePage contextRandomPlaylistHmPg(){
+        for (int i = 1; i < 2; i++) {
+            List<WebElement> listItems = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#playlists >ul >li")));
+            int size = listItems.size();
+            int randomNumber = ThreadLocalRandom.current().nextInt(3, size);
+            //listItems.get(randomNumber);
+            contextClick(listItems.get(randomNumber));
+        }
+        return this;
+    }
     public HomePage clickFirstPlaylist(){
         findElement(playlistSelection);
         click(playlistSelection);
@@ -58,10 +71,10 @@ public class HomePage extends BasePage{
         click(editSelection);
         return this;
     }
-    public HomePage editName(String name){
+    public HomePage editName(String randomName){
         findElement(editField);
         editField.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.BACK_SPACE));
-        editField.sendKeys(name);
+        editField.sendKeys(randomName);
         editField.sendKeys(Keys.ENTER);
         return this;
     }
