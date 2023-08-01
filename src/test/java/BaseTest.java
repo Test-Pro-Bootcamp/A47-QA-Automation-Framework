@@ -19,7 +19,7 @@ public class BaseTest {
            WebDriverManager.chromedriver().setup();
        }
 
-       @BeforeSuite
+       @BeforeMethod
        public void launchBrowser() {
            ChromeOptions options = new ChromeOptions();
            options.addArguments("--remote-allow-origins=*");
