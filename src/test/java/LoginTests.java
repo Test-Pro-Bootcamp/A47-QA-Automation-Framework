@@ -8,8 +8,8 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginValidCredentialsTest() {
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
         loginPage.login();
         homePage.getAvatarIcon();

@@ -26,9 +26,9 @@ public class PlaylistTests extends BaseTest{
     @Test
     public void renamePlaylist () {
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongs = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongs = new AllSongsPage(getDriver());
 
         String editedPlaylistNameMessage = "Updated playlist";
 
@@ -42,9 +42,9 @@ public class PlaylistTests extends BaseTest{
 
     @Test
     public void addSongToPlaylist(){
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongs = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongs = new AllSongsPage(getDriver());
 
         String newSongAddedNotificationText = "Added 1 song into";
         loginPage.login();
@@ -63,9 +63,9 @@ public class PlaylistTests extends BaseTest{
     public void deletePlaylist() {
 
         String deletedPlaylistMessage = "Deleted playlist";
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage allSongs = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        AllSongsPage allSongs = new AllSongsPage(getDriver());
 
         loginPage.login();
         homePage.choosePlaylistFromPlaylistPane();

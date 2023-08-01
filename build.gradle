@@ -22,7 +22,7 @@ test {
     }
 }
 
-    task testHome (type: Test) {
+    task testHomePage (type: Test) {
         useTestNG() {
             suites "src/test/resources/HomePage.xml"
             systemProperty "browser", System.getProperty("browser")
