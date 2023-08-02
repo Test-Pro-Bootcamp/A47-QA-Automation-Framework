@@ -28,7 +28,7 @@ public class BaseTest {
     public static Actions actions = null;
     public static String url = "https://qa.koel.app/";
 
-    public static ThreadLocal<WebDriver> threadDriver;
+    public static ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
     @BeforeSuite
     static void setupClass() {
@@ -93,20 +93,16 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL) throws MalformedURLException {
-        //ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--remote-allow-origins=*");
 
-        driver = pickBrowser(System.getProperty("browser"));
-        threadDriver = new ThreadLocal<>();
-        threadDriver.set(driver);
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 
         actions = new Actions(getDriver());
-
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         getDriver().manage().window().maximize();
+
         url = BaseURL;
         getDriver().get(url);
-        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         waitForLoadingScreenToDisappear();
 
     }
