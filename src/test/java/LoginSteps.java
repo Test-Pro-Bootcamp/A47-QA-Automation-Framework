@@ -55,7 +55,9 @@ public class LoginSteps {
         };
         @And("I click Submit")
     public void iClickSubmitBtn()  {
+
             LoginPage loginPage = new LoginPage(driver);
+            loginPage.clickSubmitBtn();
         };
         @Then("I am logged in")
         public void userIsLoggedIn () {
