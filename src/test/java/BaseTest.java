@@ -104,7 +104,6 @@ public class BaseTest {
         url = BaseURL;
         getDriver().get(url);
         waitForLoadingScreenToDisappear();
-
     }
 
     @AfterMethod
