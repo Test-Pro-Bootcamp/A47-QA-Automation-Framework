@@ -61,3 +61,16 @@ test {
             systemProperty "browser", System.getProperty("browser")
         }
     }
+
+    task testSmoke (type: Test) {
+        useTestNG() {
+                suites "src/test/resources/SmokeTest.xml"
+                systemProperty "browser", System.getProperty("browser")
+        }
+    }
+task testRegression (type: Test) {
+    useTestNG() {
+        suites "src/test/resources/RegressionTest.xml"
+        systemProperty "browser", System.getProperty("browser")
+    }
+}
