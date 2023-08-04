@@ -7,8 +7,6 @@ public class Homework18 extends BaseTest {
 
         String newSongAddedNotification = "Added 1 song into";
 
-        openLoginUrl();
-
         enterEmail("aimee.woodside@testpro.io");
 
         enterPassword("te$t$tudent13");

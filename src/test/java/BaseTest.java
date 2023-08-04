@@ -1,24 +1,44 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
+
+import java.time.Duration;
 
 public class BaseTest {
+
+    public static WebDriver driver = null;
+    public static String url = "https://qa.koel.app/";
 
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-<<<<<<< Updated upstream
-=======
+
+    @DataProvider(name = "IncorrectLoginProviders")
+    public static Object[][] getDataFromDataProviders(){
+        return new Object[][]{
+                {"NotExisting@email.com", "NotExistingPassword"},
+                {"Demo@class.com", ""},
+                {"",""},
+        };
+    }
 
     @BeforeMethod
-    public void launchBrowser() {
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String BaseURL) {
         //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        String url = BaseURL;
+        driver.get(url);
     }
 
     @AfterMethod
@@ -26,10 +46,10 @@ public class BaseTest {
         driver.quit();
     }
 
-    protected static void openLoginUrl() {
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-    }
+//    protected static void openLoginUrl() {
+//        String url = "https://qa.koel.app/";
+//        driver.get(url);
+//    }
 
     protected static void enterEmail(String email) {
         WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
@@ -91,9 +111,5 @@ public class BaseTest {
     public String getNotificationMessage() {
         WebElement notificationAlert = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
         return notificationAlert.getText();
-        
-        //Bring Changes to HW 18
     }
-
->>>>>>> Stashed changes
 }
