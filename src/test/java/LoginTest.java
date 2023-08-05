@@ -8,9 +8,7 @@ public class LoginTest extends BaseTest {
     public void LoginValidEmailPasswordTest() {
        LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-        loginPage.provideEmail("teststudent@teststudent.com");
-        loginPage.providePW("te$t$tudent");
-        loginPage.clickSubmit();
+        loginPage.provideEmail("teststudent@teststudent.com").providePW("te$t$tudent").clickSubmit();
        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
     @Test
@@ -33,10 +31,7 @@ public class LoginTest extends BaseTest {
     public void correctLoginTests(String email, String password){
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-        loginPage.provideEmail(email);
-        loginPage.providePW(password);
-        loginPage.clickSubmit();
-        System.out.println(driver.getCurrentUrl());
+        loginPage.provideEmail(email).providePW(password).clickSubmit();
         Assert.assertTrue(homePage.avatarIsDisplayed());
     }
 }

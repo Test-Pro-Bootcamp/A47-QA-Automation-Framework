@@ -8,11 +8,13 @@
     <test name="HW22" preserve-order="false">
         <classes>
             <class name="BaseTest"/>
+            <class name="ProfileTest"/>
             <class name="LoginTest"/>
             <class name="RegistrationTest"/>
             <class name="HomepageTest"/>
             <class name="PlayControlsTest"/>
             <class name="PlaylistTest"/>
+            <class name="SongsTest"/>
         </classes>
     </test>
 </suite>

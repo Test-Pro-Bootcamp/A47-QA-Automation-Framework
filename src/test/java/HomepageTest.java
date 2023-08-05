@@ -27,7 +27,7 @@ public class HomepageTest extends BaseTest {
         homePage.clickViewAllButton ();
         homePage.clickFirstSong ();
         homePage.clickAddToButton ();
-        homePage.clickPlaylist (Playlist);
+        homePage.clickPlaylist ();
         //  String notificationText = "Added 1 song into";
         String notificationText = "Added 1 song into \"" + Playlist + ".\"";
         Assert.assertTrue(homePage.getNotification().contains(notificationText));
@@ -37,14 +37,14 @@ public class HomepageTest extends BaseTest {
     public void deleteSelectedPlaylistWithSong(String Playlist) throws Exception {
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
-        loginPage.login();
 
+        loginPage.login();
         playListPage.selectDeletePlaylistWithSong(Playlist);
         Assert.assertTrue(playListPage.isPlaylistDeleted(Playlist));
 
-//        String notifyText = "Deleted playlist \"" + Playlist + ".\"";
-//        System.out.println("Message should be: " + notifyText);
-//        Assert.assertTrue(playListPage.deletedPlaylistNotify().contains(notifyText));
+        String notifyText = "Deleted playlist \"" + Playlist + ".\"";
+        System.out.println("Message should be: " + notifyText);
+        Assert.assertTrue(playListPage.deletedPlaylistNotify().contains(notifyText));
     }
 }
 

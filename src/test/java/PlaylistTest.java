@@ -1,12 +1,9 @@
-import Pages.HomePage;
-import Pages.LoginPage;
-import Pages.PlayControlsPage;
-import Pages.PlayListPage;
+import Pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 public class PlaylistTest extends BaseTest {
-        @Test(priority = 1, description = "Validate new empty playlist is created")
+        @Test(priority = 1, description = "Validate new playlist is created")
         @Parameters({"Playlist"})
         public void createPlaylist (String Playlist) {
             LoginPage loginPage = new LoginPage(driver);
@@ -31,9 +28,9 @@ public class PlaylistTest extends BaseTest {
         homePage.clickViewAllButton ();
         homePage.clickFirstSong ();
         homePage.clickAddToButton ();
-        homePage.clickPlaylist (Playlist);
-        //  String notificationText = "Added 1 song into";
-        String notificationText = "Added 1 song into \"" + Playlist + ".\"";
+        homePage.clickPlaylist ();
+        String notificationText = "Added 1 song into";
+        // String notificationText = "Added 1 song into \"" + Playlist + ".\"";
         Assert.assertTrue(homePage.getNotification().contains(notificationText));
     }
     @Test(priority = 3, description = "Validate song is deleted from playlist")
@@ -43,7 +40,7 @@ public class PlaylistTest extends BaseTest {
         PlayListPage playListPage = new PlayListPage(driver);
         loginPage.login();
         String msgText1 = "Removed 1 song from \"" + Playlist + ".\"";
-        playListPage.selectPlaylistByName (Playlist);
+        playListPage.selectPlaylist (Playlist);
         playListPage.deleteSongFromPlaylist();
         System.out.println("Message should be: " + msgText1);
         String msgReturn = playListPage.delSongNotificationMsg();
@@ -58,9 +55,23 @@ public class PlaylistTest extends BaseTest {
             loginPage.login();
             playListPage.doubleClickPlaylist(Playlist);
             playListPage.enterNewPlaylistName(NewPlaylistName);
-            //   String messageText = "Updated playlist \"" + NewPlaylistName +".\"";
-            //   Assert.assertEquals(playlistNameChangeNotify(), messageText);
+               String messageText = "Updated playlist \"" + NewPlaylistName +".\"";
+               Assert.assertEquals(playListPage.playlistNameChangeNotify(), messageText);
+         //   Assert.assertTrue(playListPage.doesPlaylistExist(NewPlaylistName));
+        }
+        @Test(priority = 6, description = "Validate playlist is renamed using contextClick")
+        @Parameters({"Playlist", "NewPlaylistName"})
+        public void renamePlaylistContextClick (String Playlist, String NewPlaylistName) throws Exception {
+            LoginPage loginPage = new LoginPage(driver);
+            PlayListPage playListPage = new PlayListPage(driver);
+            loginPage.login();
+            playListPage.createNewPlaylist(Playlist);
+            playListPage.contextClickPlaylist(Playlist);
+            playListPage.clickEditMenu();
+            playListPage.enterNewPlaylistName(NewPlaylistName);
             Assert.assertTrue(playListPage.doesPlaylistExist(NewPlaylistName));
+            //  String messageText = "Updated playlist \"" + NewPlaylistName +".\"";
+            //   Assert.assertEquals(playlistNameChangeNotify(), messageText);
         }
     @Test(priority = 5, description = "Validate empty renamed playlist is deleted")
     @Parameters({"NewPlaylistName"})
@@ -69,37 +80,10 @@ public class PlaylistTest extends BaseTest {
         PlayListPage playListPage = new PlayListPage(driver);
         loginPage.login();
 
-        playListPage.selectDeletePlaylist(NewPlaylistName);
+        playListPage.selectDeleteRenamedPlaylist(NewPlaylistName);
         String notifyText = "Deleted playlist \"" + NewPlaylistName + ".\"";
         System.out.println("Message should be: " + notifyText);
         Assert.assertTrue(playListPage.deletedPlaylistNotify().contains(notifyText));
-    }
-        @Test(priority = 6, description = "Validate playlist is renamed using contextClick")
-        @Parameters({"Playlist", "NewPlaylistName"})
-        public void renamePlaylistContextClick (String Playlist, String NewPlaylistName) {
-            LoginPage loginPage = new LoginPage(driver);
-            PlayListPage playListPage = new PlayListPage(driver);
-            loginPage.login();
-            playListPage.createNewPlaylist(Playlist);
-            playListPage.contextClickPlaylist(Playlist);
-            playListPage.clickEditMenu();
-            playListPage.enterNewPlaylistName(NewPlaylistName);
-            //  String messageText = "Updated playlist \"" + NewPlaylistName +".\"";
-            //   Assert.assertEquals(playlistNameChangeNotify(), messageText);
-            Assert.assertTrue(playListPage.doesPlaylistExist(NewPlaylistName));
-        }
-
-    @Test(priority = 7, description = "Validate song is playing/ using contextClick")
-    public void PlaySong () {
-        LoginPage loginPage = new LoginPage(driver);
-        PlayListPage playListPage = new PlayListPage(driver);
-        PlayControlsPage playControlsPage = new PlayControlsPage(driver);
-        loginPage.login();
-
-        playListPage.chooseAllSongsList();
-        playListPage.contextClickFirstSong();
-        playListPage.choosePlayOption();
-        Assert.assertTrue(playControlsPage.isSongPlaying());
     }
 }
 

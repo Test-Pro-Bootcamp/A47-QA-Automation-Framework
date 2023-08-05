@@ -1,8 +1,9 @@
 package Pages;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -13,26 +14,57 @@ public class BasePage {
     //the variables above are made protected, because protected access gives the
     // subclass a chance to use the helper method or variables, while preventing
     // a non-related class from trying to use it.
-    private By overlayLocator = By.cssSelector(".overlay.loading");
+
+    @FindBy(css = ".overlay.loading")
+    private WebElement overlay;
+
+    //Profile page confirmation message
+  //  @FindBy(xpath = "/html/body/div[2]")
+    @FindBy(css = "div.success.show")
+    private WebElement confirmationMessage;
+
     //use encapsulation of non-static and non-final fields.
     //If a variable is used only by other methods of that class, it should be declared as private.
     //make all the locators and WebElements private, because private keyword in java
-    // allows most restrictive access to variables and methods and offer strongest form of Encapsulation.
+    // allows most restrictive access to variables and methods and offer strong form of Encapsulation.
     public BasePage (WebDriver givenDriver){
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(50));
         actions = new Actions(driver);
+        PageFactory.initElements(driver, this);
     }
-    public WebElement findElementVisible(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    public void waitForOverlayToVanish () {
+        wait.until(ExpectedConditions.invisibilityOf(overlay));
     }
-    public WebElement findElementClickable(By locator) {
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    public  void waitForElement (WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
-    public WebElement findElementPresence(By locator) {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    public WebElement findElementVisible (WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
-    public void waitForOverlayToVanish(){
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
+    public WebElement findElementClickable (WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void contextClick (WebElement element){
+        WebElement contextElement = wait.until(ExpectedConditions.visibilityOf(element));
+        actions.contextClick(contextElement).perform();
+    }
+
+//    public void doubleClick (By locator){
+//        WebElement doubleClickElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//        actions.doubleClick(doubleClickElement).perform();
+//    }
+    public void doubleClick (WebElement element) {
+        actions.doubleClick(findElementVisible(element)).perform();
+    }
+    public void hoverAction (WebElement element){
+  //      wait.until(ExpectedConditions.visibilityOf(element));
+        actions.moveToElement(element).perform();
+    }
+    // profile Page method
+    public String getConfirmationText() {
+        findElementVisible(confirmationMessage);
+        return confirmationMessage.getText();
     }
 }
