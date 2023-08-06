@@ -3,7 +3,6 @@ import Pages.LoginPage;
 import Pages.SongsPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 public class SongsTest extends BaseTest{
     @Test(priority = 7, description = "Validate song is playing/ using contextClick")
     public void PlaySong () {

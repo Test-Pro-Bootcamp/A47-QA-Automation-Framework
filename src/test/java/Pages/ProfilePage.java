@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.UUID;
+
 public class ProfilePage extends BasePage{
     public ProfilePage(WebDriver givenDriver) { super(givenDriver);}
 
@@ -28,32 +30,31 @@ public class ProfilePage extends BasePage{
     @FindBy (xpath = "//html[@data-theme='cat']")
     private WebElement changeThemeConfirmation;
 
-
-
-
-
         public ProfilePage enterCurrentPassword(String currentPassword) {
             findElementClickable(currentPasswordField).sendKeys(currentPassword);
             return this;
         }
 
         public ProfilePage changeProfileName(String name) {
-
-            findElementVisible(profileNameField).sendKeys(Keys.chord(Keys.CONTROL,"A"));
+            findElementVisible(profileNameField).sendKeys(Keys.chord(Keys.COMMAND,"A"));
             findElementClickable(profileNameField).sendKeys(Keys.DELETE);
             findElementClickable(profileNameField).sendKeys(name);
             return this;
         }
-
+    public ProfilePage generateRandomName() {
+        String name =UUID.randomUUID().toString().replace("-", "");
+        System.out.println(name);
+        return this;
+    }
 
         public ProfilePage enterNewEmailAddress(String email) {
-            findElementClickable(emailAddressField).sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+            findElementClickable(emailAddressField).sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
             emailAddressField.sendKeys(email);
             return this;
         }
 
         public ProfilePage changePassword(String newPassword) {
-            findElementClickable(newPasswordField).sendKeys(Keys.chord(Keys.CONTROL,"A", Keys.BACK_SPACE));
+            findElementClickable(newPasswordField).sendKeys(Keys.chord(Keys.COMMAND,"A", Keys.BACK_SPACE));
             newPasswordField.sendKeys(newPassword);
             return this;
         }

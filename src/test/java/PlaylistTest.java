@@ -40,6 +40,21 @@ public class PlaylistTest extends BaseTest {
         System.out.println("Message should be: " + notifyText);
         Assert.assertTrue(playListPage.deletedPlaylistNotify().contains(notifyText));
     }
+    @Test(priority = 4, description = "Validate playlist is renamed using contextClick")
+    @Parameters({"Playlist", "NewPlaylistName"})
+    public void renamePlaylistContextClick (String Playlist, String NewPlaylistName) throws Exception {
+        LoginPage loginPage = new LoginPage(driver);
+        PlayListPage playListPage = new PlayListPage(driver);
+        loginPage.login();
+
+        playListPage.createNewPlaylist(NewPlaylistName);
+        playListPage.contextClickPlaylist(NewPlaylistName);
+        playListPage.clickEditMenu();
+        playListPage.enterNewPlaylistName(Playlist);
+        Assert.assertTrue(playListPage.doesPlaylistExist(Playlist));
+        //  String messageText = "Updated playlist \"" + NewPlaylistName +".\"";
+        //   Assert.assertEquals(playlistNameChangeNotify(), messageText);
+    }
 }
 
 
