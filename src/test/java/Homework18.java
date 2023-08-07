@@ -2,31 +2,16 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework18 extends BaseTest {
-    @Test
-    public void addSongToPlaylist() throws InterruptedException {
-
-        String newSongAddedNotification = "Added 1 song into";
-
-        openLoginUrl();
-
-        enterEmail("aimee.woodside@testpro.io");
-
-        enterPassword("te$t$tudent13");
-
+    @Test (dataProvider = "CorrectLoginProviders", dataProviderClass = BaseTest.class)
+    public void playSong(String email, String password) throws InterruptedException {
+        enterEmail(email);
+        enterPassword(password);
         clickLogInbutton();
 
-        searchSong("beautiful");
 
-        clickViewAllSearchBtn();
+        songPlay();
+        Thread.sleep(5000);
 
-        clickFirstSongSearchResult();
-
-        clickAddToBtn();
-
-        selectPlayList();
-
-        getNotificationMessage();
-
-        Assert.assertTrue(getNotificationMessage().contains(newSongAddedNotification));
+        Assert.assertTrue(isSongPlaying());
     }
 }

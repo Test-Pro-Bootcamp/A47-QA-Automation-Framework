@@ -1,24 +1,42 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
+
+import java.time.Duration;
 
 public class BaseTest {
+
+    public static WebDriver driver = null;
+    public static String url = "https://qa.koel.app/";
 
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
-<<<<<<< Updated upstream
-=======
-
     @BeforeMethod
-    public void launchBrowser() {
+    @Parameters({ "BaseURL" })
+    public void launchBrowser(String BaseURL) {
         //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        url = BaseURL;
+        driver.get(url);
+
+    }
+
+    @DataProvider (name = "CorrectLoginProviders")
+    public static Object [][] getLoginData(){
+        return new Object[][] {
+                { "aimee.woodside@testpro.io", "te$t$tudent13" }
+        };
     }
 
     @AfterMethod
@@ -91,9 +109,18 @@ public class BaseTest {
     public String getNotificationMessage() {
         WebElement notificationAlert = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
         return notificationAlert.getText();
-        
-        //Bring Changes to HW 18
+    }
+    public void songPlay() throws InterruptedException {
+        WebElement playNextButton = driver.findElement(By.xpath("//*[@id='mainFooter']/div[1]/i[2]"));
+        WebElement playButton = driver.findElement(By.xpath("//*[@id='mainFooter']/div[1]/span/span[2]"));
+        playNextButton.click();
+        playButton.click();
+        Thread.sleep(3000);
     }
 
->>>>>>> Stashed changes
+    public Boolean isSongPlaying() {
+        WebElement soundBar = driver.findElement(By.xpath("//*[@id='mainFooter']/div[2]/div[2]/div/button[1]/div"));
+        return soundBar.isDisplayed();
+    }
+
 }
