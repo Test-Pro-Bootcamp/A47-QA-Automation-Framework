@@ -1,10 +1,13 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -15,17 +18,20 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.DataProvider;
-
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 public class BaseTest {
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
     public static Actions actions = null;
     public static String url = null;
-
+    public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<WebDriver>();
     public static WebDriver pickBrowser (String browserName) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL = "http://192.168.12.202:4444";
@@ -54,11 +60,14 @@ public class BaseTest {
             case "grid-chrome":
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), caps);
+            case "cloud":
+                return lambdaTest();
             default:
-                WebDriverManager.chromedriver().setup();ChromeOptions options = new ChromeOptions();
-                options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito",
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeoptions = new ChromeOptions();
+                chromeoptions.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito",
                         "--start-maximized");
-                return driver = new ChromeDriver(options);
+                return driver = new ChromeDriver(chromeoptions);
         }
     }
     @BeforeSuite
@@ -70,21 +79,43 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"baseURL"})
     public void setUpBrowser(String baseURL) throws MalformedURLException {
-        driver = pickBrowser(System.getProperty("browser"));
-        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-//        driver.manage().window().maximize();
+//        driver = pickBrowser(System.getProperty("browser"));
+        threadDriver .set(pickBrowser(System.getProperty("browser")));
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(60));
+//        getDriver().manage().window().maximize();
+//        [driver~> getDriver()~> threadDriver.get()]
+//        threadDriver.get().manage().window().maximize();
 //        Is same as:
 //        options.addArguments("--start-maximized");
-        actions = new Actions(driver);
+        actions = new Actions(getDriver());
         url = baseURL;
-        driver.get(url);
+        getDriver().get(url);
     }
-
     @AfterMethod
-    public void tearDownBrowser() {
-        driver.quit();
+    public void closeBrowser() {
+        getDriver().quit();
+        threadDriver.remove();
     }
 
+    public WebDriver getDriver(){
+//        return driver;
+        return threadDriver.get();
+    }
+    public static WebDriver lambdaTest () throws MalformedURLException {
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+
+        FirefoxOptions browserOptions = new FirefoxOptions();
+        browserOptions.setPlatformName("Windows 11");
+        browserOptions.setBrowserVersion("111.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "Maria.haider");
+        ltOptions.put("accessKey", "RXr4gjGV6UrfOODKm7YGk1UsyvENguZolKMoBSUvkHmkrjb7HX");
+        ltOptions.put("project", "koelLambdaTest");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
+        }
     @DataProvider(name = "CorrectLoginProvider")
     public static Object[][] getLoginData() {
         return new Object[][]{
