@@ -55,21 +55,23 @@ public class BaseTest {
     }
 
     protected static void enterEmail(String email) {
-        WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
+        //WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']")));
         emailInput.click();
         emailInput.clear();
         emailInput.sendKeys(email);
     }
 
     protected static void enterPassword(String password) {
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
+        WebElement passwordInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='password']")));
         passwordInput.click();
         passwordInput.clear();
         passwordInput.sendKeys(password);
     }
 
     public void clickLogInbutton() {
-        WebElement LogInButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        //WebElement LogInButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        WebElement LogInButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         LogInButton.click();
     }
 
@@ -137,23 +139,15 @@ public class BaseTest {
     }
     // Helper functions for delete playlist
         public void openPlayList(){
-        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
-        playlist.click();
+        WebElement emptyPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        emptyPlaylist.click();
     }
 
     public void deletePlaylistBtn(){
         WebElement deletePlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
         deletePlaylist.click();
     }
-
-    //if there are songs in the playlist a popup will be displayed, click yes to confirm delete.
-    //if there are no songs in the playlist, continue to confirm delete.
-    public void confirmDelete(){
-        WebElement confirmBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.ok")));
-        confirmBtn.click();
-    }
-
-    public String getDeletedPlaylistMsg(){
+    public String getDeletedPlaylistMsg()    {
         WebElement deletedNotificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return deletedNotificationMsg.getText();
     }
