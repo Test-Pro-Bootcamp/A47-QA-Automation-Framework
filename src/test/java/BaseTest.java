@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -11,6 +13,7 @@ import java.time.Duration;
 public class BaseTest {
 
     public static WebDriver driver = null;
+    public static WebDriverWait wait = null;
     public static String url = "https://qa.koel.app/";
 
     @BeforeSuite
@@ -29,6 +32,8 @@ public class BaseTest {
 
         url = BaseURL;
         driver.get(url);
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     }
 
@@ -118,9 +123,38 @@ public class BaseTest {
         Thread.sleep(3000);
     }
 
+    public void deletePlaylist() throws InterruptedException {
+        WebElement playNextButton = driver.findElement(By.xpath("//*[@id='mainFooter']/div[1]/i[2]"));
+        WebElement playButton = driver.findElement(By.xpath("//*[@id='mainFooter']/div[1]/span/span[2]"));
+        playNextButton.click();
+        playButton.click();
+        Thread.sleep(3000);
+    }
+
     public Boolean isSongPlaying() {
         WebElement soundBar = driver.findElement(By.xpath("//*[@id='mainFooter']/div[2]/div[2]/div/button[1]/div"));
         return soundBar.isDisplayed();
     }
+    // Helper functions for delete playlist
+        public void openPlayList(){
+        WebElement playlist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        playlist.click();
+    }
 
+    public void deletePlaylistBtn(){
+        WebElement deletePlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
+        deletePlaylist.click();
+    }
+
+    //if there are songs in the playlist a popup will be displayed, click yes to confirm delete.
+    //if there are no songs in the playlist, continue to confirm delete.
+    public void confirmDelete(){
+        WebElement confirmBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.ok")));
+        confirmBtn.click();
+    }
+
+    public String getDeletedPlaylistMsg(){
+        WebElement deletedNotificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return deletedNotificationMsg.getText();
+    }
 }
