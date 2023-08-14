@@ -31,24 +31,31 @@ public class BaseTest {
 
     public static Actions actions = null;
     @BeforeSuite
-    static void setupClass() {
+    public static void chromeConfigs() {
+
+        if (System.getProperty("os.name").toLowerCase().contains("ios")) {
+            System.setProperty("webdriver.chrome.driver", "chromedriver");
+        }
+    }
+//    static void setupClass() {
 
 //        WebDriverManager.chromedriver().setup();
 //        WebDriverManager.FirefoxDriver().setup();
 
 
-    }
+//    }
+
 
     @BeforeMethod
     @Parameters ({"baseUrl"})
-    public void lunchBrowser(String baseUrl) {
+    public void lunchBrowser(String baseUrl) throws MalformedURLException {
 
         //      Added ChromeOptions argument below to fix websocket error
 
 //        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--remote-allow-origins=*");
 //        driver = new FirefoxDriver();
-        driver = pickBrowser(System.getProperty("browser"));
+        driver = pickBrowser("grid-firefox");
 //        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = baseUrl;
@@ -71,8 +78,8 @@ public class BaseTest {
         String gridURL = "http://10.0.0.67:4444";
         switch (browser){
             case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
+                System.setProperty("webdriver.gecko.driver", "geckodriver");
+               return driver = new FirefoxDriver();
             case "safari":
                 WebDriverManager.safaridriver().setup();
                 return driver = new SafariDriver();
@@ -88,10 +95,7 @@ public class BaseTest {
                 caps.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
             default:
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--remote-allow-origins=*");
-                WebDriverManager.chromedriver().setup();
-                return driver = new ChromeDriver(options);
+                return driver = new ChromeDriver();
         }
 
     }
