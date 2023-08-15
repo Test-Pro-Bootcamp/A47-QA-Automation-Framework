@@ -30,6 +30,9 @@ public class BaseTest {
     public static WebDriverWait wait = null;
 
     public static Actions actions = null;
+
+    private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+
     @BeforeSuite
     public static void chromeConfigs() {
 
@@ -55,23 +58,31 @@ public class BaseTest {
 //        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--remote-allow-origins=*");
 //        driver = new FirefoxDriver();
-        driver = pickBrowser("grid-firefox");
+//        driver = pickBrowser("grid-firefox");
 //        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        threadDriver.set(pickBrowser("grid-firefox"));
+        threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = baseUrl;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        actions = new Actions(driver);
+        wait = new WebDriverWait(getDriver(), Duration.ofSeconds(4));
+        actions = new Actions(getDriver());
     }
 
     @AfterMethod
     public void closeBrowser() {
-        driver.quit();
+        getDriver().quit();
+        threadDriver.remove();
     }
 
-    public static void openLoginUrl() {
-        String url = "https://qa.koel.app/";
-        driver.get(url);
+    public WebDriver getDriver (){
+        return threadDriver.get();
     }
+
+    public void openLoginUrl() {
+        String url = "https://qa.koel.app/";
+        getDriver().get(url);
+    }
+
+
 
     public static WebDriver pickBrowser (String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();

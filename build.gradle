@@ -18,6 +18,13 @@ dependencies {
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
+    }
+
+}
+
+tasks.register('testRegression', Test) {
+    useTestNG() {
+        suites "src/test/resources/Regression.xml"
         systemProperty "browser", System.getProperty("browser")
     }
 }
