@@ -22,9 +22,9 @@ test {
 
 }
 
-tasks.register('testRegression', Test) {
+task testRegression(type: Test) {
     useTestNG() {
         suites "src/test/resources/Regression.xml"
-        systemProperty "browser", System.getProperty("browser")
+        systemProperty "browser",System.getProperty("browserName")
     }
 }

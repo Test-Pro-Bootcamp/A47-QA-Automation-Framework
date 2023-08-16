@@ -4,26 +4,27 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URI;
+import org.openqa.selenium.Keys;
 
 import javax.swing.*;
 import java.time.Duration;
 
 public class BaseTest {
     public static WebDriver driver = null;
+
+//    private WebDriver driver = null;
 
     public static String url = "https://qa.koel.app/";
 
@@ -33,25 +34,26 @@ public class BaseTest {
 
     private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
+
     @BeforeSuite
-    public static void chromeConfigs() {
-
-        if (System.getProperty("os.name").toLowerCase().contains("ios")) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
-        }
-    }
+//    public static void chromeConfigs() {
+//
+//        if (System.getProperty("os.name").toLowerCase().contains("ios")) {
+//            System.setProperty("webdriver.chrome.driver", "chromedriver");
+//        }
+//    }
 //    static void setupClass() {
-
+//
 //        WebDriverManager.chromedriver().setup();
 //        WebDriverManager.FirefoxDriver().setup();
-
-
-//    }
+//
+//
+////    }
 
 
     @BeforeMethod
     @Parameters ({"baseUrl"})
-    public void lunchBrowser(String baseUrl) throws MalformedURLException {
+    public void lunchBrowser(@Optional String baseUrl) throws MalformedURLException {
 
         //      Added ChromeOptions argument below to fix websocket error
 
@@ -60,9 +62,12 @@ public class BaseTest {
 //        driver = new FirefoxDriver();
 //        driver = pickBrowser("grid-firefox");
 //        driver = new ChromeDriver(options);
-        threadDriver.set(pickBrowser("grid-firefox"));
+        threadDriver.set(pickBrowser(System.getProperty("browserName")));
         threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         url = baseUrl;
+        getDriver().get(baseUrl);
+
+
         wait = new WebDriverWait(getDriver(), Duration.ofSeconds(4));
         actions = new Actions(getDriver());
     }
@@ -84,36 +89,40 @@ public class BaseTest {
 
 
 
-    public static WebDriver pickBrowser (String browser) throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities();
+    public WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
         String gridURL = "http://10.0.0.67:4444";
-        switch (browser){
+
+        switch (browser) {
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", "geckodriver");
-               return driver = new FirefoxDriver();
-            case "safari":
-                WebDriverManager.safaridriver().setup();
-                return driver = new SafariDriver();
+                WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions optionsFirefox = new FirefoxOptions();
+                optionsFirefox.addArguments("-private");
+                return driver = new FirefoxDriver(optionsFirefox);
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                return driver = new EdgeDriver();
             case "grid-firefox":
-                caps.setCapability("browserName", "firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
-
+                capabilities.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             case "grid-edge":
-                caps.setCapability("browserName", "safari");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
-
+                capabilities.setCapability("browserName", "edge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             case "grid-chrome":
-                caps.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+                capabilities.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
             default:
-                return driver = new ChromeDriver();
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions optionsChrome = new ChromeOptions();
+                optionsChrome.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
+                optionsChrome.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                return driver = new ChromeDriver(optionsChrome);
         }
-
     }
 
 
     //Helper functions
-    public static void searchSong(String songTileKeyword) throws InterruptedException {
+    public void searchSong(String songTileKeyword) throws InterruptedException {
         WebElement searchField = driver.findElement(By.cssSelector(("div#searchForm input[type=search]")));
 
         searchField.clear();
@@ -125,29 +134,29 @@ public class BaseTest {
 
         }
 
-    public static void clickViewAllBtn() throws InterruptedException {
+    public void clickViewAllBtn() throws InterruptedException {
     WebElement viewAllSearchResult = driver.findElement(By.cssSelector("#searchExcerptsWrapper > div > div > section.songs > h1 > button"));
     viewAllSearchResult.click();
     Thread.sleep( 5000);
     }
-    public static void selectFirstSong() throws InterruptedException{
+    public void selectFirstSong() throws InterruptedException{
         WebElement firstSongResult = driver.findElement(By.cssSelector("#songResultsWrapper > div > div > div.item-container > table > tr"));
         firstSongResult.click();
         Thread.sleep(5000);
     }
-    public static void clickAddToBtn() throws InterruptedException{
+    public void clickAddToBtn() throws InterruptedException{
         WebElement addToBtn = driver.findElement(By.cssSelector("#songResultsWrapper > header > div.song-list-controls > span > button.btn-add-to"));
         addToBtn.click();
         Thread.sleep(5000);
     }
 
-    public static void choosePlayList() throws InterruptedException{
+    public void choosePlayList() throws InterruptedException{
         WebElement playList = driver.findElement(By.xpath("//*[@id='songResultsWrapper']/header/div[3]/div/section[1]/ul/li[5]"));
         playList.click();
         Thread.sleep(5000);
     }
 
-    public static String getNotificationText() {
+    public  String getNotificationText() {
         WebElement notificationText = driver.findElement(By.cssSelector("div.alertify-logs.top.right"));
             return    notificationText.getText();
     }

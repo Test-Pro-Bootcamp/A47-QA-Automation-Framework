@@ -3,7 +3,9 @@
 
 <suite name="Example Test" parallel="methods" thread-count="2">
 
+    <parameter name="browserName" value="chrome" />
     <parameter name="baseUrl" value="https://qa.koel.app/" />
+
     <test name="HomeWork25" preserve-order="false">
         <classes>
             <class name="BaseTest"/>
