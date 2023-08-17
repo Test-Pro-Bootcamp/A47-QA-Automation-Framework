@@ -23,7 +23,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launchBrowser(String BaseURL){
+    public void launchBrowser(String BaseURL) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
@@ -36,11 +36,11 @@ public class BaseTest {
     }
 
     //public static void openLoginUrl(){
-      //  String url = "https://qa.koel.app/";
-      //  driver.get(url);
-   // }
+    //  String url = "https://qa.koel.app/";
+    //  driver.get(url);
+    // }
 
-    public static void enterEmail(String email){
+    public static void enterEmail(String email) {
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.click();
         emailField.clear();
@@ -48,12 +48,13 @@ public class BaseTest {
 
     }
 
-    public static void enterPassword(String password){
+    public static void enterPassword(String password) {
         WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
         passwordInput.click();
         passwordInput.clear();
         passwordInput.sendKeys(password);
     }
+
     public static void clickSubmit() {
         WebElement submitLogin = driver.findElement(By.cssSelector("button[type='submit']"));
         submitLogin.click();
@@ -64,7 +65,7 @@ public class BaseTest {
         driver.quit();
     }
 
-    public void clickPLayList(){
+    public void clickPLayList() {
         WebElement selectPlayList = driver.findElement(By.xpath("//*[@id='playlists']/ul/li[3]/a"));
         selectPlayList.click();
 
@@ -76,10 +77,9 @@ public class BaseTest {
         Thread.sleep(2000);
     }
 
-    public String getNotificationDelete(){
+    public String getNotificationDelete() {
         WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         return notification.getText();
     }
-
 
 }
