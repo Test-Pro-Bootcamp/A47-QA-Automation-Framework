@@ -1,18 +1,21 @@
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import org.testng.Assert;
 
-public class HomeWork25 extends BaseTest{
+public class LoginTests extends BaseTest{
     @Test
-    public void emailPasswordLoginTest () {
+    public void validLoginTest1 () {
         LoginPage loginPage = new LoginPage(getDriver());
         openLoginUrl();
         loginPage.provideEmail("beomseo.park@testpro.io").providePassword("te$t$tudent").clickSubmit();
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
     @Test
-    public void loginTest () {
+    public void validLoginTest2 () {
         LoginPage loginPage = new LoginPage(getDriver());
         openLoginUrl();
         loginPage.loginUrl();
         loginPage.login();
+        Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
 }

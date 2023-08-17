@@ -17,6 +17,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URI;
 import org.openqa.selenium.Keys;
+import java.net.URL;
+import java.util.HashMap;
 
 import javax.swing.*;
 import java.time.Duration;
@@ -54,8 +56,11 @@ public class BaseTest {
     @BeforeMethod
     @Parameters ({"baseUrl"})
     public void lunchBrowser(@Optional String baseUrl) throws MalformedURLException {
+        if (baseUrl == null) {
+            baseUrl = url;
+        }
 
-        //      Added ChromeOptions argument below to fix websocket error
+            //      Added ChromeOptions argument below to fix websocket error
 
 //        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--remote-allow-origins=*");
@@ -87,13 +92,39 @@ public class BaseTest {
         getDriver().get(url);
     }
 
+    public static WebDriver lambdaTest() throws MalformedURLException{
+        String hubURL = "https://hub.lambdatest.com/wd/hub";
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("114.0");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "parkbeomseo0105");
+        ltOptions.put("accessKey", "ckgacJlN3BkF09ye8swcDAtWnfCeTiNNbAAMZwhsVcUQcXonc5");
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+
+        return new RemoteWebDriver(new URL(hubURL), browserOptions);
+
+    }
+
 
 
     public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         String gridURL = "http://10.0.0.67:4444";
 
-        switch (browser) {
+        if (browser == null) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions optionsChrome = new ChromeOptions();
+            optionsChrome.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
+            optionsChrome.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+            return driver = new ChromeDriver(optionsChrome);
+        }
+
+
+            switch (browser) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions optionsFirefox = new FirefoxOptions();
@@ -111,6 +142,9 @@ public class BaseTest {
             case "grid-chrome":
                 capabilities.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+
+                case "cloud":
+                    return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions optionsChrome = new ChromeOptions();

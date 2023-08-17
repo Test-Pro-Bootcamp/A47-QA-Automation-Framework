@@ -9,7 +9,7 @@
     <test name="HomeWork25" preserve-order="false">
         <classes>
             <class name="BaseTest"/>
-            <class name="HomeWork25"/>
+            <class name="LoginTests"/>
         </classes>
     </test>
 </suite>
