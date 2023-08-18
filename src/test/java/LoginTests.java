@@ -6,15 +6,12 @@ public class LoginTests extends BaseTest{
     @Test
     public void validLoginTest1 () {
         LoginPage loginPage = new LoginPage(getDriver());
-        openLoginUrl();
         loginPage.provideEmail("beomseo.park@testpro.io").providePassword("te$t$tudent").clickSubmit();
         Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
     @Test
     public void validLoginTest2 () {
         LoginPage loginPage = new LoginPage(getDriver());
-        openLoginUrl();
-        loginPage.loginUrl();
         loginPage.login();
         Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }
