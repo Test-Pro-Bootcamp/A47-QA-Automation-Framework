@@ -1,13 +1,16 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
+import javax.swing.*;
 import java.time.Duration;
 
 public class BaseTest {
@@ -15,6 +18,8 @@ public class BaseTest {
     public static WebDriver driver = null;
     public static WebDriverWait wait = null;
     public static String url = "https://qa.koel.app/";
+
+    public static Actions actions = null;
 
     @BeforeSuite
     static void setupClass() {
@@ -34,7 +39,7 @@ public class BaseTest {
         driver.get(url);
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
+        actions = new Actions(driver);
     }
 
     @DataProvider (name = "CorrectLoginProviders")
@@ -131,8 +136,24 @@ public class BaseTest {
         WebElement deletePlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
         deletePlaylist.click();
     }
-    public String getDeletedPlaylistMsg()    {
-        WebElement deletedNotificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        return deletedNotificationMsg.getText();
+    public String getNotificationMsg()    {
+        WebElement NotificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return NotificationMsg.getText();
+    }
+
+    public void rightclickPlaylist() {
+        WebElement playList = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        actions.contextClick(playList).perform();
+    }
+
+    public void clickEditOnPlaylist() {
+       wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#playlists > ul > li:nth-child(3) > nav > ul > li:nth-child(1)"))).click();
+    }
+
+    public void enterNewPlaylistName(String newPlaylistName) {
+        WebElement playListInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='inline-playlist-name-input']")));
+        playListInputField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
+        playListInputField.sendKeys(newPlaylistName);
+        playListInputField.sendKeys(Keys.ENTER);
     }
 }
