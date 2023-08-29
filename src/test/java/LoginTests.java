@@ -1,25 +1,77 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class LoginTests extends BaseTest {
-    @Test
-    public void LoginEmptyEmailPasswordTest() {
+    @Test (description = "Login with valid email and password")
+    public void loginValidEmailPassword() {
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        navigateToPage();
+        provideEmail("demo@class.com");
+        providePassword("te$t$tudent");
+        clickSubmit();
+        WebElement avatar = driver.findElement(By.cssSelector("[class='avatar']")); //or "img[class='avatar']"
+        Assert.assertTrue(avatar.isDisplayed(), "Avatar icon is not displayed");
+    }
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    @Test (description = "Login with not existing email")
+    public void loginNotExistingEmail () {
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+        navigateToPage();
+        provideEmail("NotExistingEmail@gmail.com");
+        providePassword("te$t$tudent");
+        clickSubmit();
+
+        Assert.assertEquals(driver.getCurrentUrl(), loginUrl, "Wrong login url shows after unsuccessful login");
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button is not displayed");
+    }
+    @Test (description = "Login with empty password")
+    public void loginEmptyEmailPasswordTest() {
+
+        navigateToPage();
+        provideEmail("demo@class.com");
+        providePassword("");
+        clickSubmit();
+
+        Assert.assertEquals(driver.getCurrentUrl(), loginUrl, "Wrong login url shows after unsuccessful login");
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button is not displayed");
+    }
+    @Test (description = "Login with empty email and password")
+    public void loginEmptyEmailPassword() {
+
+        navigateToPage();
+        provideEmail("");
+        providePassword("");
+        clickSubmit();
+
+        Assert.assertEquals(driver.getCurrentUrl(), loginUrl, "Wrong login url shows after unsuccessful login");
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button is not displayed");
+    }
+
+    @Test (description = "Login with incorrect password")
+    public void loginIncorrectPassword() {
+
+        String loginUrl = "https://qa.koel.app/";
+        driver.get(loginUrl);
+
+        WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
+        emailInput.click();
+        emailInput.clear();
+        emailInput.sendKeys("demo@class.com");
+
+        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
+        passwordInput.click();
+        passwordInput.clear();
+        emailInput.sendKeys("IncorrectPassword");
+
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        loginButton.click();
+
+        Assert.assertEquals(driver.getCurrentUrl(), loginUrl, "Wrong login url shows after unsuccessful login");
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button is not displayed");
     }
 }
