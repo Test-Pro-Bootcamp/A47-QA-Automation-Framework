@@ -14,5 +14,8 @@ public class LoginTests extends BaseTest {
         enterPassword("te$t$tudent");
         clickSubmit();
     }
-    }
+
+
+
+}
 
