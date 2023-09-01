@@ -4,13 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeMethod;
 import java.time.Duration;
 
 public class BaseTest {
-    public static WebDriverManager driver = null;
+    public static WebDriver driver = null;
     public static String url = ("https://qa.koel.app/");
 
     @BeforeSuite
@@ -22,8 +23,9 @@ public class BaseTest {
     public void launchBrowser() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
-        WebDriver driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);//
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        openLoginUrl();
     }
 
     @AfterMethod
@@ -32,13 +34,15 @@ public class BaseTest {
     }
 
     protected static void openLoginUrl() {
+
         String url = ("https://qa.koel.app/");
+        driver.get(url);//navigates to the specified URL (Koel)
     }
         public void provideEmail(String email) {
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
         emailField.clear();
         emailField.click();
-        emailField.sendKeys("irene.perdon@testpro.io")
+        emailField.sendKeys("irene.perdon@testpro.io");
     }
 
     public void providePassword(String password) {
@@ -49,7 +53,7 @@ public class BaseTest {
     }
 
     public void clickSubmit() {
-        WebElement submit = driver.findElement().findElement(By.cssSelector("button[type='submit']"));
+        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
         submit.click();
     }
 }
