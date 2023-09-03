@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
     public LoginPage(WebDriver givenDriver) {
+
         super(givenDriver);
     }
 
@@ -13,14 +14,17 @@ public class LoginPage extends BasePage {
     By submitBtn = By.cssSelector("button[type='submit']");
 
     public void provideEmail(String email) {
+
         findElement(emailField).sendKeys(email);
     }
 
     public void providePassword(String password) {
+
         findElement(passwordField).sendKeys(password);
     }
 
     public void clickSubmit() {
+
         findElement(submitBtn).click();
     }
 
