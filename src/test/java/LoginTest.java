@@ -11,7 +11,9 @@ public class LoginTest extends BaseTest {
 
         loginPage.login();
 
-        Assert.assertTrue(homePage.gerUserAvatar().isDisplayed());
+        //loginPage.provideEmail("aimee.woodside@testpro.io").providePassword("te$t$tudent13").clickSubmit();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
 }
