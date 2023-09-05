@@ -6,8 +6,8 @@ public class PlayControlsTest extends BaseTest {
 
     @Test (description = "Validate a song is playing")
     public void playSong() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver);
-        PlayControlsPage playControlsPage = new PlayControlsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        PlayControlsPage playControlsPage = new PlayControlsPage(getDriver());
         loginPage.login();
         playControlsPage.hoverOverPlayControl();
         playControlsPage.clickPlayNextSong();
@@ -18,8 +18,8 @@ public class PlayControlsTest extends BaseTest {
     }
     @Test (description = "Validate Hover Over Play Control is working")
     public void hoverOverPlayCtrl () throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver);
-        PlayControlsPage playControlsPage = new PlayControlsPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        PlayControlsPage playControlsPage = new PlayControlsPage(getDriver());
         loginPage.login();
         playControlsPage.hoverOverPlayControl();
         Assert.assertTrue(playControlsPage.isPlayHoveredOver().isDisplayed());

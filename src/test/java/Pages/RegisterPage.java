@@ -9,7 +9,7 @@ public class RegisterPage extends BasePage{
         super(givenDriver);
     }
     //private By registrationLinkLocator = By.cssSelector("[id = 'hel']");
-    @FindBy(css = "[id = 'hel']")
+    @FindBy(xpath = "//*[@id='app']/div/div/form/div[2]/a")
     private WebElement registrationLinkLocator;
 
     //private By registerBtnLocator = By.xpath("//input[@id='button']");
@@ -19,7 +19,7 @@ public class RegisterPage extends BasePage{
     // Registration Navigation
     //-------------------------
     public void registrationNavigate() {
-        (registrationLinkLocator).click();
+        findElementClickable(registrationLinkLocator).click();
         System.out.println("Registration link is clicked");
     }
     public boolean registerBtnIsDisplayed(){

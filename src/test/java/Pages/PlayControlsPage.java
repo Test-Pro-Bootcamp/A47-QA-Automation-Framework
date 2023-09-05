@@ -35,10 +35,10 @@ public class PlayControlsPage extends BasePage{
 //-------------------------
     public void clickPlayNextSong() {
         waitForOverlayToVanish();
-        playNextSongButton.click();
+        findElementClickable(playNextSongButton).click();
     }
     public  void clickPlaySong() {
-         PlayControlBtn.click();
+        findElementClickable(PlayControlBtn).click();
         //    Actions actions = new Actions(driver);
         //    actions.click(playSongElement).perform();
     }

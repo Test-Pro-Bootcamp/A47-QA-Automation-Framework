@@ -8,8 +8,8 @@ public class HomepageTest extends BaseTest {
     @Test(priority = 5, description = "Validate song is added to playlist")
     @Parameters({"Playlist"})
     public void addSongToPlaylist(String Playlist) {
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         loginPage.login();
 
         homePage.searchSong ("Metre");
@@ -26,8 +26,8 @@ public class HomepageTest extends BaseTest {
     @Test(priority = 6, description = "Validate song is deleted from playlist")
     @Parameters({"Playlist"})
     public void deleteSong(String Playlist) {
-        LoginPage loginPage = new LoginPage(driver);
-        PlayListPage playListPage = new PlayListPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        PlayListPage playListPage = new PlayListPage(getDriver());
         loginPage.login();
         String msgText1 = "Removed 1 song from \"" + Playlist + ".\"";
         playListPage.selectPlaylist (Playlist);
@@ -39,8 +39,8 @@ public class HomepageTest extends BaseTest {
     @Test(priority = 7, description = "Validate specified playlist is deleted")
     @Parameters({"Playlist"})
     public void deleteSelectedPlaylist(String Playlist) throws Exception {
-        LoginPage loginPage = new LoginPage(driver);
-        PlayListPage playListPage = new PlayListPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        PlayListPage playListPage = new PlayListPage(getDriver());
 
         loginPage.login();
         playListPage.selectDeletePlaylist(Playlist);

@@ -8,9 +8,9 @@ public class ProfileTest extends BaseTest {
         public void updateProfileName () {
 
             String profileUpdatedMsg = "Profile updated.";
-            LoginPage loginPage = new LoginPage(driver);
-            HomePage homePage = new HomePage(driver);
-            ProfilePage profilePage = new ProfilePage(driver);
+            LoginPage loginPage = new LoginPage(getDriver());
+            HomePage homePage = new HomePage(getDriver());
+            ProfilePage profilePage = new ProfilePage(getDriver());
 
             loginPage.login();
             homePage.clickProfileBtn();
@@ -24,9 +24,9 @@ public class ProfileTest extends BaseTest {
         }
         @Test
         public void updateProfileTheme() {
-            LoginPage loginPage = new LoginPage(driver);
-            HomePage homePage = new HomePage(driver);
-            ProfilePage profilePage = new ProfilePage(driver);
+            LoginPage loginPage = new LoginPage(getDriver());
+            HomePage homePage = new HomePage(getDriver());
+            ProfilePage profilePage = new ProfilePage(getDriver());
             loginPage.login();
             homePage.clickProfileBtn();
             profilePage.changeBackgroundTheme();

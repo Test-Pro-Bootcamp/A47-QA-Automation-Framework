@@ -6,8 +6,8 @@ public class PlaylistTest extends BaseTest {
         @Test(priority = 1, description = "Validate new playlist is created")
         @Parameters({"Playlist"})
         public void createPlaylist (String Playlist) {
-            LoginPage loginPage = new LoginPage(driver);
-            PlayListPage playListPage = new PlayListPage(driver);
+            LoginPage loginPage = new LoginPage(getDriver());
+            PlayListPage playListPage = new PlayListPage(getDriver());
             loginPage.login();
 
             String notificationText = "Created playlist \"" + Playlist + ".\"";
@@ -19,8 +19,8 @@ public class PlaylistTest extends BaseTest {
         @Test(priority = 2, description = "Validate playlist is renamed using doubleClick")
         @Parameters({"Playlist", "NewPlaylistName"})
         public void renamePlaylist(String Playlist, String NewPlaylistName)  {
-            LoginPage loginPage = new LoginPage(driver);
-            PlayListPage playListPage = new PlayListPage(driver);
+            LoginPage loginPage = new LoginPage(getDriver());
+            PlayListPage playListPage = new PlayListPage(getDriver());
             loginPage.login();
             playListPage.doubleClickPlaylist(Playlist);
             playListPage.enterNewPlaylistName(NewPlaylistName);
@@ -31,8 +31,8 @@ public class PlaylistTest extends BaseTest {
     @Test(priority = 3, description = "Validate empty renamed playlist is deleted")
     @Parameters({"NewPlaylistName"})
     public void deleteRenamedPlaylist(String NewPlaylistName) {
-        LoginPage loginPage = new LoginPage(driver);
-        PlayListPage playListPage = new PlayListPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        PlayListPage playListPage = new PlayListPage(getDriver());
         loginPage.login();
 
         playListPage.selectDeleteRenamedPlaylist(NewPlaylistName);
@@ -43,8 +43,8 @@ public class PlaylistTest extends BaseTest {
     @Test(priority = 4, description = "Validate playlist is renamed using contextClick")
     @Parameters({"Playlist", "NewPlaylistName"})
     public void renamePlaylistContextClick (String Playlist, String NewPlaylistName) throws Exception {
-        LoginPage loginPage = new LoginPage(driver);
-        PlayListPage playListPage = new PlayListPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        PlayListPage playListPage = new PlayListPage(getDriver());
         loginPage.login();
 
         playListPage.createNewPlaylist(NewPlaylistName);
