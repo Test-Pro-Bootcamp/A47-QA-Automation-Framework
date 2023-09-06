@@ -22,10 +22,10 @@ public class Homework16 extends BaseTest {
         String url = "https://qa.koel.app/";
         driver.get(url);
 
-        WebElement registrationLink = driver.findElement(By.cssSelector("[id='hel']"));
+        WebElement registrationLink = driver.findElement(By.cssSelector("[href='registration']"));
         registrationLink.click();
 
-        String registrationUrl = "https://qa.koel.app/";
+        String registrationUrl = "https://qa.koel.app/registration";
         Assert.assertEquals(driver.getCurrentUrl(), registrationUrl);
 
         driver.quit();
