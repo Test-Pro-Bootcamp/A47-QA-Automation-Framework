@@ -19,12 +19,16 @@ public class LoginTests extends BaseTest {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         String url = "https://qa.koel.app/";
 =======
         String url = "https://bbb.koel.app/  ";
 >>>>>>> Stashed changes
 =======
         String url = "https://testpro.io";
+>>>>>>> Stashed changes
+=======
+        String url = "https://tespro.io/";
 >>>>>>> Stashed changes
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
