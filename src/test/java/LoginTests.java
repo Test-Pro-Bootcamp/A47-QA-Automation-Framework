@@ -28,7 +28,7 @@ public class LoginTests extends BaseTest {
         String url = "https://testpro.io";
 >>>>>>> Stashed changes
 =======
-        String url = "https://tespro.io/";
+        String url = "https://tesp ro.io/";
 >>>>>>> Stashed changes
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
