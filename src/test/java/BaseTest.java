@@ -34,21 +34,21 @@ public class BaseTest {
         String url = "https://bbb.testPro.io/";
         driver.get(url);
     }
-    public static void provideEmail(String email){
+    public void provideEmail(String email){
         WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
-    emailField.clear();
-    emailField.sendKeys(email);
+        emailField.clear();
+        emailField.sendKeys(email);
     }
 
-    public static void providePassword(String password){
+    public void providePassword(String password){
         WebElement passwordFiled = driver.findElement(By.cssSelector("[type='password']"));
         passwordFiled.clear();
         passwordFiled.sendKeys(password);
     }
-    protected static void clickSubmit() throws InterruptedException {
+    protected void clickSubmit() {
       WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        submitButton.click();
-        Thread.sleep(2000);
+      submitButton.click();
+
 
     }
 
