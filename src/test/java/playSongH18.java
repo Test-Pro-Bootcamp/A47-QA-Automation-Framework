@@ -17,7 +17,6 @@ public class playSongH18 extends BaseTest {
     public void clickPlay(){
         WebElement playNextButton = driver.findElement(By.xpath("//i[@data-testid='play-next-btn']"));
         WebElement playButton = driver.findElement(By.xpath("//spam[@data-testid='play-btn']"));
-
         playNextButton.click();
         playButton.click();
     }
@@ -25,8 +24,5 @@ public class playSongH18 extends BaseTest {
         WebElement soundBar = driver.findElement(By.xpath("//div[@data-testid='sound-bar-play']"));
         return soundBar.isDisplayed();
     }
-
-
-
 
 }
