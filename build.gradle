@@ -17,6 +17,13 @@ dependencies {
 
 test {
     useTestNG() {
-        suites "src/test/resources/TestNG.xml"
+        suites "src/test/resources/SmokeTest.xml"
+    }
+}
+
+task testSmoke(type: Test){
+    useTestNG() {
+        suites "src/test/resources/SmokeTest.xml"
+        systemProperty "browser", System.getProperty("browser")
     }
 }
