@@ -19,4 +19,12 @@ test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
     }
+
+}
+
+task testRegression(type: Test) {
+    useTestNG() {
+        suites "src/testRegression/resources/${suites}.xml"
+        systemProperty "browser",System.getProperty("browserName")
+    }
 }
