@@ -10,6 +10,7 @@ public class LoginTests extends BaseTest {
     @Test
     public void LoginEmptyEmailPasswordTest() {
 
+
 //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -17,9 +18,12 @@ public class LoginTests extends BaseTest {
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        String url = "https://qa.koel.app/";
+        String url = "https:///";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
+
+        //no any changes of the branch
     }
+
 }
