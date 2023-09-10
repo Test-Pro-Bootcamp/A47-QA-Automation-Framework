@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNG">
-
-    <test name="Example Test" preserve-order="false">
+<suite name="Koel App Tests">
+    <test name="Basic Koel Tests" preserve-order="false">
         <classes>
-            <class name="LoginTests"/>
             <class name="BaseTest"/>
+            <class name="LoginTests">
+                <methods>
+                    <include name="loginValidEmailPassword"/>
+                    <include name="loginNotExistingEmail"/>
+                    <include name="loginEmptyEmailPasswordTest"/>
+                    <include name="loginEmptyEmailPassword"/>
+                </methods>
+            </class>
+            <class name="TestHomework16">
+                <methods>
+                    <include name="registrationNavigation"/>
+                </methods>
+            </class>
+            <class name="ProfileTests">
+                <methods>
+                    <include name="changeProfileName"/>
+                </methods>
+            </class>
+            <class name="TestHomework17">
+                <methods>
+                    <include name="createNewPlaylist"/>
+                    <include name="addSongToPlaylist"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
