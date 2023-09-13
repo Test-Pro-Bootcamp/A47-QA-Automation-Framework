@@ -25,8 +25,8 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        loginPage.provideEmail("demo@class.com")
-                 .providePassword("te$t$tudent")
+        loginPage.provideEmail("aimee.woodside@testpro.io")
+                 .providePassword("te$t$tudent13")
                  .clickSubmit();
 
         Assert.assertTrue(homePage.isAvatarDisplayed());
@@ -37,7 +37,7 @@ public class LoginTests extends BaseTest {
 
         LoginPage loginPage = new LoginPage(getDriver());
 
-        loginPage.provideEmail("demo@class.com")
+        loginPage.provideEmail("aimee.woodside@testpro.io")
                  .providePassword("")
                  .clickSubmit();
 
@@ -50,7 +50,7 @@ public class LoginTests extends BaseTest {
 
         LoginPage loginPage = new LoginPage(getDriver());
 
-        loginPage.provideEmail("").providePassword("te$t$tudent").clickSubmit();
+        loginPage.provideEmail("").providePassword("te$t$tudent13").clickSubmit();
 
         Assert.assertEquals(getDriver().getCurrentUrl(), url);
     }

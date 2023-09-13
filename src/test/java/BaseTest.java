@@ -80,13 +80,14 @@ public class BaseTest {
     public static WebDriver lambdaTest() throws MalformedURLException {
         String hubURL="https://hub.lambdatest.com/wd/hub";
 
-        FirefoxOptions browserOptions = new FirefoxOptions();
+        ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName("Windows 10");
-        browserOptions.setBrowserVersion("111.0");
+        browserOptions.setBrowserVersion("117.0");
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-        ltOptions.put("username","khaledzamanqa");
-        ltOptions.put("accessKey","e33oiUgYlTNRArFJpW8NCYZmvEzDi9jIQC6qvdHg4UOxL82EHd");
-        ltOptions.put("project", "Automation Test");
+        ltOptions.put("username", "aimeewoodside23");
+        ltOptions.put("accessKey", "uknazWU8XpTMGklfqvzMGcwF0fnSptd2Erk5HKMYir4HodlfqV");
+        ltOptions.put("project", "Selenium Parallel Testing");
+        ltOptions.put("selenium_version", "4.0.0");
         ltOptions.put("w3c", true);
         browserOptions.setCapability("LT:Options", ltOptions);
 
@@ -95,7 +96,7 @@ public class BaseTest {
 
     public static WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL = "http://192.168.1.160:4444";
+        String gridURL = "http://192.168.1.83:4444";
 
         switch (browser){
             case "firefox":
