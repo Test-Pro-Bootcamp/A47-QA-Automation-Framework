@@ -21,5 +21,9 @@ public class LoginTests extends BaseTest {
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
+
+        provideEmail("irene.perdon@testpro.io");
+        providePassword("te$t$tudent");
+        clickSubmit();
     }
 }
