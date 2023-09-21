@@ -4,6 +4,7 @@
 <suite name="TestNG">
     <parameter name="BaseURL" value="https://qa.koel.app/"/>
     <test name="Example Test" preserve-order="false">
+
         <classes>
             <class name="LoginTests"/>
             <class name="ProfileTests"/>
@@ -11,7 +12,15 @@
             <class name="Homework17"/>
             <class name="Homework16"/>
             <class name="Homework18"/>
-            <class name="Homework19"/>
+           <class name="Homework19">
+               <methods>
+                   <include name="playSong" />
+                   <include name="clickPlay" />
+                   <include name="isSongPlaying" />
+               </methods>
+
+
+           </class>
 
         </classes>
     </test>
