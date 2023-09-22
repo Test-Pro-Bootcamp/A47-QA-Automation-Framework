@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -25,32 +26,28 @@ public class Homework17 extends BaseTest{
     }
 
     public void searchSong (String name) throws  InterruptedException{
-        WebElement searchField = driver.findElement(By.cssSelector("div#searchForm input[type='search']"));
+        WebElement searchField = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#searchForm input[type='search']")));
         searchField.sendKeys(name);
-        Thread.sleep(2000);
     }
 public void clickViewAllBtn() throws InterruptedException{
-        WebElement ViewAll = driver.findElement(By.xpath( "//button[@data-test='view-all-songs-btn']"));
+        WebElement ViewAll = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath( "//button[@data-test='view-all-songs-btn']")));
         ViewAll.click();
-        Thread.sleep(2000);
 }
 
 public void selectFirstSongResult() throws InterruptedException{
-        WebElement FirstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]"));
+        WebElement FirstSong = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]")));
         FirstSong.click();
-    Thread.sleep(2000);
 }
 
 public void clickAddToBtn() throws InterruptedException{
-        WebElement addToButton = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//button[@data-test='add-to-btn']"));
+        WebElement addToButton = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']//button[@data-test='add-to-btn']")));
         addToButton.click();
         Thread.sleep(2000);
 }
 
 public void choosePlaylist() throws InterruptedException{
-        WebElement Playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Pro Playlist')]"));
+        WebElement Playlist = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Pro Playlist')]")));
         Playlist.click();
-        Thread.sleep(2000);
 }
 
 

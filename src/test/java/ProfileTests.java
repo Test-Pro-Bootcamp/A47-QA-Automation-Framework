@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -27,23 +28,23 @@ public class ProfileTests extends BaseTest{
         clickSaveButton();
 
         Thread.sleep(2000);
-        WebElement actualProfileName = driver.findElement(By.cssSelector("a.view-profile>span"));
+        WebElement actualProfileName = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a.view-profile>span")));
         Assert.assertEquals(actualProfileName.getText(), randomName);
     }
 
     public void clickAvatarIcon(){
-       WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
+       WebElement avatarIcon = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
        avatarIcon.click();
     }
 
     public void provideCurrentPassword(String password){
-        WebElement currentPassword = driver.findElement(By.cssSelector("[name='current_password']"));
+        WebElement currentPassword = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='current_password']")));
         currentPassword.clear();
         currentPassword.sendKeys(password);
     }
 
     public void clickSaveButton(){
-        WebElement saveButton = driver.findElement(By.cssSelector("button.btn-submit"));
+        WebElement saveButton = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn-submit")));
         saveButton.click();
     }
 
