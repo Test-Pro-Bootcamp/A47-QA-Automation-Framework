@@ -1,25 +1,57 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 public class LoginTests extends BaseTest {
-    @Test
-    public void LoginEmptyEmailPasswordTest() {
+    @Test (dataProvider = "ValidLoginData", dataProviderClass = BaseTest.class)
+    public void successfulLoginTest(String email, String password) {
 
-//      Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+//        Enter email into the email field
+        enterEmailField(email);
 
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        Enter password into the password field
+        enterPasswordField(password);
 
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
+//        Click the Login button
+        clickSubmit();
+
+//        Verify user is logged in by avatar display
+        WebElement avatar = driver.findElement(By.cssSelector(".avatar"));
+        Assert.assertTrue(avatar.isDisplayed());
     }
+
+    @Test (dataProvider = "InvalidLoginData", dataProviderClass = BaseTest.class)
+    public void invalidLoginTest(String email, String password) {
+
+//        Enter email into the email field
+        enterEmailField(email);
+
+//        Enter password into the password field
+        enterPasswordField(password);
+
+//        Click the Login button
+        clickSubmit();
+
+//        Check that user is still on the Login page and the Login button is still displayed
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
+
+    @Test (enabled = false)
+    public void emptyPasswordFieldTest() {
+
+//        Enter email into the email field
+        enterEmailField("daviyontae.floyd@testpro.io");
+
+//        Enter password into the password field
+        enterPasswordField(" ");
+
+//        Click the Login button
+        clickSubmit();
+
+//        Check that user is still on the Login page and the Login button is still displayed
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
+
 }
