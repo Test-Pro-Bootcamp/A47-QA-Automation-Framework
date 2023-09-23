@@ -14,6 +14,8 @@
           <class name="Homework18">
               <methods>
                   <include name="playSong" />
+                  <include name="clickPlay" />
+                  <include name="isSongPlaying" />
               </methods>
 
           </class>
