@@ -16,27 +16,27 @@ public class Homework20 extends BaseTest{
         providePassword("te$t$tudent");
         clickSubmit();
         doubleClickPlaylist();
-        enterNewPlaylistName();
-        Assert.assertEquals(getRenamePlaylistSuccessMsg);
+        enterNewPlaylistName("Test Pro");
+        Assert.assertEquals(getRenamePlaylistSuccessMsg(),updatePlaylistMsg);
     }
 
     public void doubleClickPlaylist() {
         WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
-        actions.doubleclick(playlistElement).perform();
+        actions.doubleClick(playlistElement).perform();
     }
 
 
-public void enterNewPlaylistName() {
+    public void enterNewPlaylistName(String newPlaylistName) {
         WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("name='randy'")));
-        playlistInputField.sendKeys(Keys.chord(keys.CONTROL,"A", keys.BACK_SPACE));
+        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
 
         playlistInputField.sendKeys(newPlaylistName);
         playlistInputField.sendKeys(Keys.ENTER);
-}
+    }
 
-public String getRenamePlaylistSuccessMsg () {
-  WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-  return notification.getText();
-}
+    public String getRenamePlaylistSuccessMsg() {
+        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return notification.getText();
+    }
 
 }

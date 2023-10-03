@@ -5,17 +5,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-<<<<<<< Updated upstream
-
-=======
 import org.testng.annotations.Parameters;
->>>>>>> Stashed changes
 import java.time.Duration;
-
+import java.util.UUID;
 
 
 public class BaseTest {
@@ -30,7 +28,9 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void launchBrowser(){
+    @Parameters({"BaseURL"})
+    public void launchBrowser(String BaseURL) {
+        //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
@@ -39,37 +39,50 @@ public class BaseTest {
         driver.manage().window().maximize();
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        url=BaseUrl;
+        actions =new Actions(driver);
+        url = BaseURL;
         navigateToPage();
     }
-
     @AfterMethod
-    public void closeBrowser(){
+    public void closeBrowser() {
         driver.quit();
-
     }
-
-    public static void navigateToPage(){
+    public  void navigateToPage() {
         driver.get(url);
-
     }
-
-    public static void provideEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.click();
+    public void provideEmail(String email) {
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
         emailField.clear();
         emailField.sendKeys(email);
     }
-
-public static void providePassword(String password){
-       WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-       passwordField.click();
-       passwordField.clear();
-       passwordField.sendKeys(password);
+    public void providePassword(String password) {
+        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
+        passwordField.clear();
+        passwordField.sendKeys(password);
     }
-
-    public static void clickSubmit(){
-        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
+    public void clickSubmit() {
+        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         submit.click();
+    }
+    public void clickSaveButton() {
+        WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.btn-submit")));
+        saveButton.click();
+    }
+    public void provideProfileName(String randomName) {
+        WebElement profileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+        profileName.clear();
+        profileName.sendKeys(randomName);
+    }
+    public void provideCurrentPassword(String password) {
+        WebElement currentPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='current_password']")));
+        currentPassword.clear();
+        currentPassword.sendKeys(password);
+    }
+    public String generateRandomName() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+    public void clickAvatarIcon() {
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
+        avatarIcon.click();
     }
 }
