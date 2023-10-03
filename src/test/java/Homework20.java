@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 public class Homework20 extends BaseTest{
     @Test
     public void renamePlaylist() {
+
         String updatePlaylistMsg = "Updated playlist \"Randy.\"";
 
         navigateToPage();
@@ -27,7 +28,7 @@ public class Homework20 extends BaseTest{
 
 
     public void enterNewPlaylistName(String newPlaylistName) {
-        WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("name='randy'")));
+        WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='Test Pro']")));
         playlistInputField.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
 
         playlistInputField.sendKeys(newPlaylistName);

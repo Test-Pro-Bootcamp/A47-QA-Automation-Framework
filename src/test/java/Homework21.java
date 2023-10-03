@@ -6,8 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework21 extends BaseTest{
-    @Test
     String newPlaylistName = "Sample Edited Playlist";
+    @Test
 
     public void renamePlaylist(){
         String updatedPlaylistMsg = "updated playlist \"Sample Edited Playlist.\"";
