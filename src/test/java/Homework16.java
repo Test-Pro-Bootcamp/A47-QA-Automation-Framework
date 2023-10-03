@@ -23,7 +23,7 @@ public class Homework16 extends BaseTest{
         String Url = "https://qa.koel.app/";
         driver.get(Url);
 
-        WebElement registrationLink = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[href='registration']")));
+        WebElement registrationLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[href='registration']")));
         registrationLink.click();
 
         String registrationUrl = "https://qa.koel.app/registration";

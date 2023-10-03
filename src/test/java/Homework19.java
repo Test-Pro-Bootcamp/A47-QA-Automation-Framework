@@ -21,18 +21,18 @@ public void deletePlaylist() throws InterruptedException {
 
 
     public void openPlaylist() {
-        WebElement emptyPlaylist = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
+        WebElement emptyPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
         emptyPlaylist.click();
     }
 
 
     public void clickDeletePlaylistBtn() throws InterruptedException{
-        WebElement deletePlaylist = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
+        WebElement deletePlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn-delete-playlist")));
     }
 
 
     public String getDeletedPlaylistMsg() {
-        WebElement notificationMsg = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        WebElement notificationMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return notificationMsg.getText();
     }
 

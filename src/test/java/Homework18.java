@@ -17,15 +17,15 @@ public class Homework18 extends BaseTest {
     }
 
 public void clickPlay() {
-    WebElement playNextButton = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-testid='play-next-btn']")));
-    WebElement playButton = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@data-testid='play-btn']")));
+    WebElement playNextButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@data-testid='play-next-btn']")));
+    WebElement playButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@data-testid='play-btn']")));
 
     playNextButton.click();
     playButton.click();
 }
 
 public boolean isSongPlaying(){
- WebElement soundBar = driver.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid='sound-bar-play']")));
+ WebElement soundBar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-testid='sound-bar-play']")));
  return soundBar.isDisplayed();
 }
 

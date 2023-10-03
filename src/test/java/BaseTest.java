@@ -18,13 +18,14 @@ import java.util.UUID;
 
 public class BaseTest {
 
-    public static WebDriver driver = null;
-    public static String url = "https://qa.koel.app/";
+    public  WebDriver driver = null;
+    public  String url = "https://qa.koel.app/";
+    public  WebDriverWait wait = null;
+    public  Actions actions;
 
     @BeforeSuite
     static void setupClass(){
         WebDriverManager.chromedriver().setup();
-        Actions actions = new Actions(driver);
     }
 
     @BeforeMethod
