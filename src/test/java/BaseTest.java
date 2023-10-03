@@ -39,7 +39,7 @@ public class BaseTest {
         driver.manage().window().maximize();
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions =new Actions(driver);
+        actions = new Actions(driver);
         url = BaseURL;
         navigateToPage();
     }
