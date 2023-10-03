@@ -16,12 +16,12 @@ public class Homework21 extends BaseTest{
         provideEmail("randy.davila@testpro.io");
         providePassword("te$t$tudent");
         clickSubmit();
-        doubleClickplaylist();
+        doubleClickPlaylist();
         enterNewPlaylistName();
         Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
     }
 
-public void doubleClickplaylist() {
+public void doubleClickPlaylist() {
         WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist:nth-child(3)")));
     actions.doubleClick(playlistElement).perform();
 }
