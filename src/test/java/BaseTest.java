@@ -119,8 +119,12 @@ public class BaseTest {
 
     }
 
-    public void launchBrowser(String BaseURL) {
+    public void launchBrowser(String BaseURL) throws MalformedURLException{
         //      Added ChromeOptions argument below to fix websocket error
+
+        ThreadLocal<Object> threadlocal = new ThreadLocal<>();
+driver = pickBrowser(System.getProperty("browser"));
+threadlocal.set(driver);
 
         driver = pickBrowser(System.getProperty("browser"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
