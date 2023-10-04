@@ -9,6 +9,16 @@
          <class name="Homework20" />
             <class name="Homework21" />
             <class name="Homework22" />
+            <class name="LoginTests">
+                <methods> 
+                    <include name="LoginEmptyEmailPasswordTest" />
+                    <include name="LoginEmptyEmailPasswordTest" />
+                    <include name="LoginInvalidEmailPassword" />
+
+                </methods>
+
+
+            </class>
 
 
         </classes>

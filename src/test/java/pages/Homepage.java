@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 public class Homepage extends BasePage {
 
+    public boolean isAvatarDisplayed;
+
     public Homepage(WebDriver givenDriver) {
         super(givenDriver);
     }
