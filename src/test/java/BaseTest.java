@@ -27,24 +27,33 @@ public class BaseTest {
 
     @BeforeSuite
     static void setupClass() {
+
         WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
     @Parameters({"BaseURL"})
     public void launchBrowser(String BaseURL){
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        //options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().window().maximize();
         url = BaseURL;
         driver.get(url);
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         actions = new Actions(driver);
 
     }
+
+    @AfterMethod(alwaysRun = true)
+    public void closeBrowser() {
+        driver.quit();
+    }
+
 
 
 /*
