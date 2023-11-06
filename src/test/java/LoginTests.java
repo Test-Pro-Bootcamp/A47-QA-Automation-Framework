@@ -13,8 +13,8 @@ public class LoginTests extends BaseTest {
     @Test
     public void LoginEmptyEmailPasswordTest() {
 
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
 
 
         loginPage.provideEmail("andrea.guevara@testpro.io")

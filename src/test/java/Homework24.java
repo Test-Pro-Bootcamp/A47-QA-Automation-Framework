@@ -15,8 +15,8 @@ public class Homework24 extends  BaseTest{
     String newPlaylistName = "Test Pro Edited PlayList+" + rand.nextInt(100);
         String updatedPlaylistMsg = "Updated playlist \"Test Pro Edited PlayList+.\"";
 
-    LoginPage loginPage = new LoginPage(driver);
-    HomePage homePage = new HomePage(driver);
+    LoginPage loginPage = new LoginPage(getDriver());
+    HomePage homePage = new HomePage(getDriver());
 
         loginPage.Login();
         homePage.doubleClickPlayList();
