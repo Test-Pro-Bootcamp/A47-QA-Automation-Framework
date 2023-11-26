@@ -34,10 +34,12 @@ public class LoginStepDefinitions {
     public void closeBrowser(){
         driver.quit();
     }
-    @Given("I open Login page")
+
+    @Given ("I open Login page")
     public void openLoginPage() {
-        driver.get("https://qa.koel.app");
+       driver.get("https://qa.koel.app");
     }
+
     @When("I enter email {string}")
     public void i_enter_email(String email) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']"))).sendKeys(email);
@@ -46,16 +48,17 @@ public class LoginStepDefinitions {
     public void i_enter_password(String password) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='password']"))).sendKeys(password);
     }
-    @And("I submit")
+
+    @And ("I click submit")
     public void clickSubmit() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='submit']"))).click();
     }
-    @Then("I am logged into the website")
+    @Then("I am successfully logged into the website")
     public void userIsLoggedIn() {
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar"))).isDisplayed());
     }
 
-    @Then("I am not logged in")
+    @Then("I am not logged into the website")
     public void iAmNotLoggedIn() {
 
     }

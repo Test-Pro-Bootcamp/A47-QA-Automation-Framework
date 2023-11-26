@@ -3,28 +3,14 @@ Feature: Login feature
   Background:
     Given I open Login page
 
-  Scenario: Login Success
+  Scenario: Login with Valid Credentials
+    When I enter email "aimee.woodside@testpro.io"
+    And I enter password "te$t$tudent13"
+    And I click submit
+    Then I am successfully logged into the website
 
-    When I enter email "demo@class.com"
-    And I enter password "te$t$tudent"
-    And I submit
-    Then I am logged into the website
-
-  Scenario: Login Incorrect Password
-    When I enter password "incorrectpassword"
-    And I enter email "demo@class.com"
-    And I submit
-    Then I am not logged in
-
-
-  Scenario: Login Email Not Existing
-    When I enter email "blah@test.com"
-    And I enter password "te$t$tudent"
-    And I submit
-    Then I am not logged in
-
-  Scenario: Empty Login and Password
-    When I enter email ""
-    And I enter password ""
-    And I submit
-    Then I am not logged in
+  Scenario: Login with Invalid Credentials
+    When I enter email "aimee@testpro.io"
+    And I enter password "te$t$tudent13"
+    And I click submit
+    Then I am not logged into the website
