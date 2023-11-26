@@ -1,0 +1,11 @@
+<suite name="HomeworkSuite" verbose="1">
+
+    <test name="HomeworkTest">
+        <parameter name="baseUrl" value="your_base_url_here" />
+
+        <classes>
+            <class name="Homework20" />
+        </classes>
+    </test>
+
+</suite>

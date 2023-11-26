@@ -1,0 +1,8 @@
+<suite name="TestSuite">
+    <parameter name="baseUrl" value="https://qa.koel.app/" />
+    <test name="YourTest">
+        <classes>
+            <class name="Homework19" />
+        </classes>
+    </test>
+</suite>
